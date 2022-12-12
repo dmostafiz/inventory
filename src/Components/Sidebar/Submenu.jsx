@@ -19,7 +19,7 @@ export default function Submenu({ icon, title, children, ...rest }) {
                 />
             </NavItem>
             <Collapse in={integrations.isOpen}>
-                <Box bg={'whiteAlpha.200'}>
+                <Box bgGradient='linear(to-tr, whiteAlpha.500, whiteAlpha.200)'>
                     {children}
                 </Box>
             </Collapse>

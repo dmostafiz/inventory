@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Image, Text } from '@chakra-ui/react';
 import { Title, Button, createStyles } from '@mantine/core';
 import Link from 'next/link';
+import Logo from '../Logo';
 
 const useStyles = createStyles((theme) => ({
 
@@ -102,12 +103,8 @@ export default function Header() {
         >
 
           <Flex alignItems='center' justify='space-between'>
-            <Box
-              bg='white'
-              rounded={'xl'}
-            >
-              <Image w={200} src={'https://assets.website-files.com/62f7d5aa77a56f6116a78dbd/62fe2830964fbb752b905466_REVSURE-logo-V1-transparent.png'} />
-            </Box>
+           
+           <Logo />
 
             <Flex alignItems='center' gap={2}>
               <Link href='/auth/login'>

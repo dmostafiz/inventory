@@ -12,12 +12,10 @@ const NavItem = (props) => {
             pl="4"
             py="3"
             cursor="pointer"
-            color="whiteAlpha.800"
-            _dark={{ color: "gray.400" }}
+            color="blackAlpha.700"
             _hover={{
-                bg: "whiteAlpha.100",
-                _dark: { bg: "gray.900" },
-                color: "whiteAlpha.900",
+                bgGradient: 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)',
+                color: "blackAlpha.800",
             }}
             role="group"
             fontWeight="semibold"
@@ -29,7 +27,7 @@ const NavItem = (props) => {
                     mx="2"
                     boxSize="4"
                     _groupHover={{
-                        color: "whiteAlpha.900",
+                        color: "blackAlpha.900",
                     }}
                     as={icon}
                 />

@@ -24,7 +24,7 @@ const Feature = ({ title, text, icon }) => {
 
 export default function SectionTwo() {
     return (
-        <Box bg={useColorModeValue('gray.100', 'gray.700')} pb={14}>
+        <Box bg={'turquoise'} pb={14}>
             <Container maxW='6xl' p={4}>
                 <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
                     <Feature

@@ -24,6 +24,8 @@ import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
 import React from "react";
 import NavItem from "../../Components/Sidebar/NavItem";
 import Submenu from "../../Components/Sidebar/Submenu";
+import Link from "next/link";
+import Logo from "../../Components/Logo";
 // import { Logo } from "@choc-ui/logo";
 
 export default function App() {
@@ -42,27 +44,19 @@ export default function App() {
       pb="10"
       overflowX="hidden"
       overflowY="auto"
-      bg="cyan.700"
-      _dark={{ bg: "gray.800" }}
+      // bg="turquoise"
+      bgGradient='linear(to-tr, turquoise, #2da89c)'
       border
       color="inherit"
-      borderRightWidth="1px"
       w="60"
       {...props}
     >
       <Flex px="4" py="5" align="center">
-
-        {/* <Logo /> */}
-
-        <Text
-          fontSize="2xl"
-          ml="2"
-          color="white"
-          fontWeight="semibold"
-        >
-          Swift POS
-        </Text>
+        <Link href='/'>
+          <Logo />
+        </Link>
       </Flex>
+
       <Flex
         direction="column"
         as="nav"
@@ -110,7 +104,7 @@ export default function App() {
   );
 
   return (
-    
+
     <Box as="section" bg="gray.50" _dark={{ bg: "gray.700" }} minH="100vh">
 
       <SidebarContent display={{ base: "none", md: "unset" }} />
