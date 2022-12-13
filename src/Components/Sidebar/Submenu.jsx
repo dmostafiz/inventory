@@ -10,19 +10,21 @@ export default function Submenu({ icon, title, children, ...rest }) {
 
     return (
         <>
-            <NavItem icon={icon && icon} onClick={integrations.onToggle} {...rest}>
-                {title}
-                <Icon
-                    as={MdKeyboardArrowRight}
-                    ml="auto"
-                    transform={integrations.isOpen && "rotate(90deg)"}
-                />
-            </NavItem>
-            <Collapse in={integrations.isOpen}>
-                <Box bgGradient='linear(to-tr, whiteAlpha.500, whiteAlpha.200)'>
-                    {children}
+            <Box borderLeft={integrations.isOpen ? '2px' : '0px'} borderColor='blackAlpha.500' bgGradient={integrations.isOpen ? 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)' : ''}>
+                <Box borderBottom={integrations.isOpen && "1px"} borderColor='blackAlpha.50' bg={integrations.isOpen && "whiteAlpha.400"}>
+                    <NavItem icon={icon && icon} onClick={integrations.onToggle} {...rest}>
+                        {title}
+                        <Icon
+                            as={MdKeyboardArrowRight}
+                            ml="auto"
+                            transform={integrations.isOpen && "rotate(90deg)"}
+                        />
+                    </NavItem>
                 </Box>
-            </Collapse>
+                <Collapse in={integrations.isOpen}>
+                    {children}
+                </Collapse>
+            </Box>
         </>
     )
 }

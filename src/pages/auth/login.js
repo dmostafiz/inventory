@@ -49,7 +49,7 @@ export default function Login() {
                 <Checkbox>Remember me</Checkbox>
                 <Link href={'#'}>Forgot password?</Link>
               </Stack>
-              <Link href='/business'>
+              <Link href='/home'>
                 <Button
                   bg={'blue.400'}
                   color={'white'}

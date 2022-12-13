@@ -1,25 +1,29 @@
 import { Flex, Icon, useColorModeValue } from "@chakra-ui/react";
+import { BsArrowRight } from "react-icons/bs";
 
 const NavItem = (props) => {
 
     const color = useColorModeValue("gray.600", "gray.300");
-    const { icon, children, ...rest } = props;
+    const { icon, children, submenu, ...rest } = props;
 
     return (
         <Flex
             align="center"
-            px="4"
-            pl="4"
-            py="3"
+            px="3"
+            pl="3"
+            py="2"
             cursor="pointer"
             color="blackAlpha.700"
+            borderBottom={submenu ? '0px' : '1px'}
+            borderColor='blackAlpha.100'
             _hover={{
-                bgGradient: 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)',
-                color: "blackAlpha.800",
+                bgGradient: submenu ? 'none' : 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)',
+                color: "blackAlpha.900",
             }}
             role="group"
-            fontWeight="semibold"
-            transition=".15s ease"
+            fontWeight={'normal'}
+            fontSize={submenu? '15px': '16px'}
+            transition="0s ease"
             {...rest}
         >
             {icon && (
@@ -30,6 +34,17 @@ const NavItem = (props) => {
                         color: "blackAlpha.900",
                     }}
                     as={icon}
+                />
+            )}
+
+            {submenu && (
+                <Icon
+                    mx="1"
+                    boxSize="3"
+                    _groupHover={{
+                        color: "blackAlpha.900",
+                    }}
+                    as={BsArrowRight}
                 />
             )}
             {children}
