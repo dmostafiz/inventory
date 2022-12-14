@@ -1,5 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { MantineProvider } from '@mantine/core'
+import '../../styles/globals.css'
+import theme from '../theme'
 
 function MyApp({ Component, pageProps }) {
   return <MantineProvider
@@ -10,7 +12,7 @@ function MyApp({ Component, pageProps }) {
       colorScheme: 'light',
     }}
   >
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
   </MantineProvider>

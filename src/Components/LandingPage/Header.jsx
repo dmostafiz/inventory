@@ -104,7 +104,7 @@ export default function Header() {
 
           <Flex alignItems='center' justify='space-between'>
            
-           <Logo />
+           <Logo bg='white' />
 
             <Flex alignItems='center' gap={2}>
               <Link href='/auth/login'>

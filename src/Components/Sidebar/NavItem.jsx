@@ -14,8 +14,8 @@ const NavItem = (props) => {
             py="2"
             cursor="pointer"
             color="blackAlpha.700"
-            borderBottom={submenu ? '0px' : '1px'}
-            borderColor='blackAlpha.100'
+            borderBottom={submenu ? '0px' : '2px'}
+            borderColor='blackAlpha.50'
             _hover={{
                 bgGradient: submenu ? 'none' : 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)',
                 color: "blackAlpha.900",

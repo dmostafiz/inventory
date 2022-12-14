@@ -1,7 +1,4 @@
 import { Box } from '@chakra-ui/react'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../../styles/Home.module.css'
 import SectionOne from '../Components/LandingPage/SectionOne'
 import Header from '../Components/LandingPage/Header'
 import SectionTwo from '../Components/LandingPage/SectionTwo'

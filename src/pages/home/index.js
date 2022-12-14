@@ -1,188 +1,46 @@
 import {
   Avatar,
   Box,
-  Collapse,
+  Card,
+  CardBody,
+  CardHeader,
   Drawer,
   DrawerContent,
   DrawerOverlay,
   Flex,
+  Heading,
   Icon,
   IconButton,
   Input,
   InputGroup,
   InputLeftElement,
+  SimpleGrid,
+  Stack,
+  StackDivider,
   Text,
-  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FaBell, FaClipboardCheck, FaMinusCircle, FaRss } from "react-icons/fa";
-import { AiFillGift, AiFillMinusCircle } from "react-icons/ai";
-import { BsCardHeading, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
-import { FiArrowDownCircle, FiArrowUpCircle, FiMenu, FiSearch } from "react-icons/fi";
-import { HiCode, HiCollection } from "react-icons/hi";
-import { MdArrowCircleUp, MdContacts, MdHome, MdKeyboardArrowRight } from "react-icons/md";
+import { FaBell } from "react-icons/fa";
+import { FiMenu, FiSearch, FiServer } from "react-icons/fi";
 import React from "react";
-import NavItem from "../../Components/Sidebar/NavItem";
-import Submenu from "../../Components/Sidebar/Submenu";
-import Link from "next/link";
-import Logo from "../../Components/Logo";
+import LeftSidebar from "../../Components/home/LeftSidebar";
+import TopBar from "../../Components/home/TopBar";
+import Statistics from "../../Components/home/Dashboard/StatCard";
+import StatsCard from "../../Components/home/Dashboard/StatCard";
+import { BsArrowCounterclockwise, BsCart, BsFillBagCheckFill, BsFillInfoCircleFill, BsFillInfoSquareFill, BsFillReplyAllFill, BsPerson } from "react-icons/bs";
+import { GoLocation } from "react-icons/go";
+import { AiFillCreditCard, AiFillMinusCircle } from "react-icons/ai";
 // import { Logo } from "@choc-ui/logo";
 
 export default function App() {
+
   const sidebar = useDisclosure();
-  const integrations = useDisclosure();
-  const ok = useDisclosure();
-
-  const SidebarContent = (props) => (
-    <Box
-      as="nav"
-      pos="fixed"
-      top="0"
-      left="0"
-      zIndex="sticky"
-      h="full"
-      pb="10"
-      overflowX="hidden"
-      overflowY="auto"
-      // bg="turquoise"
-      bgGradient='linear(to-tr, turquoise, #40e0d036)'
-      border
-      color="inherit"
-      w="60"
-      shadow={'lg'}
-      borderRight='2px'
-      borderColor={'blackAlpha.200'}
-      {...props}
-    >
-      <Box
-        // bg='turquoise'
-        h='14'
-      >
-        <Link href='/home'>
-          <Logo />
-        </Link>
-      </Box>
-      {/* <Flex px="4" py="5" align="center">
-    
-      </Flex> */}
-
-      <Flex
-        direction="column"
-        as="nav"
-        fontSize="sm"
-        color="gray.600"
-        aria-label="Main Navigation"
-      >
-        <Link href='/home'>
-          <NavItem icon={MdHome}>Home</NavItem>
-        </Link>
-        {/* <NavItem icon={FaRss}>Articles</NavItem> */}
-        {/* <NavItem icon={HiCollection}>Collections</NavItem> */}
-        {/* <NavItem icon={FaClipboardCheck}>Checklists</NavItem> */}
-
-        <Submenu
-          icon={MdContacts}
-          title={'Contacts'}
-        >
-          <NavItem pl="6" py="1" submenu={true}>
-            Supliers
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Customers
-          </NavItem>
-        </Submenu>
-
-        <Submenu
-          icon={AiFillGift}
-          title={'Products'}
-        >
-          <NavItem pl="6" py="1" submenu={true}>
-            Product List
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Products
-          </NavItem>
-
-          <NavItem pl="6" py="1" submenu={true}>
-            Variations
-          </NavItem>
-
-          <NavItem pl="6" py="1" submenu={true}>
-            Units
-          </NavItem>
-
-          <NavItem pl="6" py="1" submenu={true}>
-            Categories
-          </NavItem>
-
-          <NavItem pl="6" py="1" submenu={true}>
-            Brands / Company
-          </NavItem>
-
-        </Submenu>
-
-        <Submenu
-          icon={BsFillArrowDownCircleFill}
-          title={'Purchases'}
-        >
-          <NavItem pl="6" py="1" submenu={true}>
-            Purchases List
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Purchase
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Return List
-          </NavItem>
-        </Submenu>
-
-        <Submenu
-          icon={BsFillArrowUpCircleFill}
-          title={'Sells'}
-        >
-          <NavItem pl="6" py="1" submenu={true}>
-            All Sells
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Sell
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            List POS
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Sell Returns
-          </NavItem>
-        </Submenu>
-
-
-        <Submenu
-          icon={FaMinusCircle}
-          title={'Expenses'}
-        >
-          <NavItem pl="6" py="1" submenu={true}>
-            Expenses List
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Expenses
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            List POS
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Sell Returns
-          </NavItem>
-        </Submenu>
-
-        <NavItem icon={BsGearFill}>Settings</NavItem>
-      </Flex>
-    </Box>
-  );
 
   return (
 
     <Box as="section" bg="gray.50" minH="100vh">
 
-      <SidebarContent display={{ base: "none", md: "unset" }} />
+      <LeftSidebar display={{ base: "none", md: "unset" }} />
 
       <Drawer
         isOpen={sidebar.isOpen}
@@ -191,76 +49,127 @@ export default function App() {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <SidebarContent w="full" borderRight="none" />
+          <LeftSidebar w="full" borderRight="none" />
         </DrawerContent>
       </Drawer>
 
 
       <Box ml={{ base: 0, md: 60 }}>
 
-        <Flex
-          as="header"
-          align="center"
-          justify="space-between"
-          w="full"
-          px="4"
-          bg="turquoise"
-          // borderBottomWidth="2px"
-          borderColor='blackAlpha.200'
-          color="black"
-          h="14"
-          shadow={'sm'}
-        >
-
-          <IconButton
-            aria-label="Menu"
-            display={{ base: "inline-flex", md: "none" }}
-            onClick={sidebar.onOpen}
-            icon={<FiMenu />}
-            size="sm"
-            color={'black'}
-          />
-
-          <InputGroup w="96" display={{ base: "none", md: "flex" }}>
-            <InputLeftElement color="gray.900">
-              <FiSearch />
-            </InputLeftElement>
-            <Input
-              bg='blackAlpha.100'
-              _hover={{
-                borderColor: 'blackAlpha.100'
-              }}
-              _focus={{
-                ring: '0',
-                borderColor: 'blackAlpha.100'
-              }}
-              border='0px'
-              borderColor='blackAlpha.50'
-              placeholder="Search for products..."
-            />
-          </InputGroup>
-
-          <Flex align="center">
-            <Icon color="gray.500" as={FaBell} cursor="pointer" />
-            <Avatar
-              ml="4"
-              size="sm"
-              name="anubra266"
-              src="https://avatars.githubusercontent.com/u/30869823?v=4"
-              cursor="pointer"
-            />
-          </Flex>
-
-        </Flex>
+        <TopBar sidebar={sidebar} />
 
         <Box as="main">
-          <Box h={200} w='full' bgGradient='linear(to-b, turquoise, #40e0d000)' roundedBottom={'30px'}>
 
+          <Box px={{base:2, md:5}} pt={5} pb={5} w='full' bgGradient='linear(to-b, #dce0cd, #40e0d000)' roundedBottom={'30px'}>
+
+            <Heading as='h2' fontSize={'24px'} color='blackAlpha.700'>
+              Welcome Mostafiz
+            </Heading>
+
+            <Box mt={3}>
+              <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
+                <StatsCard
+                  title={'TOTAL SALES'}
+                  stat={'5,000'}
+                  icon={<BsFillBagCheckFill size={'1.5em'} />}
+                />
+                <StatsCard
+                  title={'NET'}
+                  stat={'1,000'}
+                  icon={<FiServer size={'1.5em'} />}
+                  iconBg='green.400'
+                />
+                <StatsCard
+                  title={'INVOICE DUE'}
+                  stat={'705'}
+                  icon={<GoLocation size={'1.5em'} />}
+                  iconBg='orange.400'
+                />
+                <StatsCard
+                  title={'TOTAL SALES RETURNS'}
+                  stat={'7'}
+                  icon={<AiFillMinusCircle size={'1.5em'} />}
+                  iconBg='red.500'
+
+                />
+              </SimpleGrid>
+            </Box>
+
+            <Box mt={4}>
+              <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
+                <StatsCard
+                  title={'TOTAL PURCHASES'}
+                  stat={'5,000'}
+                  icon={<AiFillCreditCard size={'1.5em'} />}
+                  iconBg='blue.400'
+                />
+                <StatsCard
+                  title={'PURCHASES DUE'}
+                  stat={'1,000'}
+                  icon={<BsFillInfoSquareFill size={'1.5em'} />}
+                  iconBg='orange.400'
+                />
+                <StatsCard
+                  title={'PURCHASES RETURNS'}
+                  stat={'545'}
+                  icon={<BsFillReplyAllFill size={'1.5em'} />}
+                  iconBg='red.400'
+                />
+                <StatsCard
+                  title={'EXPENSES'}
+                  stat={'0.0'}
+                  icon={<GoLocation size={'1.5em'} />}
+                  iconBg='red.400'
+                />
+              </SimpleGrid>
+            </Box>
           </Box>
 
 
 
 
+          <Box px={{base:2, md:5}}>
+
+
+            <Card shadow={'md'}>
+              <CardHeader>
+                <Heading size='md'>Sales last 30 days</Heading>
+              </CardHeader>
+
+              <CardBody>
+
+                <Stack divider={<StackDivider />} spacing='4'>
+                  <Box>
+                    <Heading size='xs' textTransform='uppercase'>
+                      Summary
+                    </Heading>
+                    <Text pt='2' fontSize='sm'>
+                      View a summary of all your clients over the last month.
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size='xs' textTransform='uppercase'>
+                      Overview
+                    </Heading>
+                    <Text pt='2' fontSize='sm'>
+                      Check out the overview of your clients.
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size='xs' textTransform='uppercase'>
+                      Analysis
+                    </Heading>
+                    <Text pt='2' fontSize='sm'>
+                      See a detailed analysis of all your business clients.
+                    </Text>
+                  </Box>
+                </Stack>
+
+              </CardBody>
+
+            </Card>
+
+          </Box>
 
         </Box>
       </Box>
