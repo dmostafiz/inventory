@@ -1,4 +1,4 @@
-import { Avatar, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Button, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { FaBell } from 'react-icons/fa'
 import { FiMenu, FiSearch } from 'react-icons/fi'
@@ -51,8 +51,9 @@ export default function TopBar({sidebar}) {
                 />
             </InputGroup>
 
-            <Flex align="center">
-                <Icon color="gray.500" as={FaBell} cursor="pointer" />
+            <Flex align="center" gap={3}>
+                <Button size={'sm'} rounded='full' bg={'#01B4A1'} _active color='whiteAlpha.900' _hover shadow='sm'>POINT OF SALES</Button>
+                <Icon fontSize={'20px'} color="blackAlpha.800" as={FaBell} cursor="pointer" />
                 <Avatar
                     ml="4"
                     size="sm"

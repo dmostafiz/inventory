@@ -44,7 +44,8 @@ export default function SalesChart() {
             },
 
             stroke: {
-                width: 3
+                width: 3,
+                curve: 'straight'
             },
 
             grid: {

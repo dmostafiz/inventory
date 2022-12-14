@@ -15,7 +15,7 @@ const NavItem = (props) => {
             cursor="pointer"
             color="blackAlpha.700"
             borderBottom={submenu ? '0px' : '2px'}
-            borderColor='blackAlpha.50'
+            borderBottomColor='blackAlpha.50'
             _hover={{
                 bgGradient: submenu ? 'none' : 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)',
                 color: "blackAlpha.900",
@@ -24,6 +24,7 @@ const NavItem = (props) => {
             fontWeight={'normal'}
             fontSize={submenu? '15px': '16px'}
             transition="0s ease"
+        
             {...rest}
         >
             {icon && (
@@ -40,7 +41,7 @@ const NavItem = (props) => {
             {submenu && (
                 <Icon
                     mx="1"
-                    boxSize="3"
+                    boxSize="4"
                     _groupHover={{
                         color: "blackAlpha.900",
                     }}

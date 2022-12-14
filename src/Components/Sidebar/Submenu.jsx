@@ -10,8 +10,8 @@ export default function Submenu({ icon, title, children, ...rest }) {
 
     return (
         <>
-            <Box borderLeft={integrations.isOpen ? '2px' : '0px'} borderColor='blackAlpha.500' bgGradient={integrations.isOpen ? 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)' : ''}>
-                <Box borderBottom={integrations.isOpen && "1px"} borderColor='blackAlpha.50' bg={integrations.isOpen && "whiteAlpha.400"}>
+            <Box borderColor={integrations.isOpen ? 'turquoise' : 'white'} bgGradient={integrations.isOpen ? 'linear(to-tr, #40e0d00f, gray.50)' : ''}>
+                <Box borderBottom={integrations.isOpen && "1px"} borderColor='blackAlpha.50' bg={integrations.isOpen && "#40e0d00f"}>
                     <NavItem icon={icon && icon} onClick={integrations.onToggle} {...rest}>
                         {title}
                         <Icon

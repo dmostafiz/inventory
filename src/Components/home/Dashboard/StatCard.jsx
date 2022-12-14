@@ -41,7 +41,7 @@ export default function StatsCard({title, stat, icon, iconBg='#88A47C'}) {
                     <StatLabel fontSize={{base: 'xs', md:'sm'}} color='gray.400'>
                         {title}
                     </StatLabel>
-                    <StatNumber fontSize={{base: 'lg', md:'2xl'}} color='#00453D' fontWeight={'black'}>
+                    <StatNumber fontSize={{base: 'md', md:'lg'}} color='#00453D' fontWeight={'black'}>
                         $ {stat}
                     </StatNumber>
                 </Box>

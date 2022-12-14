@@ -52,107 +52,164 @@ export default function LeftSidebar(props) {
       color="gray.600"
       aria-label="Main Navigation"
     >
-      <Link href='/home'>
-        <NavItem icon={MdHome}>Home</NavItem>
-      </Link>
+
+      <Box
+        borderLeft={'4px'}
+        borderLeftColor='white'
+        _hover={{
+          borderLeftColor:'turquoise'
+        }}
+      >
+        <Link href='/home'>
+          <NavItem icon={MdHome}>Home</NavItem>
+        </Link>
+      </Box>
       {/* <NavItem icon={FaRss}>Articles</NavItem> */}
       {/* <NavItem icon={HiCollection}>Collections</NavItem> */}
       {/* <NavItem icon={FaClipboardCheck}>Checklists</NavItem> */}
 
-      <Submenu
-        icon={MdContacts}
-        title={'Contacts'}
+      <Box
+        borderLeft={'4px'}
+        borderLeftColor='white'
+        _hover={{
+          borderLeftColor:'turquoise'
+        }}
       >
-        <NavItem pl="6" py="1" submenu={true}>
-          Supliers
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Customers
-        </NavItem>
-      </Submenu>
+        <Submenu
+          icon={MdContacts}
+          title={'Contacts'}
+        >
+          <NavItem pl="6" py="1" submenu={true}>
+            Supliers
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Customers
+          </NavItem>
+        </Submenu>
+      </Box>
 
-      <Submenu
-        icon={AiFillGift}
-        title={'Products'}
+      <Box
+        borderLeft={'4px'}
+        borderLeftColor='white'
+        _hover={{
+          borderLeftColor:'turquoise'
+        }}
       >
-        <NavItem pl="6" py="1" submenu={true}>
-          Product List
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Add Products
-        </NavItem>
+        <Submenu
+          icon={AiFillGift}
+          title={'Products'}
+        >
+          <NavItem pl="6" py="1" submenu={true}>
+            Product List
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Add Products
+          </NavItem>
 
-        <NavItem pl="6" py="1" submenu={true}>
-          Variations
-        </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Variations
+          </NavItem>
 
-        <NavItem pl="6" py="1" submenu={true}>
-          Units
-        </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Units
+          </NavItem>
 
-        <NavItem pl="6" py="1" submenu={true}>
-          Categories
-        </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Categories
+          </NavItem>
 
-        <NavItem pl="6" py="1" submenu={true}>
-          Brands / Company
-        </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Brands / Company
+          </NavItem>
 
-      </Submenu>
+        </Submenu>
+      </Box>
 
-      <Submenu
-        icon={BsFillArrowDownCircleFill}
-        title={'Purchases'}
+      <Box
+        borderLeft={'4px'}
+        borderLeftColor='white'
+        _hover={{
+          borderLeftColor:'turquoise'
+        }}
       >
-        <NavItem pl="6" py="1" submenu={true}>
-          Purchases List
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Add Purchase
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Return List
-        </NavItem>
-      </Submenu>
+        <Submenu
+          icon={BsFillArrowDownCircleFill}
+          title={'Purchases'}
+        >
+          <NavItem pl="6" py="1" submenu={true}>
+            Purchases List
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Add Purchase
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Return List
+          </NavItem>
+        </Submenu>
+      </Box>
 
-      <Submenu
-        icon={BsFillArrowUpCircleFill}
-        title={'Sells'}
+      <Box
+        borderLeft={'4px'}
+        borderLeftColor='white'
+        _hover={{
+          borderLeftColor:'turquoise'
+        }}
       >
-        <NavItem pl="6" py="1" submenu={true}>
-          All Sells
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Add Sell
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          List POS
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Sell Returns
-        </NavItem>
-      </Submenu>
+        <Submenu
+          icon={BsFillArrowUpCircleFill}
+          title={'Sales'}
+        >
+          <NavItem pl="6" py="1" submenu={true}>
+            All Sales
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Add Sale
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            List POS
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Sell Returns
+          </NavItem>
+        </Submenu>
+      </Box>
 
 
-      <Submenu
-        icon={FaMinusCircle}
-        title={'Expenses'}
+      <Box
+        borderLeft={'4px'}
+        borderLeftColor='white'
+        _hover={{
+          borderLeftColor:'turquoise'
+        }}
       >
-        <NavItem pl="6" py="1" submenu={true}>
-          Expenses List
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Add Expenses
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          List POS
-        </NavItem>
-        <NavItem pl="6" py="1" submenu={true}>
-          Sell Returns
-        </NavItem>
-      </Submenu>
+        <Submenu
+          icon={FaMinusCircle}
+          title={'Expenses'}
+        >
+          <NavItem pl="6" py="1" submenu={true}>
+            Expenses List
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Add Expenses
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            List POS
+          </NavItem>
+          <NavItem pl="6" py="1" submenu={true}>
+            Sell Returns
+          </NavItem>
+        </Submenu>
+      </Box>
 
-      <NavItem icon={BsGearFill}>Settings</NavItem>
+      <Box
+        borderLeft={'4px'}
+        borderLeftColor='white'
+        _hover={{
+          borderLeftColor:'turquoise'
+        }}
+      >
+        <NavItem icon={BsGearFill}>Settings</NavItem>
+      </Box>
     </Flex>
   </Box>
 }
