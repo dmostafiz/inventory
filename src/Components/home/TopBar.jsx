@@ -1,9 +1,10 @@
-import { Avatar, Button, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { FaBell } from 'react-icons/fa'
 import { FiMenu, FiSearch } from 'react-icons/fi'
+import LogoMobile from '../LogoMobile'
 
-export default function TopBar({sidebar}) {
+export default function TopBar({ sidebar }) {
 
     return (
         <Flex
@@ -11,7 +12,7 @@ export default function TopBar({sidebar}) {
             align="center"
             justify="space-between"
             w="full"
-            px={{base:2, md:5}}
+            px={{ base: 2, md: 5 }}
             bg="#dce0cd"
             // borderBottomWidth="2px"
             // borderColor='blackAlpha.50'
@@ -20,14 +21,11 @@ export default function TopBar({sidebar}) {
             shadow={'sm'}
         >
 
-            <IconButton
-                aria-label="Menu"
+            <Box
                 display={{ base: "inline-flex", md: "none" }}
-                onClick={sidebar.onOpen}
-                icon={<FiMenu />}
-                size="sm"
-                color={'black'}
-            />
+            >
+                <LogoMobile bg='white' />
+            </Box>
 
             <InputGroup w="96" display={{ base: "none", md: "flex" }}>
                 <InputLeftElement color="gray.900">
@@ -51,17 +49,27 @@ export default function TopBar({sidebar}) {
                 />
             </InputGroup>
 
-            <Flex align="center" gap={3}>
-                <Button size={'sm'} rounded='full' bg={'#01B4A1'} _active color='whiteAlpha.900' _hover shadow='sm'>POINT OF SALES</Button>
+            <Flex align="center" gap={5}>
+                <Button size={'sm'} rounded='xl' bg={'#01B4A1'} _active color='whiteAlpha.900' _hover shadow='sm'>POINT OF SALES</Button>
                 <Icon fontSize={'20px'} color="blackAlpha.800" as={FaBell} cursor="pointer" />
                 <Avatar
-                    ml="4"
+                    // ml="4"
                     size="sm"
                     name="anubra266"
                     src="https://avatars.githubusercontent.com/u/30869823?v=4"
                     cursor="pointer"
                 />
             </Flex>
+
+
+            <IconButton
+                aria-label="Menu"
+                display={{ base: "inline-flex", md: "none" }}
+                onClick={sidebar.onOpen}
+                icon={<FiMenu />}
+                size="sm"
+                color={'black'}
+            />
 
         </Flex>
     )
