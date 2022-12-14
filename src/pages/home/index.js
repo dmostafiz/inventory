@@ -30,6 +30,13 @@ import StatsCard from "../../Components/home/Dashboard/StatCard";
 import { BsArrowCounterclockwise, BsCart, BsFillBagCheckFill, BsFillInfoCircleFill, BsFillInfoSquareFill, BsFillReplyAllFill, BsPerson } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { AiFillCreditCard, AiFillMinusCircle } from "react-icons/ai";
+
+
+import dynamic from "next/dynamic";
+
+const SalesChart  =  dynamic(import("../../Components/home/Dashboard/Charts/SalesChart"), {
+  ssr: false
+});
 // import { Logo } from "@choc-ui/logo";
 
 export default function App() {
@@ -139,30 +146,9 @@ export default function App() {
               <CardBody>
 
                 <Stack divider={<StackDivider />} spacing='4'>
-                  <Box>
-                    <Heading size='xs' textTransform='uppercase'>
-                      Summary
-                    </Heading>
-                    <Text pt='2' fontSize='sm'>
-                      View a summary of all your clients over the last month.
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Heading size='xs' textTransform='uppercase'>
-                      Overview
-                    </Heading>
-                    <Text pt='2' fontSize='sm'>
-                      Check out the overview of your clients.
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Heading size='xs' textTransform='uppercase'>
-                      Analysis
-                    </Heading>
-                    <Text pt='2' fontSize='sm'>
-                      See a detailed analysis of all your business clients.
-                    </Text>
-                  </Box>
+               
+                    <SalesChart />
+
                 </Stack>
 
               </CardBody>
