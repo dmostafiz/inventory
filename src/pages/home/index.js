@@ -1,7 +1,7 @@
 import { Box, Card, CardBody, CardHeader, Heading, SimpleGrid, Stack, StackDivider } from '@chakra-ui/react'
 import React from 'react'
 import { AiFillCreditCard, AiFillMinusCircle } from 'react-icons/ai'
-import { BsFillBagCheckFill, BsFillInfoSquareFill, BsFillReplyAllFill } from 'react-icons/bs'
+import { BsCreditCard2Front, BsFillBagCheckFill, BsFillInfoSquareFill, BsFillReplyAllFill } from 'react-icons/bs'
 import { FiServer } from 'react-icons/fi'
 import { GoLocation } from 'react-icons/go'
 import StatsCard from '../../Components/home/Dashboard/StatCard'
@@ -72,7 +72,7 @@ export default function index() {
           <StatsCard
             title={'EXPENSES'}
             stat={'0.0'}
-            icon={<GoLocation size={'1.5em'} />}
+            icon={<BsCreditCard2Front size={'1.5em'} />}
             iconBg='red.400'
           />
         </SimpleGrid>
