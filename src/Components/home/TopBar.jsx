@@ -4,7 +4,7 @@ import { FaBell } from 'react-icons/fa'
 import { FiMenu, FiSearch } from 'react-icons/fi'
 import LogoMobile from '../LogoMobile'
 
-export default function TopBar({ sidebar }) {
+export default function TopBar({layoutWidth, sidebar }) {
 
     return (
         <Flex

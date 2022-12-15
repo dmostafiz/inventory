@@ -15,12 +15,7 @@ const SalesChart = dynamic(import("../../Components/home/Dashboard/Charts/SalesC
 
 export default function index() {
   return (
-    <Layout>
-
-      <Heading as='h2' fontSize={'24px'} color='blackAlpha.700'>
-        Welcome Mostafiz
-      </Heading>
-
+    <Layout title='Welcome Mostafiz'>
       <Box mt={3}>
         <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
           <StatsCard
@@ -79,7 +74,7 @@ export default function index() {
       </Box>
 
       <Card shadow={'md'} bg='white' mt={4}>
-        <CardHeader>
+        <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
           <Heading size='md'>Sales last 30 days</Heading>
         </CardHeader>
         <CardBody>
@@ -90,7 +85,7 @@ export default function index() {
       </Card>
 
       <Card shadow={'md'} bg='white' mt={4}>
-        <CardHeader>
+        <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
           <Heading size='md'>Sales Current Financial Year</Heading>
         </CardHeader>
         <CardBody>
@@ -103,7 +98,7 @@ export default function index() {
       <Box mt={4}>
         <Flex direction={{ base: 'column', lg: 'row' }} gap={4}>
           <Card flex='1' shadow={'md'} bg='white'>
-            <CardHeader>
+            <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
               <Heading size='md'>Sales payment due</Heading>
             </CardHeader>
             <CardBody p={2} pt={0}>
@@ -140,7 +135,7 @@ export default function index() {
           </Card>
 
           <Card flex='1' shadow={'md'} bg='white'>
-            <CardHeader>
+            <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
               <Heading size='md'>Purchase payments due</Heading>
             </CardHeader>
             <CardBody p={2} pt={0}>
@@ -182,7 +177,7 @@ export default function index() {
 
       <Box mt={4}>
         <Card flex='1' shadow={'md'} bg='white'>
-          <CardHeader>
+          <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
             <Heading size='md'>Product stock alerts</Heading>
           </CardHeader>
           <CardBody p={2} pt={0}>

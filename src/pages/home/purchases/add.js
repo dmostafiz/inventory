@@ -1,7 +1,10 @@
 import React from 'react'
+import Layout from '../../../Layouts/Home/Layout'
 
 export default function add() {
   return (
-    <div>add purchase</div>
+    <Layout title='Add purchase'>
+      <div>add purchase</div>
+    </Layout>
   )
 }

@@ -57,7 +57,7 @@ export default function LeftSidebar(props) {
         borderLeft={'4px'}
         borderLeftColor='white'
         _hover={{
-          borderLeftColor:'turquoise'
+          borderLeftColor: 'turquoise'
         }}
       >
         <Link href='/home'>
@@ -72,19 +72,23 @@ export default function LeftSidebar(props) {
         borderLeft={'4px'}
         borderLeftColor='white'
         _hover={{
-          borderLeftColor:'turquoise'
+          borderLeftColor: 'turquoise'
         }}
       >
         <Submenu
           icon={MdContacts}
           title={'Contacts'}
         >
-          <NavItem pl="6" py="1" submenu={true}>
-            Supliers
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Customers
-          </NavItem>
+          <Link href='/home/contacts/supliers'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Supliers
+            </NavItem>
+          </Link>
+          <Link href='/home/contacts/customers'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Customers
+            </NavItem>
+          </Link>
         </Submenu>
       </Box>
 
@@ -92,35 +96,47 @@ export default function LeftSidebar(props) {
         borderLeft={'4px'}
         borderLeftColor='white'
         _hover={{
-          borderLeftColor:'turquoise'
+          borderLeftColor: 'turquoise'
         }}
       >
         <Submenu
           icon={AiFillGift}
           title={'Products'}
         >
-          <NavItem pl="6" py="1" submenu={true}>
-            Product List
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Products
-          </NavItem>
+          <Link href='/home/products'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Product List
+            </NavItem>
+          </Link>
+          <Link href='/home/products/add'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Add Products
+            </NavItem>
+          </Link>
 
-          <NavItem pl="6" py="1" submenu={true}>
-            Variations
-          </NavItem>
+          <Link href='/home/products/variations'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Variations
+            </NavItem>
+          </Link>
 
-          <NavItem pl="6" py="1" submenu={true}>
-            Units
-          </NavItem>
+          <Link href='/home/products/units'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Units
+            </NavItem>
+          </Link>
 
-          <NavItem pl="6" py="1" submenu={true}>
-            Categories
-          </NavItem>
+          <Link href='/home/products/categories'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Categories
+            </NavItem>
+          </Link>
 
-          <NavItem pl="6" py="1" submenu={true}>
-            Brands / Company
-          </NavItem>
+          <Link href='/home/products/brands'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Brands / Company
+            </NavItem>
+          </Link>
 
         </Submenu>
       </Box>
@@ -129,22 +145,28 @@ export default function LeftSidebar(props) {
         borderLeft={'4px'}
         borderLeftColor='white'
         _hover={{
-          borderLeftColor:'turquoise'
+          borderLeftColor: 'turquoise'
         }}
       >
         <Submenu
           icon={BsFillArrowDownCircleFill}
           title={'Purchases'}
         >
-          <NavItem pl="6" py="1" submenu={true}>
-            Purchases List
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Purchase
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Return List
-          </NavItem>
+          <Link href='/home/purchases'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Purchases List
+            </NavItem>
+          </Link>
+          <Link href='/home/purchases/add'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Add Purchase
+            </NavItem>
+          </Link>
+          <Link href='/home/purchases/returns'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Return List
+            </NavItem>
+          </Link>
         </Submenu>
       </Box>
 
@@ -152,25 +174,33 @@ export default function LeftSidebar(props) {
         borderLeft={'4px'}
         borderLeftColor='white'
         _hover={{
-          borderLeftColor:'turquoise'
+          borderLeftColor: 'turquoise'
         }}
       >
         <Submenu
           icon={BsFillArrowUpCircleFill}
           title={'Sales'}
         >
-          <NavItem pl="6" py="1" submenu={true}>
-            All Sales
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Sale
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            List POS
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Sell Returns
-          </NavItem>
+          <Link href='/home/sales'>
+            <NavItem pl="6" py="1" submenu={true}>
+              All Sales
+            </NavItem>
+          </Link>
+          <Link href='/home/sales/add'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Add Sale
+            </NavItem>
+          </Link>
+          <Link href='/home/pos/list'>
+            <NavItem pl="6" py="1" submenu={true}>
+              List POS
+            </NavItem>
+          </Link>
+          <Link href='/home/sales/returns'>
+            <NavItem pl="6" py="1" submenu={true}>
+              Sale Returns
+            </NavItem>
+          </Link>
         </Submenu>
       </Box>
 
@@ -179,7 +209,7 @@ export default function LeftSidebar(props) {
         borderLeft={'4px'}
         borderLeftColor='white'
         _hover={{
-          borderLeftColor:'turquoise'
+          borderLeftColor: 'turquoise'
         }}
       >
         <Submenu
@@ -205,7 +235,7 @@ export default function LeftSidebar(props) {
         borderLeft={'4px'}
         borderLeftColor='white'
         _hover={{
-          borderLeftColor:'turquoise'
+          borderLeftColor: 'turquoise'
         }}
       >
         <NavItem icon={BsGearFill}>Settings</NavItem>

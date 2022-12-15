@@ -1,7 +1,10 @@
 import React from 'react'
+import Layout from '../../../Layouts/Home/Layout'
 
 export default function categories() {
   return (
-    <div>categories</div>
+    <Layout title='Categories'>
+      <div>categories</div>
+    </Layout>
   )
 }

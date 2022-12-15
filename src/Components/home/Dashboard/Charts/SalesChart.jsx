@@ -40,12 +40,14 @@ export default function SalesChart() {
             },
 
             dataLabels: {
-                enabled: true
+                enabled: true,
+                color:'#7BDDCF'
             },
 
             stroke: {
-                width: 3,
-                curve: 'straight'
+                width: 2,
+                curve: 'straight',
+                colors: ['#7BDDCF']
             },
 
             grid: {
@@ -71,19 +73,18 @@ export default function SalesChart() {
             },
 
             fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: 'dark',
-                    type: "horizontal",
-                    shadeIntensity: 0.25,
-                    gradientToColors: {
-                        colors: ['#2E93fA', '#66DA26']
-                    },
-                    inverseColors: true,
-                    opacityFrom: 0.5,
-                    opacityTo: 0.75,
-                    // stops: [50, 0, 100]
-                },
+                // type: 'gradient',
+                colors: ['#7BDDCF']
+                // gradient: {
+                //     shade: 'dark',
+                //     type: "horizontal",
+                //     shadeIntensity: 0.25,
+                //     gradientToColors: ['#7BDDCF', '#7BDDCF', '#7BDDCF', '#7BDDCF'],
+                //     inverseColors: true,
+                //     opacityFrom: 0.5,
+                //     opacityTo: 0.75,
+                //     // stops: [50, 0, 100]
+                // },
             }
         },
 
