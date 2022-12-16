@@ -51,7 +51,7 @@ export default function Layout({ title, breads = [], titleRight, header, gradien
           <Box px={layoutWidth} pt={8} pb={header ? 8 : 4} w='full' bgGradient={(header && gradient) && 'linear(to-b, #78DCCE, #40e0d000)'} roundedBottom={'30px'}>
             <Flex alignContent={'flex-end'} justify='space-between'>
               <Box>
-                <Heading fontSize={'24px'} color='blackAlpha.800' mb='1'>
+                <Heading fontSize={'28px'} color='blackAlpha.800' mb='1'>
                   {title}
                 </Heading>
                 {breads.length > 0 && <Breadcrumb spacing='4px' color={'gray.400'} fontSize='14px' separator={<ChevronRightIcon color='gray.400' />}>

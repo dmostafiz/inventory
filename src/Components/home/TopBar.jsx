@@ -50,7 +50,7 @@ export default function TopBar({layoutWidth, sidebar }) {
             </InputGroup>
 
             <Flex align="center" gap={5}>
-                <Button size={'sm'} rounded='xl' bg={'blackAlpha.400'} _active color='whiteAlpha.900' _hover shadow='sm'>POINT OF SALES</Button>
+                <Button size={'sm'} rounded='full' bg={'blackAlpha.300'} _active color='whiteAlpha.900' _hover shadow='sm'>POINT OF SALES</Button>
                 <Icon fontSize={'20px'} color="blackAlpha.800" as={FaBell} cursor="pointer" />
                 <Avatar
                     // ml="4"
