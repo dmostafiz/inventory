@@ -8,6 +8,7 @@ export default function supliers() {
       title='Supliers'
       titleRight={<Button bg='turquoise'>Add Supplier</Button>}
       breads={[
+        { title: 'Contacts', link:'#'},
         { title: 'Supliers', link:'/home/contacts/supliers'}
       ]}
     >

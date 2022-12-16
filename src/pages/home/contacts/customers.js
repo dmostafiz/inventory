@@ -8,6 +8,7 @@ export default function customers() {
       title={'Customers'}
       titleRight={<Button bg='turquoise'>Add Customer</Button>}
       breads={[
+        { title: 'Contacts', link:'#'},
         { title: 'Customers', link: '/home/contacts/customers' }
       ]}
     >
