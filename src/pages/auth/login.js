@@ -12,6 +12,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import Logo from '../../Components/Logo';
 
 export default function Login() {
   return (
@@ -19,19 +20,30 @@ export default function Login() {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+    // bg={useColorModeValue('gray.50', 'gray.800')}
+    >
+
+      <Stack w={{ base: 'full', md: 'lg' }} spacing={8} py={5} px={{ base: 2, md: 6 }}>
+
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+          <Box pb={{ base: 5, md: 10 }}>
+            <Link href='/'>
+              <Logo />
+            </Link>
+          </Box>
+
+          <Heading fontSize={{ base: 'xl', md: '3xl' }}>Sign in</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
             to enjoy all of our cool <Link href={'#'}>features</Link> ✌️
           </Text>
         </Stack>
+
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
-          p={8}>
+          p={5}
+        >
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
@@ -51,11 +63,12 @@ export default function Login() {
               </Stack>
               <Link href='/home'>
                 <Button
-                  bg={'blue.400'}
+                  bg={'turquoise'}
                   color={'white'}
                   _hover={{
-                    bg: 'blue.500',
-                  }}>
+                    bg: 'turquoise',
+                  }}
+                >
                   Sign in
                 </Button>
               </Link>

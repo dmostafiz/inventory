@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { MantineProvider } from '@mantine/core'
 import '../../styles/globals.css'
 import theme from '../theme'
+import NextNProgress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps }) {
   return <MantineProvider
@@ -13,6 +14,16 @@ function MyApp({ Component, pageProps }) {
     }}
   >
     <ChakraProvider theme={theme}>
+
+      <NextNProgress
+        color="#015048"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        showOnShallow={true}
+      />
+
+
       <Component {...pageProps} />
     </ChakraProvider>
   </MantineProvider>

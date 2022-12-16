@@ -12,7 +12,9 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
+import Breadcrumps from "../../Components/Breadcrumps";
 import LeftSidebar from "../../Components/home/LeftSidebar";
 import TopBar from "../../Components/home/TopBar";
 
@@ -46,7 +48,7 @@ export default function Layout({ title, breads = [], titleRight, header, gradien
 
         <TopBar layoutWidth={layoutWidth} sidebar={sidebar} />
 
-        <Box as="main" bg=''>
+        <Box as="main">
 
           <Box px={layoutWidth} pt={8} pb={header ? 8 : 4} w='full' bgGradient={(header && gradient) && 'linear(to-b, #78DCCE, #40e0d000)'} roundedBottom={'30px'}>
             <Flex alignContent={'flex-end'} justify='space-between'>
@@ -54,14 +56,7 @@ export default function Layout({ title, breads = [], titleRight, header, gradien
                 <Heading fontSize={'28px'} color='blackAlpha.800' mb='1'>
                   {title}
                 </Heading>
-                {breads.length > 0 && <Breadcrumb spacing='4px' color={'gray.400'} fontSize='14px' separator={<ChevronRightIcon color='gray.400' />}>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href='/home'>Home</BreadcrumbLink>
-                  </BreadcrumbItem>
-                  {breads.map((item, index) => <BreadcrumbItem key={index} isCurrentPage={breads.length == (index + 1)}>
-                    <BreadcrumbLink href={item.link}>{item.title}</BreadcrumbLink>
-                  </BreadcrumbItem>)}
-                </Breadcrumb>}
+                {breads.length > 0 && <Breadcrumps breads={breads} />}
               </Box>
 
               {titleRight && titleRight}

@@ -29,8 +29,6 @@ const NavItem = (props) => {
             fontWeight={'normal'}
             fontSize={submenu? '15px': '16px'}
             transition="0s ease"
-
-
         
             {...rest}
         >
