@@ -4,9 +4,9 @@ import Layout from '../../../Layouts/Home/Layout'
 export default function index() {
   return (
     <Layout
-      title='Pos'
+      title='Expenses List'
     >
-      <div>Pos</div>
+        <div>List Expenses</div>
     </Layout>
   )
 }

@@ -5,6 +5,7 @@ import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "
 import { FaMinusCircle } from "react-icons/fa";
 import { MdContacts, MdHome } from "react-icons/md";
 import Logo from "../Logo";
+import MenuItem from "../Sidebar/MenuItem";
 import NavItem from "../Sidebar/NavItem";
 import Submenu from "../Sidebar/Submenu";
 
@@ -53,193 +54,77 @@ export default function LeftSidebar(props) {
       aria-label="Main Navigation"
     >
 
-      <Box
-        borderLeft={'4px'}
-        borderLeftColor='white'
-        _hover={{
-          borderLeftColor: 'turquoise'
-        }}
-      >
-        <Link href='/home'>
-          <NavItem icon={MdHome}>Home</NavItem>
-        </Link>
-      </Box>
-      {/* <NavItem icon={FaRss}>Articles</NavItem> */}
-      {/* <NavItem icon={HiCollection}>Collections</NavItem> */}
-      {/* <NavItem icon={FaClipboardCheck}>Checklists</NavItem> */}
 
-      <Box
-        borderLeft={'4px'}
-        borderLeftColor='white'
-        _hover={{
-          borderLeftColor: 'turquoise'
-        }}
-      >
-        <Submenu
-          icon={MdContacts}
-          title={'Contacts'}
-        >
-          <Link href='/home/contacts/supliers'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Supliers
-            </NavItem>
-          </Link>
-          <Link href='/home/contacts/customers'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Customers
-            </NavItem>
-          </Link>
-        </Submenu>
-      </Box>
+      <MenuItem
+        icon={MdHome}
+        title='Home'
+        link='/home'
+      />
 
-      <Box
-        borderLeft={'4px'}
-        borderLeftColor='white'
-        _hover={{
-          borderLeftColor: 'turquoise'
-        }}
-      >
-        <Submenu
-          icon={AiFillGift}
-          title={'Products'}
-        >
-          <Link href='/home/products'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Product List
-            </NavItem>
-          </Link>
-          <Link href='/home/products/add'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Add Products
-            </NavItem>
-          </Link>
+      <MenuItem
+        icon={MdContacts}
+        title='Contacts'
+        submenus={[
+          { title: 'Supliers', link: '/home/contacts/supliers' },
+          { title: 'Customers', link: '/home/contacts/customers' },
+        ]}
+      />
 
-          <Link href='/home/products/variations'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Variations
-            </NavItem>
-          </Link>
+      <MenuItem
+        icon={AiFillGift}
+        title='Products'
+        submenus={[
+          { title: 'Product List', link: '/home/products' },
+          { title: 'Add Products', link: '/home/products/add' },
+          { title: 'Variations', link: '/home/products/variations' },
+          { title: 'Units', link: '/home/products/units' },
+          { title: 'Categories', link: '/home/products/categories' },
+          { title: ' Brands / Company', link: '/home/products/brands' }
+        ]}
+      />
 
-          <Link href='/home/products/units'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Units
-            </NavItem>
-          </Link>
+      <MenuItem
+        icon={BsFillArrowDownCircleFill}
+        title='Purchases'
+        submenus={[
+          { title: 'Purchases List', link: '/home/purchases' },
+          { title: 'Add Purchase', link: '/home/purchases/add' },
+          { title: 'Return List', link: '/home/purchases/returns' },
+        ]}
+      />
 
-          <Link href='/home/products/categories'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Categories
-            </NavItem>
-          </Link>
-
-          <Link href='/home/products/brands'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Brands / Company
-            </NavItem>
-          </Link>
-
-        </Submenu>
-      </Box>
-
-      <Box
-        borderLeft={'4px'}
-        borderLeftColor='white'
-        _hover={{
-          borderLeftColor: 'turquoise'
-        }}
-      >
-        <Submenu
-          icon={BsFillArrowDownCircleFill}
-          title={'Purchases'}
-        >
-          <Link href='/home/purchases'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Purchases List
-            </NavItem>
-          </Link>
-          <Link href='/home/purchases/add'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Add Purchase
-            </NavItem>
-          </Link>
-          <Link href='/home/purchases/returns'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Return List
-            </NavItem>
-          </Link>
-        </Submenu>
-      </Box>
-
-      <Box
-        borderLeft={'4px'}
-        borderLeftColor='white'
-        _hover={{
-          borderLeftColor: 'turquoise'
-        }}
-      >
-        <Submenu
-          icon={BsFillArrowUpCircleFill}
-          title={'Sales'}
-        >
-          <Link href='/home/sales'>
-            <NavItem pl="6" py="1" submenu={true}>
-              All Sales
-            </NavItem>
-          </Link>
-          <Link href='/home/sales/add'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Add Sale
-            </NavItem>
-          </Link>
-          <Link href='/home/pos/list'>
-            <NavItem pl="6" py="1" submenu={true}>
-              List POS
-            </NavItem>
-          </Link>
-          <Link href='/home/sales/returns'>
-            <NavItem pl="6" py="1" submenu={true}>
-              Sale Returns
-            </NavItem>
-          </Link>
-        </Submenu>
-      </Box>
+      <MenuItem
+        icon={BsFillArrowUpCircleFill}
+        title='Sales'
+        submenus={[
+          { title: 'All Sales', link: '/home/sales' },
+          { title: 'Add Sale', link: '/home/sales/add' },
+          { title: 'List POS', link: '/home/pos/list' },
+          { title: 'Sale Returns', link: '/home/sales/returns' },
+        ]}
+      />
 
 
-      <Box
-        borderLeft={'4px'}
-        borderLeftColor='white'
-        _hover={{
-          borderLeftColor: 'turquoise'
-        }}
-      >
-        <Submenu
-          icon={FaMinusCircle}
-          title={'Expenses'}
-        >
-          <NavItem pl="6" py="1" submenu={true}>
-            Expenses List
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Add Expenses
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            List POS
-          </NavItem>
-          <NavItem pl="6" py="1" submenu={true}>
-            Sell Returns
-          </NavItem>
-        </Submenu>
-      </Box>
+      <MenuItem
+        icon={FaMinusCircle}
+        title='Expenses'
+        submenus={[
+          { title: 'Expenses List', link: '/home/expenses' },
+          { title: 'Add Expenses', link: '/home/expenses/add' }
+        ]}
+      />
 
-      <Box
-        borderLeft={'4px'}
-        borderLeftColor='white'
-        _hover={{
-          borderLeftColor: 'turquoise'
-        }}
-      >
-        <NavItem icon={BsGearFill}>Settings</NavItem>
-      </Box>
+
+      <MenuItem
+        icon={BsGearFill}
+        title='Settings'
+        submenus={[
+          { title: 'General Settings', link: '#' },
+          { title: 'Profile Settings', link: '#' },
+          { title: 'Business Settings', link: '#' }
+        ]}
+      />
+
     </Flex>
   </Box>
 }

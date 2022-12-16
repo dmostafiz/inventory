@@ -15,63 +15,70 @@ const SalesChart = dynamic(import("../../Components/home/Dashboard/Charts/SalesC
 
 export default function index() {
   return (
-    <Layout title='Welcome Mostafiz'>
-      <Box mt={3}>
-        <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
-          <StatsCard
-            title={'TOTAL SALES'}
-            stat={'5,000'}
-            icon={<BsFillBagCheckFill size={'1.5em'} />}
-          />
-          <StatsCard
-            title={'NET'}
-            stat={'1,000'}
-            icon={<FiServer size={'1.5em'} />}
-            iconBg='green.400'
-          />
-          <StatsCard
-            title={'INVOICE DUE'}
-            stat={'705'}
-            icon={<GoLocation size={'1.5em'} />}
-            iconBg='orange.400'
-          />
-          <StatsCard
-            title={'TOTAL SALES RETURNS'}
-            stat={'7'}
-            icon={<AiFillMinusCircle size={'1.5em'} />}
-            iconBg='red.500'
-          />
-        </SimpleGrid>
-      </Box>
+    <Layout
+      title='Welcome Mostafiz'
+      header={
+        <>
+          <Box mt={3}>
+            <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
+              <StatsCard
+                title={'TOTAL SALES'}
+                stat={'5,000'}
+                icon={<BsFillBagCheckFill size={'1.5em'} />}
+              />
+              <StatsCard
+                title={'NET'}
+                stat={'1,000'}
+                icon={<FiServer size={'1.5em'} />}
+                iconBg='green.400'
+              />
+              <StatsCard
+                title={'INVOICE DUE'}
+                stat={'705'}
+                icon={<GoLocation size={'1.5em'} />}
+                iconBg='orange.400'
+              />
+              <StatsCard
+                title={'TOTAL SALES RETURNS'}
+                stat={'7'}
+                icon={<AiFillMinusCircle size={'1.5em'} />}
+                iconBg='red.500'
+              />
+            </SimpleGrid>
+          </Box>
+          <Box mt={4}>
+            <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
+              <StatsCard
+                title={'TOTAL PURCHASES'}
+                stat={'5,000'}
+                icon={<AiFillCreditCard size={'1.5em'} />}
+                iconBg='blue.400'
+              />
+              <StatsCard
+                title={'PURCHASES DUE'}
+                stat={'1,000'}
+                icon={<BsFillInfoSquareFill size={'1.5em'} />}
+                iconBg='orange.400'
+              />
+              <StatsCard
+                title={'PURCHASES RETURNS'}
+                stat={'545'}
+                icon={<BsFillReplyAllFill size={'1.5em'} />}
+                iconBg='red.400'
+              />
+              <StatsCard
+                title={'EXPENSES'}
+                stat={'0.0'}
+                icon={<BsCreditCard2Front size={'1.5em'} />}
+                iconBg='red.400'
+              />
+            </SimpleGrid>
+          </Box>
+        </>
+      }
+      gradient={true}
+    >
 
-      <Box mt={4}>
-        <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
-          <StatsCard
-            title={'TOTAL PURCHASES'}
-            stat={'5,000'}
-            icon={<AiFillCreditCard size={'1.5em'} />}
-            iconBg='blue.400'
-          />
-          <StatsCard
-            title={'PURCHASES DUE'}
-            stat={'1,000'}
-            icon={<BsFillInfoSquareFill size={'1.5em'} />}
-            iconBg='orange.400'
-          />
-          <StatsCard
-            title={'PURCHASES RETURNS'}
-            stat={'545'}
-            icon={<BsFillReplyAllFill size={'1.5em'} />}
-            iconBg='red.400'
-          />
-          <StatsCard
-            title={'EXPENSES'}
-            stat={'0.0'}
-            icon={<BsCreditCard2Front size={'1.5em'} />}
-            iconBg='red.400'
-          />
-        </SimpleGrid>
-      </Box>
 
       <Card shadow={'md'} bg='white' mt={4}>
         <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>

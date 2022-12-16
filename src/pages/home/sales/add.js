@@ -1,12 +1,10 @@
 import React from 'react'
 import Layout from '../../../Layouts/Home/Layout'
 
-export default function index() {
+export default function add() {
   return (
-    <Layout
-      title='Pos'
-    >
-      <div>Pos</div>
+    <Layout title='Add Sale'>
+        <div>add sale</div>
     </Layout>
   )
 }

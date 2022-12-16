@@ -1,5 +1,9 @@
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Drawer,
   DrawerContent,
   DrawerOverlay,
@@ -14,7 +18,7 @@ import TopBar from "../../Components/home/TopBar";
 
 // import { Logo } from "@choc-ui/logo";
 
-export default function Layout({ title, children }) {
+export default function Layout({ title, breads = [], titleRight, header, gradient = false, children }) {
 
   const layoutWidth = { base: 2, md: 10 }
 
@@ -42,19 +46,35 @@ export default function Layout({ title, children }) {
 
         <TopBar layoutWidth={layoutWidth} sidebar={sidebar} />
 
-        <Box as="main">
+        <Box as="main" bg=''>
 
-          <Box minH={'calc(100vh - 100px)'} px={layoutWidth} pt={8} pb={5} w='full' bgGradient={children && 'linear(to-b, #dce0cd, #40e0d000)'} roundedBottom={'30px'}>
+          <Box px={layoutWidth} pt={8} pb={header ? 8 : 4} w='full' bgGradient={(header && gradient) && 'linear(to-b, #78DCCE, #40e0d000)'} roundedBottom={'30px'}>
+            <Flex alignContent={'flex-end'} justify='space-between'>
+              <Box>
+                <Heading fontSize={'24px'} color='blackAlpha.800' mb='1'>
+                  {title}
+                </Heading>
+                {breads.length > 0 && <Breadcrumb spacing='4px' color={'gray.400'} fontSize='14px' separator={<ChevronRightIcon color='gray.400' />}>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href='/home'>Home</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  {breads.map((item, index) => <BreadcrumbItem key={index} isCurrentPage={breads.length == (index + 1)}>
+                    <BreadcrumbLink href={item.link}>{item.title}</BreadcrumbLink>
+                  </BreadcrumbItem>)}
+                </Breadcrumb>}
+              </Box>
 
-            <Heading fontSize={'24px'} color='blackAlpha.800' mb={5}>
-              {title}
-            </Heading>
-
-            <Box>
-              {children}
-            </Box>
-
+              {titleRight && titleRight}
+            </Flex>
+            {header}
           </Box>
+
+
+          <Box minH={'74vh'} px={layoutWidth} pb={16}>
+            {children}
+          </Box>
+
+
           <Box color={'gray.600'} bg='blackAlpha.50' px={layoutWidth} py={3}>
             <Flex w='full' alignItems={'center'} justify='space-between'>
               <Text fontSize='14px'>2022 @ tech-oak.com all rights reserved</Text>
