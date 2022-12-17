@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider theme={theme}>
 
       <NextNProgress
-        color="#015048"
+        color="#00776B"
         startPosition={0.3}
         stopDelayMs={200}
         height={3}
