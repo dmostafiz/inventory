@@ -8,15 +8,21 @@ import StatsCard from '../../Components/home/Dashboard/StatCard'
 import Layout from '../../Layouts/Home/Layout'
 
 import dynamic from "next/dynamic";
+import useUser from '../../Hooks/useUser'
 
 const SalesChart = dynamic(import("../../Components/home/Dashboard/Charts/SalesChart"), {
   ssr: false
 });
 
 export default function index() {
+
+  const { isError, error, authUser, isLoading, logoutUser } = useUser()
+
+  console.log('auth user', authUser)
+
   return (
     <Layout
-      title='Welcome Mostafiz'
+      title={`Welcome ${authUser?.firstName}`}
       header={
         <>
           <Box mt={3}>

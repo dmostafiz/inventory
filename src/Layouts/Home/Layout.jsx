@@ -12,6 +12,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import Breadcrumps from "../../Components/Breadcrumps";
@@ -29,6 +30,11 @@ export default function Layout({ title, breads = [], titleRight, header, gradien
 
   return (
     <HomeWrapper>
+
+      <Head>
+        <title>Tech Oak | {title}</title>
+      </Head>
+
       <Box as="section" bg="gray.50" minH="100vh">
 
         <LeftSidebar display={{ base: "none", md: "unset" }} />
