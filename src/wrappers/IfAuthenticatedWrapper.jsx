@@ -1,15 +1,15 @@
 import { Center, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React from 'react'
-import ComponentLoader from '../../Components/ComponentLoader'
-import useUser from '../../Hooks/useUser'
+import ComponentLoader from '../Components/ComponentLoader'
+import useUser from '../Hooks/useUser'
 
-export default function HomeWrapper({ children }) {
+export default function IfAuthenticatedWrapper({ children }) {
   const router = useRouter()
   const { isLoading, authUser } = useUser()
 
-  if (!isLoading && !authUser) {
-    router.push('/auth/login')
+  if (!isLoading && authUser) {
+    window.location.href = '/home'
   }
 
   return (
@@ -19,7 +19,7 @@ export default function HomeWrapper({ children }) {
           <ComponentLoader />
         </Center>
 
-        : (!isLoading && authUser)
+        : (!isLoading && !authUser)
 
           ? children
 

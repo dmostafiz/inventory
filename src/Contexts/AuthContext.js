@@ -31,7 +31,7 @@ const AuthContextProvider = ({ children }) => {
         if (response?.data?.ok) {
             removeAccessToken()
 
-            window.location.href = '/'
+            window.location.href = '/auth/login'
         }
     }
 

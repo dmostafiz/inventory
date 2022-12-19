@@ -17,7 +17,7 @@ import React from "react";
 import Breadcrumps from "../../Components/Breadcrumps";
 import LeftSidebar from "../../Components/home/LeftSidebar";
 import TopBar from "../../Components/home/TopBar";
-import HomeWrapper from "./HomeWrapper";
+import HomeWrapper from "../../wrappers/HomeWrapper";
 
 // import { Logo } from "@choc-ui/logo";
 
