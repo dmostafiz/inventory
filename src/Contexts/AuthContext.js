@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { createContext, useEffect, useState } from "react"
 import Axios from "../Helpers/Axios"
 import { getAccessToken, removeAccessToken } from "../Helpers/cookieHelper"
-import useUser from "../Hooks/useUser"
+// import useUser from "../Hooks/useUser"
 
 export const AuthContext = createContext()
 

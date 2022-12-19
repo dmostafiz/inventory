@@ -3,6 +3,10 @@ import { MantineProvider } from '@mantine/core'
 import '../../styles/globals.css'
 import theme from '../theme'
 import NextNProgress from "nextjs-progressbar";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AuthContextProvider from '../Contexts/AuthContext';
+
+const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }) {
   return <MantineProvider
@@ -22,9 +26,13 @@ function MyApp({ Component, pageProps }) {
         height={3}
         showOnShallow={true}
       />
+      
+      <QueryClientProvider client={queryClient}>
+        <AuthContextProvider>
+          <Component {...pageProps} />
+        </AuthContextProvider>
+      </QueryClientProvider>
 
-
-      <Component {...pageProps} />
     </ChakraProvider>
   </MantineProvider>
 }

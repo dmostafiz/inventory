@@ -11,15 +11,22 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue
+  useColorModeValue,
+  FormErrorMessage
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Logo from '../../Components/Logo';
 import Link from 'next/link';
+import useRegistration from '../../Hooks/useRegistration';
+import useUser from '../../Hooks/useUser';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, fbLoading, googleLoading } = useRegistration()
+
+  const { isLoading, authUser } = useUser()
 
   return (
     <Flex
@@ -49,26 +56,51 @@ export default function Register() {
           <Stack spacing={4}>
             <HStack>
               <Box>
-                <FormControl id="firstName" isRequired>
+                <FormControl id="firstName" isInvalid={errors.firstName} isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    placeholder='Enter your first name'
+                    {...register('firstName')}
+                  />
+                  <FormErrorMessage>
+                    {errors.firstName && errors.firstName.message}
+                  </FormErrorMessage>
                 </FormControl>
               </Box>
               <Box>
-                <FormControl id="lastName">
+                <FormControl id="lastName" isInvalid={errors.lastName} isRequired>
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    placeholder='Enter your last name'
+                    {...register('lastName')}
+                  />
+                  <FormErrorMessage>
+                    {errors.lastName && errors.lastName.message}
+                  </FormErrorMessage>
                 </FormControl>
               </Box>
             </HStack>
-            <FormControl id="email" isRequired>
+            <FormControl id="email" isInvalid={errors.email} isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                placeholder='Enter your email address!'
+                {...register('email')}
+              />
+              <FormErrorMessage>
+                {errors.email && errors.email.message}
+              </FormErrorMessage>
             </FormControl>
-            <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
+            <FormControl id="password" isInvalid={errors.password} isRequired>
+              <FormLabel>New Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='Enter new password'
+                  {...register('password')}
+                />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -79,7 +111,34 @@ export default function Register() {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              <FormErrorMessage>
+                {errors.password && errors.password.message}
+              </FormErrorMessage>
             </FormControl>
+
+            <FormControl id="password" isInvalid={errors.confirmPassword} isRequired>
+              <FormLabel>Re-type Password</FormLabel>
+              <InputGroup>
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='Re-type the password'
+                  {...register('confirmPassword')}
+                />
+                <InputRightElement h={'full'}>
+                  <Button
+                    variant={'ghost'}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }>
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              <FormErrorMessage>
+                {errors.confirmPassword && errors.confirmPassword.message}
+              </FormErrorMessage>
+            </FormControl>
+
             <Stack spacing={10} pt={2}>
               <Button
                 loadingText="Submitting"
@@ -89,13 +148,16 @@ export default function Register() {
                 _hover={{
                   bg: 'turquoise',
                 }}
+
+                isLoading={isSubmitting}
+                onClick={handleSubmit(onSubmit)}
               >
                 Sign up
               </Button>
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
-                Already a user? <Link href='#' color={'blue.400'}>Login</Link>
+                Already a user? <Link href='/auth/login' color={'blue.400'}>Login</Link>
               </Text>
             </Stack>
           </Stack>

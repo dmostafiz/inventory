@@ -10,11 +10,14 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import Logo from '../../Components/Logo';
+import useLogin from '../../Hooks/useLogin';
 
 export default function Login() {
+  const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading } = useLogin('/home')
   return (
     <Flex
       minH={'100vh'}
@@ -45,13 +48,28 @@ export default function Login() {
           p={5}
         >
           <Stack spacing={4}>
-            <FormControl id="email">
+            <FormControl id="email" isInvalid={errors.email}>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                placeholder='Enter your login email'
+                {...register('email')}
+              />
+
+              <FormErrorMessage>
+                {errors.email && errors.email.message}
+              </FormErrorMessage>
             </FormControl>
-            <FormControl id="password">
+            <FormControl id="password" isInvalid={errors.password}>
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input
+                type="password"
+                placeholder='Enter your password'
+                {...register('password')}
+              />
+              <FormErrorMessage>
+                {errors.password && errors.password.message}
+              </FormErrorMessage>
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -68,6 +86,9 @@ export default function Login() {
                   _hover={{
                     bg: 'turquoise',
                   }}
+                  loadingText="Loging in..."
+                  isLoading={isSubmitting}
+                  onClick={handleSubmit(onSubmit)}
                 >
                   Sign in
                 </Button>
