@@ -21,7 +21,7 @@ export default function LeftSidebar(props) {
     pb="10"
     overflowX="hidden"
     overflowY="auto"
-    // bg="turquoise"
+    bg="white"
     // bgGradient='linear(to-t, turquoise, white)'
     border
     color="inherit"
@@ -121,7 +121,7 @@ export default function LeftSidebar(props) {
         submenus={[
           { title: 'General Settings', link: '#' },
           { title: 'Profile Settings', link: '#' },
-          { title: 'Business Settings', link: '#' }
+          { title: 'Business Settings', link: '/home/settings/business' }
         ]}
       />
 

@@ -6,7 +6,7 @@ export default function supliers() {
   return (
     <Layout
       title='Supliers'
-      titleRight={<Button bg='turquoise'>Add Supplier</Button>}
+      titleRight={<Button colorScheme={'teal'} variant='outline' size={'sm'}>Add Supplier</Button>}
       breads={[
         { title: 'Contacts', link:'#'},
         { title: 'Supliers', link:'/home/contacts/supliers'}

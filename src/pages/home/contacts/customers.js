@@ -6,7 +6,7 @@ export default function customers() {
   return (
     <Layout
       title={'Customers'}
-      titleRight={<Button bg='turquoise'>Add Customer</Button>}
+      titleRight={<Button colorScheme={'teal'} variant='outline' size={'sm'}>Add Customer</Button>}
       breads={[
         { title: 'Contacts', link:'#'},
         { title: 'Customers', link: '/home/contacts/customers' }

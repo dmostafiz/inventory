@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, CardHeader, Flex, Heading, SimpleGrid, Stack, StackDivider, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react'
+import { Alert, AlertIcon, Box, Card, CardBody, CardHeader, Flex, Heading, SimpleGrid, Stack, StackDivider, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { AiFillCreditCard, AiFillMinusCircle } from 'react-icons/ai'
 import { BsCreditCard2Front, BsFillBagCheckFill, BsFillInfoSquareFill, BsFillReplyAllFill } from 'react-icons/bs'
@@ -9,6 +9,9 @@ import Layout from '../../Layouts/Home/Layout'
 
 import dynamic from "next/dynamic";
 import useUser from '../../Hooks/useUser'
+import Link from 'next/link'
+import Axios from '../../Helpers/Axios'
+import { useQuery } from '@tanstack/react-query'
 
 const SalesChart = dynamic(import("../../Components/home/Dashboard/Charts/SalesChart"), {
   ssr: false
@@ -18,6 +21,14 @@ export default function index() {
 
   const { isError, error, authUser, isLoading, logoutUser } = useUser()
 
+  const { data } = useQuery(['myBusinesses'], async () => {
+    const res = await Axios.get('/business')
+
+    // console.log('Business response', res)
+    return res.data
+})
+
+
   console.log('auth user', authUser)
 
   return (
@@ -25,7 +36,15 @@ export default function index() {
       title={`Welcome ${authUser?.firstName}`}
       header={
         <>
-          <Box mt={3}>
+          {data?.businesses?.length < 1 && <Box mt={5} mb={5}>
+            <Alert status='info' variant='left-accent' shadow={'md'} bg='white'>
+              <AlertIcon />
+              <Box>We are very happy to get you here today. To run your operations, please setup your business infomation right now (
+                <Link href='/home/settings/business'><Text as='span' color='#00B29E'>Click Here</Text></Link>)</Box>
+            </Alert>
+          </Box>}
+
+          <Box mt={5}>
             <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
               <StatsCard
                 title={'TOTAL SALES'}
