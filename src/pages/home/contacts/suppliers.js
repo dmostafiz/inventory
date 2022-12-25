@@ -4,43 +4,44 @@ import moment from 'moment'
 import React from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
-import CreateCustomer from '../../../Components/home/Dashboard/FormModals/CreateCustomer'
+import CreateSupplier from '../../../Components/home/Dashboard/FormModals/CreateSupplier'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
 
-export default function customers() {
+export default function suplliers() {
 
   const { deleteAction } = useAppActions()
 
-  const { data, isLoading, error } = useQuery(['getCustomers'], async () => {
-    const res = await Axios.get('/customer')
+  const { data, isLoading, error } = useQuery(['getSuppliers'], async () => {
+    const res = await Axios.get('/supplier')
 
-    console.log('customers loaded', res.data)
+    console.log('suppliers loaded', res.data)
 
     return res.data
   })
 
-
   return (
     <Layout
-      title={'Customers'}
-      titleRight={<CreateCustomer />}
+      title='Suppliers'
+      titleRight={<CreateSupplier />}
       breads={[
         { title: 'Contacts', link: '#' },
-        { title: 'Customers', link: '/home/contacts/customers' }
+        { title: 'Suppliers', link: '/home/contacts/suppliers' }
       ]}
     >
+
+
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
           <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-            <Heading size='md'>Customer list</Heading>
+            <Heading size='md'>Suppliers list</Heading>
           </CardHeader>
           <CardBody p={2} pt={0}>
             <TableContainer>
               {isLoading && <ComponentLoader />}
 
-              {!isLoading && data?.customers?.length > 0 && <Table size='sm' variant='striped'>
+              {!isLoading && data?.suppliers?.length > 0 && <Table size='sm' variant='striped'>
                 <Thead>
                   <Tr>
                     <Th>Name</Th>
@@ -53,37 +54,37 @@ export default function customers() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.customers?.map((customer, index) => {
+                  {data?.suppliers?.map((supplier, index) => {
                     return <Tr key={index}>
-                      <Td>{customer.prefix}. {customer.firstName} {customer.middleName} {customer.lastName}</Td>
+                      <Td>{supplier.prefix}. {supplier.firstName} {supplier.middleName} {supplier.lastName}</Td>
                       <Td>
-                        <Text><strong>Mobile</strong> - {customer.mobile}</Text>
-                        <Text><strong>Alternative</strong> - {customer.alternativeMobile}</Text>
-                        <Text><strong>Land Line</strong> - {customer.landLine}</Text>
-                        <Text><strong>Email</strong> - {customer.email}</Text>
+                        <Text><strong>Mobile</strong> - {supplier.mobile}</Text>
+                        <Text><strong>Alternative</strong> - {supplier.alternativeMobile}</Text>
+                        <Text><strong>Land Line</strong> - {supplier.landLine}</Text>
+                        <Text><strong>Email</strong> - {supplier.email}</Text>
                       </Td>
                       <Td>
-                        <Text>{customer.addressOne}.</Text>
-                        <Text>{customer.addressTwo}</Text>
-                        <Text mt={2}><strong>City</strong> - {customer.city}</Text>
-                        <Text><strong>State</strong> - {customer.state}</Text>
-                        <Text><strong>Country</strong> - {customer.country}</Text>
-                        <Text><strong>zip code</strong> - {customer.zipCode}</Text>
+                        <Text>{supplier.addressOne}.</Text>
+                        <Text>{supplier.addressTwo}</Text>
+                        <Text mt={2}><strong>City</strong> - {supplier.city}</Text>
+                        <Text><strong>State</strong> - {supplier.state}</Text>
+                        <Text><strong>Country</strong> - {supplier.country}</Text>
+                        <Text><strong>zip code</strong> - {supplier.zipCode}</Text>
                       </Td>
                       <Td>
                         <Text><strong>Total</strong> - {0} products</Text>
                         <Text><strong>Paid</strong> - {0}</Text>
                         <Text><strong>Due</strong> - {0}</Text>
                       </Td>
-                      <Td>{customer.description}</Td>
-                      <Td>{moment(customer.createdAt).format('LL')}</Td>
+                      <Td>{supplier.description}</Td>
+                      <Td>{moment(supplier.createdAt).format('LL')}</Td>
                       <Td isNumeric>
                         <Button size={'sm'} colorScheme='teal'>Edit</Button>
                         <Button
                           onClick={() => deleteAction({
-                            id: customer.id,
-                            url: '/customer/delete',
-                            refetchKies: ['getCustomers']
+                            id: supplier.id,
+                            url: '/supplier/delete',
+                            refetchKies: ['getSuppliers']
                           })}
                           size={'sm'}
                           colorScheme='red'
@@ -98,13 +99,13 @@ export default function customers() {
                 </Tbody>
               </Table>}
 
-              {!isLoading && !data?.customers?.length && <DataNotFound />}
+              {!isLoading && !data?.suppliers?.length && <DataNotFound />}
 
             </TableContainer>
-
           </CardBody>
         </Card>
       </Box>
+
     </Layout>
   )
 }

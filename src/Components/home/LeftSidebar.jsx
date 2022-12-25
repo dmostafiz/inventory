@@ -65,7 +65,7 @@ export default function LeftSidebar(props) {
         icon={MdContacts}
         title='Contacts'
         submenus={[
-          { title: 'Supliers', link: '/home/contacts/supliers' },
+          { title: 'Suppliers', link: '/home/contacts/suppliers' },
           { title: 'Customers', link: '/home/contacts/customers' },
         ]}
       />

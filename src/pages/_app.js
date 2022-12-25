@@ -5,6 +5,7 @@ import theme from '../theme'
 import NextNProgress from "nextjs-progressbar";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthContextProvider from '../Contexts/AuthContext';
+import AppContextProvider from '../Contexts/AppContext';
 
 const queryClient = new QueryClient()
 
@@ -26,10 +27,12 @@ function MyApp({ Component, pageProps }) {
         height={3}
         showOnShallow={true}
       />
-      
+
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
-          <Component {...pageProps} />
+          <AppContextProvider>
+            <Component {...pageProps} />
+          </AppContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
 

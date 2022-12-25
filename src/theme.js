@@ -3,6 +3,7 @@ import { extendTheme } from '@chakra-ui/react'
 const theme = extendTheme({
   components: {
     Input: {
+      focusBorderColor: 'lime',
       _focus: {
         ring: '1px',
         ringColor: '#00B29E',

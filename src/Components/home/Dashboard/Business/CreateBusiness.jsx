@@ -79,11 +79,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        _focus={{
-                            ring: '1px',
-                            ringColor: '#00B29E',
-                            borderColor: '#00B29E'
-                        }}
+                        focusBorderColor='#00B29E' 
                         placeholder='Enter business name'
                         {...register('name')}
                     />
@@ -98,11 +94,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        _focus={{
-                            ring: '1px',
-                            ringColor: '#00B29E',
-                            borderColor: '#00B29E'
-                        }}
+                        focusBorderColor='#00B29E' 
                         placeholder='Enter contact number'
                         {...register('contact')}
                     />
@@ -118,11 +110,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        _focus={{
-                            ring: '1px',
-                            ringColor: '#00B29E',
-                            borderColor: '#00B29E'
-                        }}
+                        focusBorderColor='#00B29E' 
                         placeholder='Enter business address location'
                         {...register('location')}
 
@@ -139,11 +127,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        _focus={{
-                            ring: '1px',
-                            ringColor: '#00B29E',
-                            borderColor: '#00B29E'
-                        }}
+                        focusBorderColor='#00B29E' 
                         placeholder='Enter business city'
                         {...register('city')}
                     />
@@ -158,11 +142,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        _focus={{
-                            ring: '1px',
-                            ringColor: '#00B29E',
-                            borderColor: '#00B29E'
-                        }}
+                        focusBorderColor='#00B29E' 
                         placeholder='Enter business state'
                         {...register('state')}
                     />
@@ -179,11 +159,7 @@ export default function CreateBusiness() {
                         size={'sm'}
                         type='text'
                         placeholder='Enter business zip code'
-                        _focus={{
-                            ring: '1px',
-                            ringColor: '#00B29E',
-                            borderColor: '#00B29E'
-                        }}
+                        focusBorderColor='#00B29E' 
                         {...register('zip')}
                     />
                     {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
