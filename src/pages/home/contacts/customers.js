@@ -43,7 +43,6 @@ export default function customers() {
               {!isLoading && data?.customers?.length > 0 && <Table size='sm' variant='striped'>
                 <Thead>
                   <Tr>
-                    <Th>Name</Th>
                     <Th>Contact</Th>
                     <Th>Address</Th>
                     <Th>Purchased</Th>
@@ -55,8 +54,8 @@ export default function customers() {
                 <Tbody>
                   {data?.customers?.map((customer, index) => {
                     return <Tr key={index}>
-                      <Td>{customer.prefix}. {customer.firstName} {customer.middleName} {customer.lastName}</Td>
                       <Td>
+                        <Text><strong>Name</strong> - {customer.prefix}. {customer.firstName} {customer.middleName} {customer.lastName}</Text>
                         <Text><strong>Mobile</strong> - {customer.mobile}</Text>
                         <Text><strong>Alternative</strong> - {customer.alternativeMobile}</Text>
                         <Text><strong>Land Line</strong> - {customer.landLine}</Text>

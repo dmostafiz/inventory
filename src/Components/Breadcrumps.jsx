@@ -7,7 +7,7 @@ export default function Breadcrumps({breads}) {
     useEffect(() => {}, [])
     return (
         <>
-            {breads.length > 0 && <Breadcrumb spacing='4px' color={'gray.400'} fontSize='14px' separator={<ChevronRightIcon color='gray.400' />}>
+            {breads.length > 0 && <Breadcrumb spacing='2px' color={'gray.400'} fontSize='12px' separator={<ChevronRightIcon color='gray.400' />}>
                 <BreadcrumbItem>
                     <Link href='/home'>
                         <BreadcrumbLink as={'p'} href='/home'>Home</BreadcrumbLink>

@@ -26,7 +26,7 @@ export default function LeftSidebar(props) {
     border
     color="inherit"
     w="60"
-    shadow={'lg'}
+    shadow={'md'}
     borderRight='0px'
     borderColor={'blackAlpha.200'}
     {...props}
@@ -121,7 +121,8 @@ export default function LeftSidebar(props) {
         submenus={[
           { title: 'General Settings', link: '#' },
           { title: 'Profile Settings', link: '#' },
-          { title: 'Business Settings', link: '/home/settings/business' }
+          { title: 'Business Settings', link: '/home/settings/business' },
+          { title: 'Tax Rates', link: '/home/settings/tax' }
         ]}
       />
 

@@ -44,7 +44,6 @@ export default function suplliers() {
               {!isLoading && data?.suppliers?.length > 0 && <Table size='sm' variant='striped'>
                 <Thead>
                   <Tr>
-                    <Th>Name</Th>
                     <Th>Contact</Th>
                     <Th>Address</Th>
                     <Th>Purchased</Th>
@@ -56,8 +55,8 @@ export default function suplliers() {
                 <Tbody>
                   {data?.suppliers?.map((supplier, index) => {
                     return <Tr key={index}>
-                      <Td>{supplier.prefix}. {supplier.firstName} {supplier.middleName} {supplier.lastName}</Td>
                       <Td>
+                        <Text mb={2}><strong>Name</strong> - {supplier.prefix}. {supplier.firstName} {supplier.middleName} {supplier.lastName}</Text>
                         <Text><strong>Mobile</strong> - {supplier.mobile}</Text>
                         <Text><strong>Alternative</strong> - {supplier.alternativeMobile}</Text>
                         <Text><strong>Land Line</strong> - {supplier.landLine}</Text>
@@ -76,7 +75,7 @@ export default function suplliers() {
                         <Text><strong>Paid</strong> - {0}</Text>
                         <Text><strong>Due</strong> - {0}</Text>
                       </Td>
-                      <Td>{supplier.description}</Td>
+                      <Td whiteSpace='break-spaces'>{supplier.description}</Td>
                       <Td>{moment(supplier.createdAt).format('LL')}</Td>
                       <Td isNumeric>
                         <Button size={'sm'} colorScheme='teal'>Edit</Button>
