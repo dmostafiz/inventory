@@ -49,20 +49,20 @@ export default function CreatePurchase() {
 
     }, [supplierData.data])
 
-    const [customerId, setCustomerId] = useState(null)
+    const [supplierId, setSupplierId] = useState(null)
     const [selectedSupplier, setSelectedSupplier] = useState(null)
 
     const [purchaseDate, setPurchaseDate] = useState(null)
 
     useEffect(() => {
-        if (customerId) {
+        if (supplierId) {
 
-            const supp = suppliers.find((item) => item.value === customerId)
+            const supp = suppliers.find((item) => item.value === supplierId)
             console.log('selected supplier', supp)
             setSelectedSupplier(supp)
         }
 
-    }, [customerId])
+    }, [supplierId])
 
 
     const [query, setQuery] = useState(null)
@@ -187,7 +187,7 @@ export default function CreatePurchase() {
     })
 
     const submitNow = async (value) => {
-        const res = await Axios.post('/purchase/create', { ...value, purchasePrducts, totalAmount, paidAmount, dueAmount, customerId, purchaseDate })
+        const res = await Axios.post('/purchase/create', { ...value, purchasePrducts, totalAmount, paidAmount, dueAmount, supplierId, purchaseDate })
 
         console.log('Purchase create response: ', res)
 
@@ -215,7 +215,7 @@ export default function CreatePurchase() {
             setQuery(null)
             setSearchedProducts([])
             setSelectedSupplier(null)
-            setCustomerId(null)
+            setSupplierId(null)
             setPurchaseDate(null)
 
         } else {
@@ -241,7 +241,7 @@ export default function CreatePurchase() {
                         searchable
                         nothingFound="No suppliers found"
                         data={suppliers}
-                        onChange={value => setCustomerId(value)}
+                        onChange={value => setSupplierId(value)}
                     />
                     {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
                     <FormErrorMessage>
