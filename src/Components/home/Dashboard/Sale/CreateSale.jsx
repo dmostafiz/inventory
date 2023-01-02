@@ -58,8 +58,9 @@ export default function CreateSale() {
         if (customerId) {
 
             const cust = customers.find((item) => item.value === customerId)
-            console.log('selected customer', cust)
+            console.log('selected customer', customerId)
             setSelectedCustomer(cust)
+
         }
 
     }, [customerId])
@@ -95,16 +96,16 @@ export default function CreateSale() {
 
 
 
-    const [salePrducts, setSaleProducts] = useState([])
+    const [saleProducts, setSaleProducts] = useState([])
 
     const handleSearchedProductSelect = (item) => {
 
-        const existProduct = salePrducts.find(p => p.id == item.id)
+        const existProduct = saleProducts.find(p => p.id == item.id)
 
         if (existProduct) {
-            // const filtered = salePrducts.filter(p => p.id != item.id)
+            // const filtered = saleProducts.filter(p => p.id != item.id)
 
-            const modified = salePrducts.map(p => {
+            const modified = saleProducts.map(p => {
                 if (p.id == item.id) {
 
                     if (p.stock > p.qty) {
@@ -126,17 +127,17 @@ export default function CreateSale() {
 
         } else {
 
-            setSaleProducts([...salePrducts, { ...item, qty: 1 }])
+            setSaleProducts([...saleProducts, { ...item, qty: 1 }])
 
         }
     }
 
     const removeQty = (item) => {
-        const existProduct = salePrducts.find(p => p.id == item.id)
+        const existProduct = saleProducts.find(p => p.id == item.id)
 
         if (existProduct && existProduct.qty > 1) {
 
-            const modified = salePrducts.map(p => {
+            const modified = saleProducts.map(p => {
                 if (p.id == item.id) {
                     return {
                         ...p,
@@ -150,7 +151,7 @@ export default function CreateSale() {
             setSaleProducts(modified)
 
         } else {
-            const filtered = salePrducts.filter(p => p.id != item.id)
+            const filtered = saleProducts.filter(p => p.id != item.id)
             setSaleProducts(filtered)
         }
     }
@@ -170,7 +171,7 @@ export default function CreateSale() {
 
     useEffect(() => {
 
-        const total = salePrducts.reduce((acc, curr) => {
+        const total = saleProducts.reduce((acc, curr) => {
 
             const total = curr.qty * curr.purchasePrice
             return acc + (((total * curr.taxRate) / 100) + total)
@@ -179,7 +180,7 @@ export default function CreateSale() {
 
         setTotalAmount(total)
 
-    }, [salePrducts])
+    }, [saleProducts])
 
 
     const {
@@ -194,7 +195,7 @@ export default function CreateSale() {
     })
 
     const submitNow = async (value) => {
-        const res = await Axios.post('/sale/create', { ...value, salePrducts, totalAmount, paidAmount, dueAmount, customerId, saleDate })
+        const res = await Axios.post('/sale/create', { ...value, saleProducts, totalAmount, paidAmount, dueAmount, customerId, saleDate })
 
         console.log('Purchase create response: ', res)
 
@@ -306,7 +307,7 @@ export default function CreateSale() {
                 <TableContainer mt={5}>
                     <Table variant='striped' size={'sm'} bordered={true}>
 
-                        {salePrducts.length < 1 && <TableCaption>No products added!</TableCaption>}
+                        {saleProducts.length < 1 && <TableCaption>No products added!</TableCaption>}
 
                         <Thead bg='#1CE7CF'>
                             <Tr>
@@ -325,7 +326,7 @@ export default function CreateSale() {
                         </Thead>
                         <Tbody>
 
-                            {salePrducts.map((item, index) => <Tr key={index}>
+                            {saleProducts.map((item, index) => <Tr key={index}>
                                 <Td>{item.name}</Td>
                                 <Td>{item.sku}</Td>
                                 <Td isNumeric>{item.qty}</Td>
