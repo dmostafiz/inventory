@@ -1,5 +1,8 @@
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Box, Button, Card, CardBody, CardHeader, Heading, Menu, MenuButton, MenuItem, MenuList, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { ChevronDownIcon, Search2Icon } from '@chakra-ui/icons'
+import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Menu, MenuButton, MenuItem, MenuList, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { Input } from '@mantine/core'
+import { DateRangePicker } from '@mantine/dates'
+import { useDebouncedState } from '@mantine/hooks'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
 import React, { useContext } from 'react'
@@ -8,6 +11,7 @@ import DataNotFound from '../../../Components/DataNotFound'
 import PurchaseInvoiceModal from '../../../Components/home/Dashboard/Purchase/PurchaseInvoiceModal'
 import { InvoiceContext } from '../../../Contexts/InvoiceContext'
 import Axios from '../../../Helpers/Axios'
+import DateRangeHook from '../../../Hooks/DateRangeHook'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
 
@@ -15,15 +19,20 @@ export default function index() {
 
   const { deleteAction } = useAppActions()
 
-  const { data, isLoading, error } = useQuery(['getPurchases'], async () => {
-    const res = await Axios.get('/purchase')
+  const { date, handleDateChange } = DateRangeHook()
+  const [query, setQuery] = useDebouncedState('', 500);
+
+  const { data, isLoading, error } = useQuery([date, query], async () => {
+    const res = await Axios.get('/purchase', {
+      params: {date,query}
+    })
 
     console.log('products loaded', res.data)
 
     return res.data
   })
 
-  const {setInvoice} = useContext(InvoiceContext)
+  const { setInvoice } = useContext(InvoiceContext)
 
   return (
     <Layout
@@ -35,7 +44,24 @@ export default function index() {
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
           <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-            <Heading size='md'>Purchase list</Heading>
+            <Flex alignItems={'center'} gap={5} justify='space-between'>
+
+              <Heading size='md'>Purchase list</Heading>
+              <Box flex={'1'}>
+                <Input
+                  w={'full'}
+                  icon={<Search2Icon />}
+                  placeholder="Search by invoice number / customer first name, last name, email."
+                  onChange={e => setQuery(e.target.value)}
+                />
+              </Box>
+              <DateRangePicker
+                // label="Book hotel"
+                placeholder="Pick dates range"
+                value={date}
+                onChange={handleDateChange}
+              />
+            </Flex>
           </CardHeader>
           <CardBody p={2} pt={0}>
             <TableContainer>
@@ -70,14 +96,14 @@ export default function index() {
                         </Menu>
                       </Td>
                       <Td>{moment(invoice.purchaseDate).format('LL')}</Td>
-                      <Td>{invoice.refNo}</Td>
+                      <Td>#{invoice.refNo}</Td>
                       <Td>{invoice?.supplier?.prefix} {invoice?.supplier?.firstName} {invoice?.supplier?.lastName}</Td>
                       <Td>{invoice.totalAmount}</Td>
                       <Td>{invoice.paid}</Td>
                       <Td>{invoice.due}</Td>
                       <Td>{invoice.note}</Td>
                       <Td>{moment(invoice.createdAt).format('LL')}</Td>
-             
+
                     </Tr>
 
                   })}

@@ -1,15 +1,19 @@
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Box, Button, Card, CardBody, CardHeader, Heading, Menu, MenuButton, MenuItem, MenuList, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { ChevronDownIcon, Search2Icon } from '@chakra-ui/icons'
+import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Menu, MenuButton, MenuItem, MenuList, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { Input } from '@mantine/core'
+import { DateRangePicker } from '@mantine/dates'
+import { useDebouncedState } from '@mantine/hooks'
 import { IconArrowsLeftRight, IconMessageCircle, IconPhoto, IconSearch, IconSettings, IconTrash } from '@tabler/icons'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import SalesInvoiceModal from '../../../Components/home/Dashboard/Sale/SalesInvoiceModal'
 import { InvoiceContext } from '../../../Contexts/InvoiceContext'
 // import MenuItem from '../../../Components/Sidebar/MenuItem'
 import Axios from '../../../Helpers/Axios'
+import DateRangeHook from '../../../Hooks/DateRangeHook'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
 
@@ -17,15 +21,25 @@ export default function index() {
 
   const { deleteAction } = useAppActions()
 
-  const { data, isLoading, error } = useQuery(['getSales'], async () => {
-    const res = await Axios.get('/sale')
+  const { date, handleDateChange } = DateRangeHook()
+  const [query, setQuery] = useDebouncedState('', 500);
+
+  const { data, isLoading, error } = useQuery([date,query], async () => {
+    const res = await Axios.get(`/sale`, {
+      params: { date, query }
+    })
 
     console.log('Salse loaded', res.data)
 
     return res.data
   })
 
-  const {setInvoice} = useContext(InvoiceContext)
+  // useEffect(() => {
+
+  //   console.log('Search', query)
+  // }, [query])
+
+  const { setInvoice } = useContext(InvoiceContext)
 
 
   return (
@@ -38,7 +52,27 @@ export default function index() {
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
           <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-            <Heading size='md'>Sales list</Heading>
+            <Flex alignItems={'center'} gap={5} justify='space-between'>
+
+              <Heading size='md'>Sales list</Heading>
+
+              <Box flex={'1'}>
+                <Input
+                  w={'full'}
+                  icon={<Search2Icon />}
+                  placeholder="Search by invoice number / customer first name, last name, email."
+                  onChange={e => setQuery(e.target.value)}
+                />
+              </Box>
+
+              <DateRangePicker
+                // label="Book hotel"
+                placeholder="Pick dates range"
+                value={date}
+                onChange={handleDateChange}
+              />
+            </Flex>
+
           </CardHeader>
           <CardBody p={2} pt={0}>
             <TableContainer>
@@ -63,7 +97,7 @@ export default function index() {
                     return <Tr key={index}>
                       <Td isNumeric>
                         <Menu>
-                          <MenuButton  size='xs' colorScheme={'green'}  as={Button} rightIcon={<ChevronDownIcon />}>
+                          <MenuButton size='xs' colorScheme={'green'} as={Button} rightIcon={<ChevronDownIcon />}>
                             Actions
                           </MenuButton>
                           <MenuList color={'black'} shadow='md'>
@@ -72,7 +106,7 @@ export default function index() {
                         </Menu>
                       </Td>
                       <Td>{moment(invoice.purchaseDate).format('LL')}</Td>
-                      <Td>{invoice.refNo}</Td>
+                      <Td>#{invoice.refNo}</Td>
                       <Td>{invoice?.customer?.prefix} {invoice?.customer?.firstName} {invoice?.customer?.lastName}</Td>
                       <Td>{invoice.totalAmount}</Td>
                       <Td>{invoice.paid}</Td>
