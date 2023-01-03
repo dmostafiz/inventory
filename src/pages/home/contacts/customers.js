@@ -1,10 +1,11 @@
 import { Box, Button, Card, CardBody, CardHeader, Heading, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
-import React from 'react'
+import React, { useState } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import CreateCustomer from '../../../Components/home/Dashboard/FormModals/CreateCustomer'
+import SimpleTable from '../../../Components/SimpleTable'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
@@ -12,6 +13,8 @@ import Layout from '../../../Layouts/Home/Layout'
 export default function customers() {
 
   const { deleteAction } = useAppActions()
+
+  // const [customerId, setCustomerId] = useState(null)
 
   const { data, isLoading, error } = useQuery(['getCustomers'], async () => {
     const res = await Axios.get('/customer')
@@ -70,10 +73,17 @@ export default function customers() {
                         <Text><strong>zip code</strong> - {customer.zipCode}</Text>
                       </Td>
                       <Td>
-                        <Text><strong>Total</strong> - {0} products</Text>
-                        <Text><strong>Paid</strong> - {0}</Text>
-                        <Text><strong>Due</strong> - {0}</Text>
+
+                        <SimpleTable data={[
+                          { title: 'Total', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.totalAmount}, 0).toFixed(2) },
+                          { title: 'Paid', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.paid}, 0).toFixed(2) },
+                          { title: 'Due', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.due}, 0).toFixed(2) },
+                        ]} />
+                        
                       </Td>
+
+
+
                       <Td>{customer.description}</Td>
                       <Td>{moment(customer.createdAt).format('LL')}</Td>
                       <Td isNumeric>

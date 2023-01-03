@@ -3,10 +3,11 @@ import { Box, Button, Card, CardBody, CardHeader, Heading, Menu, MenuButton, Men
 import { IconArrowsLeftRight, IconMessageCircle, IconPhoto, IconSearch, IconSettings, IconTrash } from '@tabler/icons'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
-import React from 'react'
+import React, { useContext } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import SalesInvoiceModal from '../../../Components/home/Dashboard/Sale/SalesInvoiceModal'
+import { InvoiceContext } from '../../../Contexts/InvoiceContext'
 // import MenuItem from '../../../Components/Sidebar/MenuItem'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
@@ -23,6 +24,8 @@ export default function index() {
 
     return res.data
   })
+
+  const {setInvoice} = useContext(InvoiceContext)
 
 
   return (
@@ -64,8 +67,7 @@ export default function index() {
                             Actions
                           </MenuButton>
                           <MenuList color={'black'} shadow='md'>
-                            <SalesInvoiceModal invoice={invoice} />
-                            {/* <MenuItem>Create a Copy</MenuItem> */}
+                            <MenuItem onClick={() => setInvoice(invoice)}>Invoice</MenuItem>
                           </MenuList>
                         </Menu>
                       </Td>

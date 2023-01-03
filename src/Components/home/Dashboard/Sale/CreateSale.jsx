@@ -1,5 +1,5 @@
 import { Box, Button, Center, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Icon, Input, InputGroup, InputLeftAddon, SimpleGrid, Table, TableCaption, TableContainer, Tbody, Td, Text, Textarea, Th, Thead, Tr, useToast } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,6 +12,10 @@ import { DatePicker } from '@mantine/dates';
 import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 import DataNotFound from '../../../DataNotFound';
 import ComponentLoader from '../../../ComponentLoader';
+import CreateCustomer from '../FormModals/CreateCustomer';
+import InvoiceHook from '../../../../Hooks/InvoiceHook';
+import SalesInvoiceModalTest from './SalesInvoiceModalTest';
+import { InvoiceContext } from '../../../../Contexts/InvoiceContext';
 
 const schema = yup.object({
     note: yup.string(),
@@ -194,6 +198,10 @@ export default function CreateSale() {
         note: ''
     })
 
+
+    const {setInvoice} = useContext(InvoiceContext)
+
+
     const submitNow = async (value) => {
         const res = await Axios.post('/sale/create', { ...value, saleProducts, totalAmount, paidAmount, dueAmount, customerId, saleDate })
 
@@ -226,6 +234,8 @@ export default function CreateSale() {
             setCustomerId(null)
             setSaleDate(null)
 
+            setInvoice(res?.data?.invoice)
+
         } else {
             toast({
                 title: 'Ooppss!',
@@ -249,8 +259,13 @@ export default function CreateSale() {
                         searchable
                         nothingFound="No customers found"
                         data={customers}
+                        value={customerId}
                         onChange={value => setCustomerId(value)}
                     />
+
+                    <Box mt={2}>
+                        <CreateCustomer setCustomerId={setCustomerId} />
+                    </Box>
                     {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
                     <FormErrorMessage>
                         {errors.name && errors.name.message}
@@ -432,6 +447,7 @@ export default function CreateSale() {
                     Sale Purchase
                 </Button>
             </Box>
+
         </Box>
     )
 }

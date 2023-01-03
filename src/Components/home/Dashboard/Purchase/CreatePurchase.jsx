@@ -1,5 +1,5 @@
 import { Box, Button, Center, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Icon, Input, InputGroup, InputLeftAddon, SimpleGrid, Table, TableCaption, TableContainer, Tbody, Td, Text, Textarea, Th, Thead, Tr, useToast } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,6 +12,7 @@ import { DatePicker } from '@mantine/dates';
 import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 import DataNotFound from '../../../DataNotFound';
 import ComponentLoader from '../../../ComponentLoader';
+import { InvoiceContext } from '../../../../Contexts/InvoiceContext';
 
 const schema = yup.object({
     note: yup.string(),
@@ -186,6 +187,10 @@ export default function CreatePurchase() {
         note: ''
     })
 
+
+    const { setInvoice } = useContext(InvoiceContext)
+
+
     const submitNow = async (value) => {
         const res = await Axios.post('/purchase/create', { ...value, purchasePrducts, totalAmount, paidAmount, dueAmount, supplierId, purchaseDate })
 
@@ -217,6 +222,8 @@ export default function CreatePurchase() {
             setSelectedSupplier(null)
             setSupplierId(null)
             setPurchaseDate(null)
+
+            setInvoice(res?.data?.invoice)
 
         } else {
             toast({

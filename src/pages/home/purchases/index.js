@@ -2,10 +2,11 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Box, Button, Card, CardBody, CardHeader, Heading, Menu, MenuButton, MenuItem, MenuList, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
-import React from 'react'
+import React, { useContext } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import PurchaseInvoiceModal from '../../../Components/home/Dashboard/Purchase/PurchaseInvoiceModal'
+import { InvoiceContext } from '../../../Contexts/InvoiceContext'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
@@ -22,6 +23,7 @@ export default function index() {
     return res.data
   })
 
+  const {setInvoice} = useContext(InvoiceContext)
 
   return (
     <Layout
@@ -62,8 +64,8 @@ export default function index() {
                             Actions
                           </MenuButton>
                           <MenuList color={'black'} shadow='md'>
-                            <PurchaseInvoiceModal invoice={invoice} />
-                            {/* <MenuItem>Create a Copy</MenuItem> */}
+                            {/* <PurchaseInvoiceModal invoice={invoice} /> */}
+                            <MenuItem onClick={() => setInvoice(invoice)}>Invoice</MenuItem>
                           </MenuList>
                         </Menu>
                       </Td>

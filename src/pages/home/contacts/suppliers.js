@@ -5,6 +5,7 @@ import React from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import CreateSupplier from '../../../Components/home/Dashboard/FormModals/CreateSupplier'
+import SimpleTable from '../../../Components/SimpleTable'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
@@ -56,11 +57,15 @@ export default function suplliers() {
                   {data?.suppliers?.map((supplier, index) => {
                     return <Tr key={index}>
                       <Td>
-                        <Text mb={2}><strong>Name</strong> - {supplier.prefix}. {supplier.firstName} {supplier.middleName} {supplier.lastName}</Text>
-                        <Text><strong>Mobile</strong> - {supplier.mobile}</Text>
-                        <Text><strong>Alternative</strong> - {supplier.alternativeMobile}</Text>
-                        <Text><strong>Land Line</strong> - {supplier.landLine}</Text>
-                        <Text><strong>Email</strong> - {supplier.email}</Text>
+              
+                        <SimpleTable data={[
+                          { title: 'Name', value: `${supplier.prefix}. ${supplier.firstName} ${supplier.middleName} ${supplier.lastName}` },
+                          { title: 'Mobile', value: supplier.mobile },
+                          { title: 'Alternative', value: supplier.alternativeMobile },
+                          { title: 'Land Line', value: supplier.landLine },
+                          { title: 'Email', value: supplier.email },
+                        ]} />
+
                       </Td>
                       <Td>
                         <Text>{supplier.addressOne}.</Text>
@@ -70,11 +75,15 @@ export default function suplliers() {
                         <Text><strong>Country</strong> - {supplier.country}</Text>
                         <Text><strong>zip code</strong> - {supplier.zipCode}</Text>
                       </Td>
+
                       <Td>
-                        <Text><strong>Total</strong> - {0} products</Text>
-                        <Text><strong>Paid</strong> - {0}</Text>
-                        <Text><strong>Due</strong> - {0}</Text>
+                        <SimpleTable data={[
+                          { title: 'Total', value: supplier?.invoices?.reduce((acc, curr) => { return acc + curr.totalAmount }, 0).toFixed(2) },
+                          { title: 'Paid', value: supplier?.invoices?.reduce((acc, curr) => { return acc + curr.paid }, 0).toFixed(2) },
+                          { title: 'Due', value: supplier?.invoices?.reduce((acc, curr) => { return acc + curr.due }, 0).toFixed(2) },
+                        ]} />
                       </Td>
+
                       <Td whiteSpace='break-spaces'>{supplier.description}</Td>
                       <Td>{moment(supplier.createdAt).format('LL')}</Td>
                       <Td isNumeric>

@@ -24,7 +24,7 @@ const InvoiceNo = ({ invoice }) => (
     <View style={{display: 'flex', flexDirection: 'column',}}>
         <View style={styles.invoiceNoContainer}>
             <Text style={styles.label}>Invoice:</Text>
-            <Text style={styles.invoiceDate}>{invoice?.invoice_no}</Text>
+            <Text style={styles.invoiceDate}>#{invoice?.invoice_no}</Text>
         </View >
         <View style={styles.invoiceDateContainer}>
             <Text style={styles.label}>Date: </Text>

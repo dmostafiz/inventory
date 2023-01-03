@@ -57,7 +57,7 @@ const schema = yup.object({
 
 }).required();
 
-export default function CreateCustomer({setCustomer}) {
+export default function CreateCustomer({ setCustomerId = null}) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -81,7 +81,6 @@ export default function CreateCustomer({setCustomer}) {
 
         if (res?.data?.ok == true) {
 
-            // setCustomer(res?.data?.customer)
 
             toast({
                 title: 'Awesome!',
@@ -90,6 +89,11 @@ export default function CreateCustomer({setCustomer}) {
             })
 
             await queryClient.refetchQueries({ queryKey: ['getCustomers'] })
+            await queryClient.refetchQueries({ queryKey: ['getCustomers1'] })
+
+            if (setCustomerId != null) {
+                setCustomerId(res?.data?.customer?.id)
+            }
 
             onClose()
         }
@@ -249,7 +253,7 @@ export default function CreateCustomer({setCustomer}) {
 
 
                         <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 2 }} spacingX={8} spacingY={4} mb={4}>
-                           
+
                             <FormControl isRequired isInvalid={errors.addressOne}>
                                 <FormLabel>Address line 1</FormLabel>
                                 <Input
@@ -283,69 +287,69 @@ export default function CreateCustomer({setCustomer}) {
                         </SimpleGrid>
 
                         <SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 4 }} spacingX={8} spacingY={4}>
-                           
-                           <FormControl isRequired isInvalid={errors.city}>
-                               <FormLabel>City</FormLabel>
-                               <Input
-                                   size={'sm'}
-                                   type='text'
-                                   focusBorderColor='#00B29E'
-                                   placeholder='Enter city'
-                                   {...register('city')}
-                               />
-                               {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-                               <FormErrorMessage>
-                                   {errors.city && errors.city.message}
-                               </FormErrorMessage>
-                           </FormControl>
 
-                           <FormControl isRequired isInvalid={errors.state}>
-                               <FormLabel>State</FormLabel>
-                               <Input
-                                   size={'sm'}
-                                   type='text'
-                                   focusBorderColor='#00B29E'
-                                   placeholder='Enter state'
-                                   {...register('state')}
-                               />
-                               {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-                               <FormErrorMessage>
-                                   {errors.state && errors.state.message}
-                               </FormErrorMessage>
-                           </FormControl>
+                            <FormControl isRequired isInvalid={errors.city}>
+                                <FormLabel>City</FormLabel>
+                                <Input
+                                    size={'sm'}
+                                    type='text'
+                                    focusBorderColor='#00B29E'
+                                    placeholder='Enter city'
+                                    {...register('city')}
+                                />
+                                {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                                <FormErrorMessage>
+                                    {errors.city && errors.city.message}
+                                </FormErrorMessage>
+                            </FormControl>
+
+                            <FormControl isRequired isInvalid={errors.state}>
+                                <FormLabel>State</FormLabel>
+                                <Input
+                                    size={'sm'}
+                                    type='text'
+                                    focusBorderColor='#00B29E'
+                                    placeholder='Enter state'
+                                    {...register('state')}
+                                />
+                                {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                                <FormErrorMessage>
+                                    {errors.state && errors.state.message}
+                                </FormErrorMessage>
+                            </FormControl>
 
 
-                           <FormControl isRequired isInvalid={errors.country}>
-                               <FormLabel>Country</FormLabel>
-                               <Input
-                                   size={'sm'}
-                                   type='text'
-                                   focusBorderColor='#00B29E'
-                                   placeholder='Enter country'
-                                   {...register('country')}
-                               />
-                               {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-                               <FormErrorMessage>
-                                   {errors.country && errors.country.message}
-                               </FormErrorMessage>
-                           </FormControl>
+                            <FormControl isRequired isInvalid={errors.country}>
+                                <FormLabel>Country</FormLabel>
+                                <Input
+                                    size={'sm'}
+                                    type='text'
+                                    focusBorderColor='#00B29E'
+                                    placeholder='Enter country'
+                                    {...register('country')}
+                                />
+                                {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                                <FormErrorMessage>
+                                    {errors.country && errors.country.message}
+                                </FormErrorMessage>
+                            </FormControl>
 
-                           <FormControl isRequired isInvalid={errors.zipCode}>
-                               <FormLabel>Zip Code</FormLabel>
-                               <Input
-                                   size={'sm'}
-                                   type='text'
-                                   focusBorderColor='#00B29E'
-                                   placeholder='Enter zip code'
-                                   {...register('zipCode')}
-                               />
-                               {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-                               <FormErrorMessage>
-                                   {errors.zipCode && errors.zipCode.message}
-                               </FormErrorMessage>
-                           </FormControl>
+                            <FormControl isRequired isInvalid={errors.zipCode}>
+                                <FormLabel>Zip Code</FormLabel>
+                                <Input
+                                    size={'sm'}
+                                    type='text'
+                                    focusBorderColor='#00B29E'
+                                    placeholder='Enter zip code'
+                                    {...register('zipCode')}
+                                />
+                                {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                                <FormErrorMessage>
+                                    {errors.zipCode && errors.zipCode.message}
+                                </FormErrorMessage>
+                            </FormControl>
 
-                       </SimpleGrid>
+                        </SimpleGrid>
 
 
                         <FormControl mt={4} isInvalid={errors.description}>
@@ -362,7 +366,7 @@ export default function CreateCustomer({setCustomer}) {
                             </FormErrorMessage>
                         </FormControl>
 
-              
+
                     </ModalBody>
 
                     <ModalFooter borderTop='2px' borderColor='gray.100' py={2}>
