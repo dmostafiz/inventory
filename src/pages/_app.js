@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthContextProvider from '../Contexts/AuthContext';
 import AppContextProvider from '../Contexts/AppContext';
 import InvoiceContextProvider from '../Contexts/InvoiceContext';
+import BusinessContextProvider from '../Contexts/BusinessContext';
 
 const queryClient = new QueryClient()
 
@@ -32,9 +33,11 @@ function MyApp({ Component, pageProps }) {
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
           <AppContextProvider>
-          <InvoiceContextProvider>
-            <Component {...pageProps} />
-          </InvoiceContextProvider>
+            <InvoiceContextProvider>
+              <BusinessContextProvider>
+                <Component {...pageProps} />
+              </BusinessContextProvider>
+            </InvoiceContextProvider>
           </AppContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>

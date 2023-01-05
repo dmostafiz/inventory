@@ -54,6 +54,7 @@
     "react-icons": "^4.7.1",
     "react-to-print": "^2.14.10",
     "tabler": "^1.0.0-alpha.8",
+    "use-scan-detection": "^0.2.3",
     "yup": "^0.32.11"
   },
   "devDependencies": {

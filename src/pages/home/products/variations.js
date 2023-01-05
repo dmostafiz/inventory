@@ -31,7 +31,7 @@ export default function variations() {
 
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
-          <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+          <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
             <Heading size='md'>Variation list</Heading>
           </CardHeader>
           <CardBody p={2} pt={0}>

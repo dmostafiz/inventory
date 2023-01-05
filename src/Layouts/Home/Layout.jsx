@@ -22,7 +22,7 @@ import HomeWrapper from "../../wrappers/HomeWrapper";
 
 // import { Logo } from "@choc-ui/logo";
 
-export default function Layout({ title, breads = [], titleRight, header, gradient = false, children }) {
+export default function Layout({ title, breads = [], titleRight, header, gradient = false, showSidebar = true, children }) {
 
   const layoutWidth = { base: 2, md: 10 }
 
@@ -37,7 +37,7 @@ export default function Layout({ title, breads = [], titleRight, header, gradien
 
       <Box as="section" bg="gray.50" minH="100vh">
 
-        <LeftSidebar display={{ base: "none", md: "unset" }} />
+       {showSidebar && <LeftSidebar display={{ base: "none", md: "unset" }} />} 
 
         <Drawer
           isOpen={sidebar.isOpen}
@@ -51,9 +51,9 @@ export default function Layout({ title, breads = [], titleRight, header, gradien
         </Drawer>
 
 
-        <Box ml={{ base: 0, md: 60 }}>
+        <Box ml={{ base: 0, md: showSidebar ? 60 : 0 }}>
 
-          <TopBar layoutWidth={layoutWidth} sidebar={sidebar} />
+          <TopBar layoutWidth={layoutWidth} sidebar={sidebar}  showSidebar={showSidebar}/>
 
           <Box as="main" bg={header ? 'white' : 'gray.50'}>
 

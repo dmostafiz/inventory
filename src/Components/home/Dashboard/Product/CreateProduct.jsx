@@ -1,5 +1,5 @@
 import { Box, Button, Center, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Select, SimpleGrid, Text, Textarea, useToast } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { FileButton, Image, Title } from '@mantine/core';
 import useProductUpload from '../../../../Hooks/useProductUpload';
+import { BusinessContext } from '../../../../Contexts/BusinessContext';
 
 const schema = yup.object({
 
@@ -43,6 +44,8 @@ const schema = yup.object({
 }).required();
 
 export default function CreateProduct() {
+
+    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
 
     const queryClient = useQueryClient()
 
@@ -472,7 +475,7 @@ export default function CreateProduct() {
                     colorScheme={'teal'}
                     isLoading={isSubmitting}
                     loadingText={'Creating....'}
-                    onClick={handleSubmit(submitNow)}
+                    onClick={hasBusiness ? handleSubmit(submitNow) : businessNotFound}
                 >
                     Create Product
                 </Button>

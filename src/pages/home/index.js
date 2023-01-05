@@ -106,7 +106,7 @@ export default function index() {
 
 
       <Card shadow={'md'} bg='white' mt={4}>
-        <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+        <CardHeader bg={'#1CE7CF'} py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
           <Heading size='md'>Sales last 30 days</Heading>
         </CardHeader>
         <CardBody>
@@ -117,7 +117,7 @@ export default function index() {
       </Card>
 
       <Card shadow={'md'} bg='white' mt={4}>
-        <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+        <CardHeader bg={'#1CE7CF'} py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
           <Heading size='md'>Sales Current Financial Year</Heading>
         </CardHeader>
         <CardBody>
@@ -130,7 +130,7 @@ export default function index() {
       <Box mt={4}>
         <Flex direction={{ base: 'column', lg: 'row' }} gap={4}>
           <Card flex='1' shadow={'md'} bg='white'>
-            <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+            <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
               <Heading size='md'>Sales payment due</Heading>
             </CardHeader>
             <CardBody p={2} pt={0}>
@@ -167,7 +167,7 @@ export default function index() {
           </Card>
 
           <Card flex='1' shadow={'md'} bg='white'>
-            <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+            <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
               <Heading size='md'>Purchase payments due</Heading>
             </CardHeader>
             <CardBody p={2} pt={0}>
@@ -209,7 +209,7 @@ export default function index() {
 
       <Box mt={4}>
         <Card flex='1' shadow={'md'} bg='white'>
-          <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+          <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
             <Heading size='md'>Product stock alerts</Heading>
           </CardHeader>
           <CardBody p={2} pt={0}>

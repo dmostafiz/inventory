@@ -13,7 +13,7 @@ export default function add() {
       ]}
     >
       <Card shadow={'md'} bg='white' mt={4}>
-        <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+        <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
           <Heading size='md'>Add new product</Heading>
         </CardHeader>
         <CardBody>

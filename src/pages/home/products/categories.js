@@ -2,6 +2,7 @@ import { Box, Button, Card, CardBody, CardHeader, Heading, Table, TableContainer
 import { useQuery } from '@tanstack/react-query'
 import React, { useContext } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
+import DataNotFound from '../../../Components/DataNotFound'
 import CreateCategoryModal from '../../../Components/home/Dashboard/FormModals/CreateCategoryModal'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
@@ -28,7 +29,7 @@ export default function categories() {
     >
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
-          <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+          <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
             <Heading size='md'>Category list</Heading>
           </CardHeader>
           <CardBody p={2} pt={0}>
@@ -72,6 +73,8 @@ export default function categories() {
 
                 </Tbody>
               </Table>}
+
+              {!isLoading && !data?.units?.length && <DataNotFound />}
 
             </TableContainer>
 

@@ -1,12 +1,13 @@
 import { Button, FormControl, FormErrorMessage, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, SimpleGrid, useDisclosure } from '@chakra-ui/react'
 import { useQueryClient } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import Axios from '../../../../Helpers/Axios';
 import toasterHook from '../../../../Hooks/toasterHook';
+import { BusinessContext } from '../../../../Contexts/BusinessContext';
 
 const schema = yup.object({
 
@@ -24,6 +25,7 @@ const schema = yup.object({
 
 
 export default function CreateUnitModal() {
+    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -61,7 +63,7 @@ export default function CreateUnitModal() {
 
     return (
         <>
-            <Button onClick={onOpen} colorScheme={'teal'} variant='outline' size={'sm'}>Create Unit</Button>
+            <Button onClick={hasBusiness() ? onOpen : businessNotFound} colorScheme={'teal'} variant='outline' size={'sm'}>Create Unit</Button>
             <Modal closeOnOverlayClick={false} size={{ base: 'sm', sm: 'lg', md: '2xl' }} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>

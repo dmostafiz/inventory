@@ -6,9 +6,11 @@ import { FiMenu, FiSearch } from 'react-icons/fi'
 import LogoMobile from '../LogoMobile'
 
 import useUser from '../../Hooks/useUser'
+import Link from 'next/link'
+import Logo from '../Logo'
 
 
-export default function TopBar({ layoutWidth, sidebar }) {
+export default function TopBar({ layoutWidth, sidebar, showSidebar }) {
 
     const { isError, error, authUser, isLoading, logoutUser } = useUser()
 
@@ -33,6 +35,14 @@ export default function TopBar({ layoutWidth, sidebar }) {
                 <LogoMobile bg='white' />
             </Box>
 
+            {!showSidebar &&
+                <Box py={2}>
+                    <Link href='/home'>
+                        <Logo bg='white' rounded={'none'} />
+                    </Link>
+                </Box>
+            }
+
             <InputGroup w="96" display={{ base: "none", md: "flex" }}>
                 <InputLeftElement color="gray.900">
                     <FiSearch />
@@ -56,7 +66,12 @@ export default function TopBar({ layoutWidth, sidebar }) {
             </InputGroup>
 
             <Flex align="center" gap={5}>
-                <Button size={'sm'} rounded='full' bg={'blackAlpha.300'} _active color='whiteAlpha.900' _hover shadow='sm'>POINT OF SALES</Button>
+                <Link href={'/home/pos'}>
+                    <Button size={'sm'} rounded='full' bg={'blackAlpha.300'} _active color='whiteAlpha.900' _hover shadow='sm'>
+                        POINT OF SALES
+                    </Button>
+                </Link>
+
                 <Icon fontSize={'20px'} color="blackAlpha.800" as={FaBell} cursor="pointer" />
 
                 <Menu>

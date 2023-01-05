@@ -1,5 +1,5 @@
 import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, SimpleGrid, Textarea, useDisclosure } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
@@ -8,6 +8,7 @@ import Axios from '../../../../Helpers/Axios';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import toasterHook from '../../../../Hooks/toasterHook';
 import { useEffect } from 'react';
+import { BusinessContext } from '../../../../Contexts/BusinessContext';
 
 const schema = yup.object({
 
@@ -21,6 +22,9 @@ const schema = yup.object({
 
 
 export default function CreateVariationModal() {
+
+    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
+
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -124,9 +128,11 @@ export default function CreateVariationModal() {
 
     return (
         <>
-            <Button onClick={onOpen} colorScheme={'teal'} variant='outline' size={'sm'}>Create Variation</Button>
+            <Button onClick={hasBusiness() ? onOpen : businessNotFound} colorScheme={'teal'} variant='outline' size={'sm'}>Create Variation</Button>
             <Modal closeOnOverlayClick={false} size={{ base: 'sm', sm: 'lg', md: '2xl' }} isOpen={isOpen} onClose={onClose}>
+               
                 <ModalOverlay />
+
                 <ModalContent>
 
                     <ModalHeader borderBottom='2px' borderColor='gray.100' py={2}>Create Variation</ModalHeader>

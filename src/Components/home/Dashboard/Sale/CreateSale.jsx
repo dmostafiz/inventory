@@ -1,3 +1,4 @@
+
 import { Box, Button, Center, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Icon, Input, InputGroup, InputLeftAddon, SimpleGrid, Table, TableCaption, TableContainer, Tbody, Td, Text, Textarea, Th, Thead, Tr, useToast } from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
 import * as yup from "yup";
@@ -16,12 +17,17 @@ import CreateCustomer from '../FormModals/CreateCustomer';
 import InvoiceHook from '../../../../Hooks/InvoiceHook';
 import SalesInvoiceModalTest from './SalesInvoiceModalTest';
 import { InvoiceContext } from '../../../../Contexts/InvoiceContext';
+import scanBarcodeHook from '../../../../Hooks/scanBarcodeHook';
+import { BusinessContext } from '../../../../Contexts/BusinessContext';
 
 const schema = yup.object({
     note: yup.string(),
 }).required();
 
 export default function CreateSale() {
+
+    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
+
 
     const queryClient = useQueryClient()
 
@@ -80,7 +86,6 @@ export default function CreateSale() {
 
         async function getSearchData() {
 
-
             const res = await Axios.get(`/product/search/${query}/sale`)
 
             if (res?.data?.ok) {
@@ -130,11 +135,51 @@ export default function CreateSale() {
             setSaleProducts(modified)
 
         } else {
-
             setSaleProducts([...saleProducts, { ...item, qty: 1 }])
-
         }
     }
+
+
+    const { scannedProduct } = scanBarcodeHook()
+
+    useEffect(() => {
+
+        if (scannedProduct !== null) {
+
+            const existProduct = saleProducts.find(p => p.id == scannedProduct.id)
+
+            if (existProduct) {
+                // const filtered = saleProducts.filter(p => p.id != item.id)
+
+                const modified = saleProducts.map(p => {
+                    if (p.id == scannedProduct.id) {
+
+                        if (p.stock > p.qty) {
+                            return {
+                                ...p,
+                                qty: +p.qty + 1
+                            }
+                        } else {
+                            alert('This product is out of stock')
+                            return p
+                        }
+
+                    }
+
+                    return p
+                })
+
+                setSaleProducts(modified)
+
+            } else {
+                setSaleProducts([...saleProducts, { ...scannedProduct, qty: 1 }])
+            }
+
+        }
+
+    }, [scannedProduct])
+
+
 
     const removeQty = (item) => {
         const existProduct = saleProducts.find(p => p.id == item.id)
@@ -199,10 +244,14 @@ export default function CreateSale() {
     })
 
 
-    const {setInvoice} = useContext(InvoiceContext)
+    const { setInvoice } = useContext(InvoiceContext)
 
 
     const submitNow = async (value) => {
+
+        if(!saleProducts.length) return alert('Please add at least one product.')
+        if(!customerId) return alert('Please select a customer.')
+
         const res = await Axios.post('/sale/create', { ...value, saleProducts, totalAmount, paidAmount, dueAmount, customerId, saleDate })
 
         console.log('Purchase create response: ', res)
@@ -287,12 +336,12 @@ export default function CreateSale() {
                     </FormErrorMessage>
                 </FormControl>
 
-                <FormControl isInvalid={errors.sku}>
+                <FormControl isRequired>
                     <FormLabel>Sale Date</FormLabel>
                     <DatePicker onChange={value => setSaleDate(value)} placeholder="Pick date" />
-                    <FormErrorMessage>
+                    {/* <FormErrorMessage>
                         {errors.sku && errors.sku.message}
-                    </FormErrorMessage>
+                    </FormErrorMessage> */}
                 </FormControl>
 
 
@@ -442,7 +491,7 @@ export default function CreateSale() {
                     colorScheme={'teal'}
                     isLoading={isSubmitting}
                     loadingText={'Creating....'}
-                    onClick={handleSubmit(submitNow)}
+                    onClick={hasBusiness() ? handleSubmit(submitNow) : businessNotFound}
                 >
                     Sale Purchase
                 </Button>

@@ -13,12 +13,15 @@ import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 import DataNotFound from '../../../DataNotFound';
 import ComponentLoader from '../../../ComponentLoader';
 import { InvoiceContext } from '../../../../Contexts/InvoiceContext';
+import { BusinessContext } from '../../../../Contexts/BusinessContext';
 
 const schema = yup.object({
     note: yup.string(),
 }).required();
 
 export default function CreatePurchase() {
+
+    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
 
     const queryClient = useQueryClient()
 
@@ -192,6 +195,10 @@ export default function CreatePurchase() {
 
 
     const submitNow = async (value) => {
+
+        if(!purchasePrducts.length) return alert('No products selected!')
+        if(!supplierId) return alert('Please select a supplier')
+
         const res = await Axios.post('/purchase/create', { ...value, purchasePrducts, totalAmount, paidAmount, dueAmount, supplierId, purchaseDate })
 
         console.log('Purchase create response: ', res)
@@ -426,7 +433,7 @@ export default function CreatePurchase() {
                     colorScheme={'teal'}
                     isLoading={isSubmitting}
                     loadingText={'Creating....'}
-                    onClick={handleSubmit(submitNow)}
+                    onClick={hasBusiness() ? handleSubmit(submitNow) : businessNotFound}
                 >
                     Create Purchase
                 </Button>

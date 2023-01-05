@@ -24,7 +24,7 @@ export default function index() {
   const { date, handleDateChange } = DateRangeHook()
   const [query, setQuery] = useDebouncedState('', 500);
 
-  const { data, isLoading, error } = useQuery([date,query], async () => {
+  const { data, isLoading, error } = useQuery(['getSales', date,query], async () => {
     const res = await Axios.get(`/sale`, {
       params: { date, query }
     })
@@ -51,7 +51,7 @@ export default function index() {
     >
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
-          <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
+          <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
             <Flex alignItems={'center'} gap={5} justify='space-between'>
 
               <Heading size='md'>Sales list</Heading>
