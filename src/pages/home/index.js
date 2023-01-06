@@ -1,5 +1,5 @@
 import { Alert, AlertIcon, Box, Card, CardBody, CardHeader, Flex, Heading, SimpleGrid, Stack, StackDivider, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillCreditCard, AiFillMinusCircle } from 'react-icons/ai'
 import { BsCreditCard2Front, BsFillBagCheckFill, BsFillInfoSquareFill, BsFillReplyAllFill } from 'react-icons/bs'
 import { FiServer } from 'react-icons/fi'
@@ -12,6 +12,7 @@ import useUser from '../../Hooks/useUser'
 import Link from 'next/link'
 import Axios from '../../Helpers/Axios'
 import { useQuery } from '@tanstack/react-query'
+import { DateRangePicker } from '@mantine/dates'
 
 const SalesChart = dynamic(import("../../Components/home/Dashboard/Charts/SalesChart"), {
   ssr: false
@@ -30,6 +31,13 @@ export default function index() {
 
 
   console.log('auth user', authUser)
+
+
+  const [value, setValue] = useState([
+    new Date(2021, 11, 1),
+    new Date(2021, 11, 5),
+  ]);
+
 
   return (
     <Layout
@@ -102,6 +110,12 @@ export default function index() {
         </>
       }
       gradient={true}
+      titleRight={ <DateRangePicker
+        // label="Book hotel"
+        placeholder="Pick dates range"
+        value={value}
+        onChange={setValue}
+      />}
     >
 
 

@@ -1,6 +1,7 @@
 import { Document, Image, Page, PDFViewer, StyleSheet, View } from '@react-pdf/renderer';
 import React from 'react'
 import BillTo from './BillTo';
+import InvoiceBusiness from './InvoiceBusiness';
 import InvoiceItemsTable from './InvoiceItemsTable';
 import InvoiceNo from './InvoiceNo';
 import InvoiceThankYouMsg from './InvoiceThankYouMsg';
@@ -12,10 +13,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         backgroundColor: '#fff',
         fontFamily: 'Helvetica',
-        fontSize: 14,
-        // paddingTop: 30,
-        // paddingLeft: 30,
-        // paddingRight: 30,
+        fontSize: 12,
+        paddingTop: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
         lineHeight: 1.5,
         flexDirection: 'column',
     },
@@ -37,6 +38,7 @@ export default function InvoiceData({invoice}) {
         <Document>
             <Page size="A4" style={styles.page} >
                 {/* <Image style={styles.logo} src={'https://www.mostafiz.dev/mostafiz.png'} /> */}
+                <InvoiceBusiness business={invoice?.business} />
                 <InvoiceTitle title={'Invoice'} />
                 <View style={{
                     marginTop: 20,

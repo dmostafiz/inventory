@@ -76,8 +76,8 @@ export default function LeftSidebar(props) {
         submenus={[
           { title: 'Product List', link: '/home/products' },
           { title: 'Add Products', link: '/home/products/add' },
-          { title: 'Variations', link: '/home/products/variations' },
-          { title: 'Units', link: '/home/products/units' },
+          // { title: 'Variations', link: '/home/products/variations' },
+          { title: 'Product Units', link: '/home/products/units' },
           { title: 'Categories', link: '/home/products/categories' },
           { title: ' Brands / Company', link: '/home/products/brands' }
         ]}

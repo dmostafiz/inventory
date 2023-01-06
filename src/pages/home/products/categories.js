@@ -74,7 +74,7 @@ export default function categories() {
                 </Tbody>
               </Table>}
 
-              {!isLoading && !data?.units?.length && <DataNotFound />}
+              {!isLoading && !data?.categories?.length && <DataNotFound />}
 
             </TableContainer>
 

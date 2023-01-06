@@ -15,7 +15,6 @@ import DataNotFound from '../../../DataNotFound';
 import ComponentLoader from '../../../ComponentLoader';
 import CreateCustomer from '../FormModals/CreateCustomer';
 import InvoiceHook from '../../../../Hooks/InvoiceHook';
-import SalesInvoiceModalTest from './SalesInvoiceModalTest';
 import { InvoiceContext } from '../../../../Contexts/InvoiceContext';
 import scanBarcodeHook from '../../../../Hooks/scanBarcodeHook';
 import { BusinessContext } from '../../../../Contexts/BusinessContext';
@@ -26,7 +25,7 @@ const schema = yup.object({
 
 export default function CreateSale() {
 
-    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
+    const { businessNotFound, hasBusiness } = useContext(BusinessContext)
 
 
     const queryClient = useQueryClient()
@@ -62,7 +61,7 @@ export default function CreateSale() {
     const [customerId, setCustomerId] = useState(null)
     const [selectedCustomer, setSelectedCustomer] = useState(null)
 
-    const [saleDate, setSaleDate] = useState(null)
+    const [saleDate, setSaleDate] = useState(new Date())
 
     useEffect(() => {
         if (customerId) {
@@ -135,7 +134,11 @@ export default function CreateSale() {
             setSaleProducts(modified)
 
         } else {
-            setSaleProducts([...saleProducts, { ...item, qty: 1 }])
+            if (item.stock > 0) {
+                setSaleProducts([...saleProducts, { ...item, qty: 1 }])
+            } else {
+                alert('You cannot exit the product stock.')
+            }
         }
     }
 
@@ -249,8 +252,8 @@ export default function CreateSale() {
 
     const submitNow = async (value) => {
 
-        if(!saleProducts.length) return alert('Please add at least one product.')
-        if(!customerId) return alert('Please select a customer.')
+        if (!saleProducts.length) return alert('Please add at least one product.')
+        if (!customerId) return alert('Please select a customer.')
 
         const res = await Axios.post('/sale/create', { ...value, saleProducts, totalAmount, paidAmount, dueAmount, customerId, saleDate })
 
@@ -262,7 +265,7 @@ export default function CreateSale() {
 
             toast({
                 title: 'Congratulations!',
-                description: 'You have just created a purchase invoice.',
+                description: 'You have just created a sale invoice.',
                 status: 'success',
                 position: 'top-right',
                 duration: 9000,
@@ -281,7 +284,7 @@ export default function CreateSale() {
             setSearchedProducts([])
             setSelectedCustomer(null)
             setCustomerId(null)
-            setSaleDate(null)
+            // setSaleDate(null)
 
             setInvoice(res?.data?.invoice)
 
@@ -338,7 +341,7 @@ export default function CreateSale() {
 
                 <FormControl isRequired>
                     <FormLabel>Sale Date</FormLabel>
-                    <DatePicker onChange={value => setSaleDate(value)} placeholder="Pick date" />
+                    <DatePicker value={saleDate} onChange={value => setSaleDate(value)} placeholder="Pick date" />
                     {/* <FormErrorMessage>
                         {errors.sku && errors.sku.message}
                     </FormErrorMessage> */}

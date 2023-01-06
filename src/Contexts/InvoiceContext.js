@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 import { createContext, useEffect, useRef, useState } from "react"
 import ReactToPrint from "react-to-print"
 import InvoiceData from "../Components/home/Dashboard/Invoice/InvoiceData"
-import InvoiceDataPDF from "../Components/home/Dashboard/Invoice/InvoiceDataPDF"
 import Axios from "../Helpers/Axios"
 import { getAccessToken, removeAccessToken } from "../Helpers/cookieHelper"
 // import useUser from "../Hooks/useUser"
@@ -40,14 +39,13 @@ const InvoiceContextProvider = ({ children }) => {
                 address: user?.addressOne + ', ' + user?.addressTwo + ', ' + user?.city + ', ' + user?.state + ', ' + user?.zipCode,
                 trans_date: invoice?.invoiceData,
                 due_date: invoice?.invoiceData,
-                companyID: "10001",
-                companyName: "xyz company",
+                business: invoice?.business,
                 items: items?.map((item, i) => {
                     return {
                         sno: i + 1,
                         desc: item?.product?.name,
                         qty: item.quantity,
-                        rate: item.unitPrice,
+                        rate: ((item.unitPrice * item.taxRate) / 100) + item.unitPrice,
                     }
                 }),
             })
@@ -74,19 +72,16 @@ const InvoiceContextProvider = ({ children }) => {
                 <ModalCloseButton />
                 <ModalBody>
 
-                    <InvoiceData invoice={invoiceData} />
-
-                    <Box hidden={true} >
+             
                         <Box ref={printRef}>
-                            <InvoiceDataPDF invoice={invoiceData} />
+                            <InvoiceData invoice={invoiceData} />
                         </Box>
-                    </Box>
-
+                  
                 </ModalBody>
                 <ModalFooter>
 
                     <PDFDownloadLink
-                        document={<InvoiceDataPDF invoice={invoiceData} />}
+                        document={<InvoiceData invoice={invoiceData} />}
                         fileName={fileName}
                     >
                         {({ blob, url, loading, error }) =>

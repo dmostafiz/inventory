@@ -1,14 +1,16 @@
 import { DeleteIcon } from '@chakra-ui/icons'
-import { Box, Card, CardBody, CardHeader, Center, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Icon, Image, Input, InputGroup, InputLeftElement, SimpleGrid, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from '@chakra-ui/react'
+import { Box, Button, Card, CardBody, CardHeader, Center, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Icon, Image, Input, InputGroup, InputLeftElement, SimpleGrid, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useToast, VStack, Wrap } from '@chakra-ui/react'
 import { Select } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
-import { useQuery } from '@tanstack/react-query'
-import React, { useEffect, useState } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaPlus, FaPlusCircle } from 'react-icons/fa'
 import { FiSearch } from 'react-icons/fi'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import CreateCustomer from '../../../Components/home/Dashboard/FormModals/CreateCustomer'
+import { BusinessContext } from '../../../Contexts/BusinessContext'
+import { InvoiceContext } from '../../../Contexts/InvoiceContext'
 import Axios from '../../../Helpers/Axios'
 import scanBarcodeHook from '../../../Hooks/scanBarcodeHook'
 import Layout from '../../../Layouts/Home/Layout'
@@ -16,6 +18,12 @@ import Layout from '../../../Layouts/Home/Layout'
 export default function index() {
 
   const { scannedProduct } = scanBarcodeHook()
+
+  const queryClient = useQueryClient()
+
+  const toast = useToast()
+
+  const { businessNotFound, hasBusiness } = useContext(BusinessContext)
 
   const { data, isLoading } = useQuery(['posProducts'], async () => {
     const res = await Axios.get('/pos/products')
@@ -83,8 +91,9 @@ export default function index() {
               ...p,
               qty: +p.qty + 1
             }
-          } else {
-            alert('This product is out of stock')
+          } 
+          else {
+            alert('You cannot exit the product stock.')
             return p
           }
 
@@ -96,13 +105,42 @@ export default function index() {
       setSaleProducts(modified)
 
     } else {
-      setSaleProducts([...saleProducts, { ...item, qty: 1 }])
+      if(item.stock > 0){
+        setSaleProducts([...saleProducts, { ...item, qty: 1 }])
+      }else{
+        alert('You cannot exit the product stock.')
+      }
     }
   }
 
   const [totalAmount, setTotalAmount] = useState(0)
   const [paidAmount, setPaidAmount] = useState(0)
   const [dueAmount, setDueAmount] = useState(0)
+
+  const removeQty = (item) => {
+    const existProduct = saleProducts.find(p => p.id == item.id)
+
+    if (existProduct && existProduct.qty > 1) {
+
+        const modified = saleProducts.map(p => {
+            if (p.id == item.id) {
+                return {
+                    ...p,
+                    qty: +p.qty - 1
+                }
+            }
+
+            return p
+        })
+
+        setSaleProducts(modified)
+
+    } else {
+        const filtered = saleProducts.filter(p => p.id != item.id)
+        setSaleProducts(filtered)
+    }
+}
+
 
   useEffect(() => {
     if (totalAmount > 0 && totalAmount >= dueAmount) {
@@ -127,12 +165,75 @@ export default function index() {
   }, [saleProducts])
 
 
+  const { setInvoice } = useContext(InvoiceContext)
+
+  const [creditLoading, setCreditLoading] = useState(false)
+  const [cardLoading, setCardLoading] = useState(false)
+  const [cashLoading, setCashLoading] = useState(false)
+
+  const handleSubmit = async (paymentMethod) => {
+    if (!saleProducts.length) return alert('Please add at least one product.')
+    if (!customerId) return alert('Please select a customer.')
+
+    if (paymentMethod === 'credit') {
+      setCreditLoading(true)
+    } else if (paymentMethod === 'card') {
+      setCardLoading(true)
+    } else {
+      setCashLoading(true)
+    }
+
+    const res = await Axios.post('/pos/create', { paymentMethod, saleProducts, totalAmount, paidAmount, dueAmount, customerId, saleDate })
+
+    console.log('Purchase create response: ', res)
+
+    if (res?.data?.ok) {
+
+      toast({
+        title: 'Congratulations!',
+        description: 'You have just created a sale invoice.',
+        status: 'success',
+        position: 'top-right',
+        duration: 9000,
+        isClosable: true,
+      })
+
+      setTotalAmount(0)
+      setPaidAmount(0)
+      setDueAmount(0)
+      setSaleProducts([])
+      setSelectedCustomer(null)
+      setCustomerId(null)
+      // setSaleDate(null)
+
+      setInvoice(res?.data?.invoice)
+
+    } else {
+      toast({
+        title: 'Ooppss!',
+        description: 'Something went wrong! please try again later.',
+        status: 'error',
+        position: 'top-right',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+
+    setCreditLoading(false)
+    setCardLoading(false)
+    setCashLoading(false)
+
+    // posProducts
+    await queryClient.refetchQueries({ queryKey: ['posProducts'] })
+
+  }
+
   return (
     <Layout
       title='Point of sales'
       showSidebar={false}
     >
-      <Flex gap={5}>
+      <Flex direction={{ base: 'column', md: 'column', lg: 'row' }} gap={5}>
         <Box flex='1'>
 
           <InputGroup w="full">
@@ -179,12 +280,13 @@ export default function index() {
           </Box>
 
         </Box>
-        <Box w='60%'>
+
+        <Box w={{ base: 'full', lg: '60%' }}>
           <Card flex='1' shadow={'md'} bg='white'>
             <CardHeader py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-              <Flex>
+              <Flex gap={5}>
                 <FormControl isRequired>
-                  <FormLabel>Customer</FormLabel>
+                  {/* <FormLabel>Customer</FormLabel> */}
                   <Flex gap={2} alignItems={'center'}>
                     <Select
                       placeholder="Pick a customer here"
@@ -208,8 +310,8 @@ export default function index() {
                 </FormErrorMessage> */}
                 </FormControl>
 
-                <FormControl  w={'300px'}  isRequired>
-                  <FormLabel>Sale Date</FormLabel>
+                <FormControl w={'300px'} isRequired>
+                  {/* <FormLabel>Sale Date</FormLabel> */}
                   <DatePicker value={saleDate} onChange={value => setSaleDate(value)} placeholder="Pick date" />
                   {/* <FormErrorMessage>
                         {errors.sku && errors.sku.message}
@@ -255,6 +357,41 @@ export default function index() {
 
                   </Table>
                 </TableContainer>
+              </Box>
+              <Box w='full'>
+                <Flex gap={5} direction={{ base: 'column', md: 'column', lg: 'row' }} alignItems={{ base: 'start', lg: 'center' }} justify='space-between'>
+                  <Box>
+                    <Box bg='gray.100' py={2} px='3'>
+                      <Text>Total payable: <Text as={'span'} fontSize='17px' fontWeight={'bold'}>{totalAmount}</Text></Text>
+                    </Box>
+                  </Box>
+                  <Wrap>
+                    <Button
+                      colorScheme={'pink'}
+                      rounded='0'
+                      isLoading={creditLoading}
+                      onClick={hasBusiness() ? () => handleSubmit('credit') : businessNotFound}
+                    >
+                      Credit Sell
+                    </Button>
+                    <Button
+                      colorScheme={'green'}
+                      rounded='0'
+                      isLoading={cardLoading}
+                      onClick={hasBusiness() ? () => handleSubmit('card') : businessNotFound}
+                    >
+                      Credit / Debit Card
+                    </Button>
+                    <Button
+                      colorScheme={'teal'}
+                      rounded='0'
+                      isLoading={cashLoading}
+                      onClick={hasBusiness() ? () => handleSubmit('cash') : businessNotFound}
+                    >
+                      Cash Sell
+                    </Button>
+                  </Wrap>
+                </Flex>
               </Box>
             </CardBody>
           </Card>

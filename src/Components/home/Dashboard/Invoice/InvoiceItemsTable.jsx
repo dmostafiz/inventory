@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'wrap',
-        marginTop: 24,
-        borderWidth: 1,
-        borderColor: '#1CE7CF',
+        marginTop: 10,
+        borderBottomWidth: 1,
+        borderColor: '#DADBE0',
     },
 });
 

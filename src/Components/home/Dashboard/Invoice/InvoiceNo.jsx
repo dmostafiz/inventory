@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import moment from 'moment/moment';
 
 const styles = StyleSheet.create({
     invoiceNoContainer: {
@@ -28,7 +29,7 @@ const InvoiceNo = ({ invoice }) => (
         </View >
         <View style={styles.invoiceDateContainer}>
             <Text style={styles.label}>Date: </Text>
-            <Text >{invoice?.trans_date}</Text>
+            <Text >{invoice?.trans_date ? moment(invoice?.trans_date).format('lll') : undefined }</Text>
         </View >
     </View>
 );

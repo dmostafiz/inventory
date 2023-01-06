@@ -56,7 +56,7 @@ export default function CreatePurchase() {
     const [supplierId, setSupplierId] = useState(null)
     const [selectedSupplier, setSelectedSupplier] = useState(null)
 
-    const [purchaseDate, setPurchaseDate] = useState(null)
+    const [purchaseDate, setPurchaseDate] = useState(new Date())
 
     useEffect(() => {
         if (supplierId) {
@@ -228,7 +228,7 @@ export default function CreatePurchase() {
             setSearchedProducts([])
             setSelectedSupplier(null)
             setSupplierId(null)
-            setPurchaseDate(null)
+            // setPurchaseDate(null)
 
             setInvoice(res?.data?.invoice)
 
@@ -280,7 +280,7 @@ export default function CreatePurchase() {
 
                 <FormControl isInvalid={errors.sku}>
                     <FormLabel>Purchase Date</FormLabel>
-                    <DatePicker onChange={value => setPurchaseDate(value)} placeholder="Pick date" />
+                    <DatePicker value={purchaseDate} onChange={value => setPurchaseDate(value)} placeholder="Pick date" />
                     <FormErrorMessage>
                         {errors.sku && errors.sku.message}
                     </FormErrorMessage>
