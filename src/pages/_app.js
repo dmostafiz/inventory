@@ -8,6 +8,7 @@ import AuthContextProvider from '../Contexts/AuthContext';
 import AppContextProvider from '../Contexts/AppContext';
 import InvoiceContextProvider from '../Contexts/InvoiceContext';
 import BusinessContextProvider from '../Contexts/BusinessContext';
+import LabelContextProvider from '../Contexts/LabelContext';
 
 const queryClient = new QueryClient()
 
@@ -34,9 +35,11 @@ function MyApp({ Component, pageProps }) {
         <AuthContextProvider>
           <AppContextProvider>
             <InvoiceContextProvider>
-              <BusinessContextProvider>
-                <Component {...pageProps} />
-              </BusinessContextProvider>
+              <LabelContextProvider>
+                <BusinessContextProvider>
+                  <Component {...pageProps} />
+                </BusinessContextProvider>
+              </LabelContextProvider>
             </InvoiceContextProvider>
           </AppContextProvider>
         </AuthContextProvider>

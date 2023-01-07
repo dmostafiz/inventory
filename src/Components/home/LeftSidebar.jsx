@@ -74,12 +74,13 @@ export default function LeftSidebar(props) {
         icon={AiFillGift}
         title='Products'
         submenus={[
+          { title: 'Print Labels', link: '/home/products/labels' },
           { title: 'Product List', link: '/home/products' },
           { title: 'Add Products', link: '/home/products/add' },
           // { title: 'Variations', link: '/home/products/variations' },
           { title: 'Product Units', link: '/home/products/units' },
           { title: 'Categories', link: '/home/products/categories' },
-          { title: ' Brands / Company', link: '/home/products/brands' }
+          { title: 'Brands / Company', link: '/home/products/brands' },
         ]}
       />
 

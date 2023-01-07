@@ -9,6 +9,7 @@ import React, { useContext } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import { InvoiceContext } from '../../../Contexts/InvoiceContext'
+import { LabelContext } from '../../../Contexts/LabelContext'
 import Axios from '../../../Helpers/Axios'
 import DateRangeHook from '../../../Hooks/DateRangeHook'
 import useAppActions from '../../../Hooks/useAppActions'
@@ -17,6 +18,7 @@ import Layout from '../../../Layouts/Home/Layout'
 export default function index() {
 
   const { deleteAction } = useAppActions()
+  const {setProducts} = useContext(LabelContext)
 
   const { date, handleDateChange } = DateRangeHook()
   const [query, setQuery] = useDebouncedState('', 500);
@@ -91,6 +93,12 @@ export default function index() {
                           <MenuList color={'black'} shadow='md'>
                             {/* <PurchaseInvoiceModal invoice={invoice} /> */}
                             <MenuItem onClick={() => setInvoice(invoice)}>Invoice</MenuItem>
+                            <MenuItem onClick={() => setProducts(invoice?.purchases?.map(p => {
+                              return {
+                                ...p.product,
+                                qty: p.quantity
+                              }
+                            }))}>Print Labels</MenuItem>   
                           </MenuList>
                         </Menu>
                       </Td>
