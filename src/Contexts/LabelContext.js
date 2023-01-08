@@ -3,9 +3,11 @@ import { PDFDownloadLink } from "@react-pdf/renderer"
 import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/router"
 import { createContext, useEffect, useRef, useState } from "react"
-import Barcode from "react-barcode"
+// import Barcode from "react-barcode"
+import Barcode from 'react-jsbarcode';
 import ReactToPrint from "react-to-print"
 import InvoiceData from "../Components/home/Dashboard/Invoice/InvoiceData"
+import ReactToSvg from "../Helper/ReactToSvg"
 import Axios from "../Helpers/Axios"
 import { getAccessToken, removeAccessToken } from "../Helpers/cookieHelper"
 // import useUser from "../Hooks/useUser"
@@ -22,7 +24,7 @@ const LabelContextProvider = ({ children }) => {
 
     useEffect(() => {
 
-        console.log('Print label context', products)
+        // console.log('Print label context', products)
 
         if (products?.length) {
             onOpen()
@@ -55,21 +57,29 @@ const LabelContextProvider = ({ children }) => {
                                     return <Box key={index}>
                                         {
                                             [...Array(+product.qty).keys()].map((p, i) => {
-                                                return <Box key={index + i} p={'2px'} border='1px' mb={3}>
-                                                    <VStack spacing={0}>
-                                                        <Text fontWeight={'bold'}>{product.name}</Text>
-                                                        <Text fontSize={'12px'}>Brand: {product?.brand?.name} | MRP: {product?.sellingPriceIncTax}</Text>
+                                                return <Box key={index + i} p={'0px'} border='1px' mb={'2px'}>
+                                                    <VStack spacing={-1}>
+                                                        <Text fontSize={'14px'} fontWeight={'bold'}>{product.name}</Text>
+                                                        <Text fontSize={'10px'}>Brand: {product?.brand?.name} | MRP: {product?.sellingPriceIncTax}</Text>
                                                         <Barcode
                                                             value={product.sku}
-                                                            width={1.8}
-                                                            text={product.sku}
-                                                            fontSize={'12px'}
-                                                            height='40px'
+                                                            width={1.5}
+                                                            // text={product.sku}
+                                                            // fontSize={10}
+                                                            height={40}
+                                                            options={
+                                                                {
+                                                                    format: 'code128',
+                                                                    height: 40,
+                                                                    width: 1.5
+                                                                }}
+                                                            renderer="svg"
                                                         />
                                                     </VStack>
                                                 </Box>
                                             })
                                         }
+                                        <div className="page-break" />
                                     </Box>
                                 })
                             }

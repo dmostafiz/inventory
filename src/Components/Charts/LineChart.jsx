@@ -6,12 +6,12 @@ const Chart = dynamic(import("react-apexcharts"), {
   });
   
 
-export default function SalesChart() {
+export default function LineChart({title}) {
 
     const chart = {
 
         series: [{
-            name: 'Sales',
+            name: title,
             data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35]
         }],
 
@@ -45,8 +45,8 @@ export default function SalesChart() {
             },
 
             dataLabels: {
-                enabled: true,
-                color:'#7BDDCF'
+                enabled: false,
+                colors:['#7BDDCF']
             },
 
             stroke: {
@@ -73,7 +73,7 @@ export default function SalesChart() {
 
             yaxis: {
                 title: {
-                    text: 'Sales',
+                    text: '',
                 },
             },
 
@@ -102,7 +102,7 @@ export default function SalesChart() {
         <Chart
             options={chart.options}
             series={chart.series}
-            type="area"
+            type="line"
             height={350}
         />
     )

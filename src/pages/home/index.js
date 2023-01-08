@@ -1,6 +1,6 @@
 import { Alert, AlertIcon, Box, Card, CardBody, CardHeader, Flex, Heading, SimpleGrid, Stack, StackDivider, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { AiFillCreditCard, AiFillMinusCircle } from 'react-icons/ai'
+import { AiFillCreditCard, AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai'
 import { BsCreditCard2Front, BsFillBagCheckFill, BsFillInfoSquareFill, BsFillReplyAllFill } from 'react-icons/bs'
 import { FiServer } from 'react-icons/fi'
 import { GoLocation } from 'react-icons/go'
@@ -13,8 +13,11 @@ import Link from 'next/link'
 import Axios from '../../Helpers/Axios'
 import { useQuery } from '@tanstack/react-query'
 import { DateRangePicker } from '@mantine/dates'
+import DateRangeHook from '../../Hooks/DateRangeHook'
+import SalesLastThirtyDays from '../../Components/home/Dashboard/Reports/SalesLastThirtyDays'
+import SalesThisYear from '../../Components/home/Dashboard/Reports/SalesThisYear'
 
-const SalesChart = dynamic(import("../../Components/home/Dashboard/Charts/SalesChart"), {
+const SalesChart = dynamic(import("../../Components/Charts/LineChart"), {
   ssr: false
 });
 
@@ -27,16 +30,23 @@ export default function index() {
 
     // console.log('Business response', res)
     return res.data
-})
+  })
 
 
   console.log('auth user', authUser)
 
 
-  const [value, setValue] = useState([
-    new Date(2021, 11, 1),
-    new Date(2021, 11, 5),
-  ]);
+  const { date, handleDateChange } = DateRangeHook()
+
+
+  const headingReport = useQuery(['headingReports', date], async () => {
+    const res = await Axios.get('/report/heading', {
+      params: { date }
+    })
+
+    console.log('Heading report response', res.data)
+    return res.data
+  })
 
 
   return (
@@ -54,92 +64,82 @@ export default function index() {
 
           <Box mt={5}>
             <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
+
+
+              <StatsCard
+                title={'TOTAL PURCHASES'}
+                stat={headingReport?.data?.purchase?.totalSales?.toFixed(2)}
+                loading={headingReport?.isLoading}
+                icon={<AiFillCreditCard size={'1.5em'} />}
+                iconBg='blue.400'
+              />
+              <StatsCard
+                title={'PURCHASES PAID'}
+                stat={headingReport?.data?.purchase?.totalPaid?.toFixed(2)}
+                loading={headingReport?.isLoading}
+                icon={<BsFillInfoSquareFill size={'1.5em'} />}
+                iconBg='orange.400'
+              />
+              <StatsCard
+                title={'PURCHASES DUE'}
+                stat={headingReport?.data?.purchase?.totalDue?.toFixed(2)}
+                loading={headingReport?.isLoading}
+                icon={<BsFillReplyAllFill size={'1.5em'} />}
+                iconBg='red.400'
+              />
+              <StatsCard
+                title={'PURCHASED ITEMS'}
+                stat={headingReport?.data?.purchase?.purchaseCount}
+                loading={headingReport?.isLoading}
+                icon={<AiFillPlusCircle size={'1.5em'} />}
+                iconBg='red.400'
+              />
+
               <StatsCard
                 title={'TOTAL SALES'}
-                stat={'5,000'}
+                stat={headingReport?.data?.sale?.totalSales?.toFixed(2)}
+                loading={headingReport?.isLoading}
                 icon={<BsFillBagCheckFill size={'1.5em'} />}
               />
               <StatsCard
-                title={'NET'}
-                stat={'1,000'}
+                title={'TOTAL PAID'}
+                stat={headingReport?.data?.sale?.totalPaid?.toFixed(2)}
+                loading={headingReport?.isLoading}
                 icon={<FiServer size={'1.5em'} />}
                 iconBg='green.400'
               />
               <StatsCard
                 title={'INVOICE DUE'}
-                stat={'705'}
+                stat={headingReport?.data?.sale?.totalDue?.toFixed(2)}
+                loading={headingReport?.isLoading}
                 icon={<GoLocation size={'1.5em'} />}
                 iconBg='orange.400'
               />
               <StatsCard
-                title={'TOTAL SALES RETURNS'}
-                stat={'7'}
+                title={'TOTAL ITEMS SOLD'}
+                stat={headingReport?.data?.sale?.salesCount}
+                loading={headingReport?.isLoading}
                 icon={<AiFillMinusCircle size={'1.5em'} />}
                 iconBg='red.500'
               />
-            </SimpleGrid>
-          </Box>
-          <Box mt={4}>
-            <SimpleGrid columns={{ base: 2, md: 4 }} spacing={{ base: 2, lg: 5 }}>
-              <StatsCard
-                title={'TOTAL PURCHASES'}
-                stat={'5,000'}
-                icon={<AiFillCreditCard size={'1.5em'} />}
-                iconBg='blue.400'
-              />
-              <StatsCard
-                title={'PURCHASES DUE'}
-                stat={'1,000'}
-                icon={<BsFillInfoSquareFill size={'1.5em'} />}
-                iconBg='orange.400'
-              />
-              <StatsCard
-                title={'PURCHASES RETURNS'}
-                stat={'545'}
-                icon={<BsFillReplyAllFill size={'1.5em'} />}
-                iconBg='red.400'
-              />
-              <StatsCard
-                title={'EXPENSES'}
-                stat={'0.0'}
-                icon={<BsCreditCard2Front size={'1.5em'} />}
-                iconBg='red.400'
-              />
+
             </SimpleGrid>
           </Box>
         </>
       }
       gradient={true}
-      titleRight={ <DateRangePicker
+      titleRight={<DateRangePicker
         // label="Book hotel"
         placeholder="Pick dates range"
-        value={value}
-        onChange={setValue}
+        value={date}
+        onChange={handleDateChange}
       />}
     >
 
 
-      <Card shadow={'md'} bg='white' mt={4}>
-        <CardHeader bg={'#1CE7CF'} py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-          <Heading size='md'>Sales last 30 days</Heading>
-        </CardHeader>
-        <CardBody>
-          <Stack divider={<StackDivider />} spacing='4'>
-            <SalesChart />
-          </Stack>
-        </CardBody>
-      </Card>
+      <SalesLastThirtyDays />
 
-      <Card shadow={'md'} bg='white' mt={4}>
-        <CardHeader bg={'#1CE7CF'} py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-          <Heading size='md'>Sales Current Financial Year</Heading>
-        </CardHeader>
-        <CardBody>
-          <Stack divider={<StackDivider />} spacing='4'>
-            <SalesChart />
-          </Stack>
-        </CardBody>
-      </Card>
+      <SalesThisYear />
 
       <Box mt={4}>
         <Flex direction={{ base: 'column', lg: 'row' }} gap={4}>
@@ -147,7 +147,7 @@ export default function index() {
             <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
               <Heading size='md'>Sales payment due</Heading>
             </CardHeader>
-            <CardBody p={2} pt={0}>
+            <CardBody p={0} pt={0}>
               <TableContainer>
                 <Table size='sm' variant='striped'>
                   <Thead>
@@ -184,7 +184,7 @@ export default function index() {
             <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
               <Heading size='md'>Purchase payments due</Heading>
             </CardHeader>
-            <CardBody p={2} pt={0}>
+            <CardBody p={0} pt={0}>
               <TableContainer>
                 <Table size='sm' variant='striped'>
                   <Thead>
@@ -226,7 +226,7 @@ export default function index() {
           <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
             <Heading size='md'>Product stock alerts</Heading>
           </CardHeader>
-          <CardBody p={2} pt={0}>
+          <CardBody p={0} pt={0}>
             <TableContainer>
               <Table size='sm' variant='striped'>
                 <Thead>

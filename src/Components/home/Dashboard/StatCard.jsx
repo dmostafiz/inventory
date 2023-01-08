@@ -3,6 +3,7 @@ import {
     chakra,
     Flex,
     SimpleGrid,
+    Spinner,
     Stat,
     StatLabel,
     StatNumber,
@@ -14,7 +15,7 @@ import { FiServer } from 'react-icons/fi';
 import { GoLocation } from 'react-icons/go';
 
 
-export default function StatsCard({title, stat, icon, iconBg='#88A47C'}) {
+export default function StatsCard({title, stat, icon, iconBg='#88A47C', loading}) {
 
     return (
         <Stat
@@ -41,9 +42,9 @@ export default function StatsCard({title, stat, icon, iconBg='#88A47C'}) {
                     <StatLabel fontSize={{base: 'xs', md:'sm'}} color='gray.400'>
                         {title}
                     </StatLabel>
-                    <StatNumber fontSize={{base: 'md', md:'lg'}} color='#00453D' fontWeight={'black'}>
-                        $ {stat}
-                    </StatNumber>
+                    {!loading ? <StatNumber fontSize={{base: 'md', md:'lg'}} color='#00453D' fontWeight={'black'}>
+                        {stat}
+                    </StatNumber> : <Spinner />}
                 </Box>
 
             </Flex>
