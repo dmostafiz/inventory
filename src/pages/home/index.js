@@ -68,28 +68,40 @@ export default function index() {
 
               <StatsCard
                 title={'TOTAL PURCHASES'}
-                stat={headingReport?.data?.purchase?.totalSales?.toFixed(2)}
+                stat={headingReport?.data?.purchase?.totalSales?.toFixed(2) || '0.00'}
                 loading={headingReport?.isLoading}
                 icon={<AiFillCreditCard size={'1.5em'} />}
                 iconBg='blue.400'
+                link={{
+                  title: 'View all purchases',
+                  url: '/home/purchases'
+                }}
               />
               <StatsCard
                 title={'PURCHASES PAID'}
-                stat={headingReport?.data?.purchase?.totalPaid?.toFixed(2)}
+                stat={headingReport?.data?.purchase?.totalPaid?.toFixed(2) || '0.00'}
                 loading={headingReport?.isLoading}
                 icon={<BsFillInfoSquareFill size={'1.5em'} />}
                 iconBg='orange.400'
+                link={{
+                  title: 'View paid purchases',
+                  url: '/home/purchases?status=paid'
+                }}
               />
               <StatsCard
                 title={'PURCHASES DUE'}
-                stat={headingReport?.data?.purchase?.totalDue?.toFixed(2)}
+                stat={headingReport?.data?.purchase?.totalDue?.toFixed(2) || '0.00'}
                 loading={headingReport?.isLoading}
                 icon={<BsFillReplyAllFill size={'1.5em'} />}
                 iconBg='red.400'
+                link={{
+                  title: 'View due purchases',
+                  url: '/home/purchases?status=due'
+                }}
               />
               <StatsCard
                 title={'PURCHASED ITEMS'}
-                stat={headingReport?.data?.purchase?.purchaseCount}
+                stat={headingReport?.data?.purchase?.purchaseCount || '0'}
                 loading={headingReport?.isLoading}
                 icon={<AiFillPlusCircle size={'1.5em'} />}
                 iconBg='red.400'
@@ -97,27 +109,39 @@ export default function index() {
 
               <StatsCard
                 title={'TOTAL SALES'}
-                stat={headingReport?.data?.sale?.totalSales?.toFixed(2)}
+                stat={headingReport?.data?.sale?.totalSales?.toFixed(2) || '0.00'}
                 loading={headingReport?.isLoading}
                 icon={<BsFillBagCheckFill size={'1.5em'} />}
+                link={{
+                  title: 'View all sales',
+                  url: '/home/sales'
+                }}
               />
               <StatsCard
                 title={'TOTAL PAID'}
-                stat={headingReport?.data?.sale?.totalPaid?.toFixed(2)}
+                stat={headingReport?.data?.sale?.totalPaid?.toFixed(2) || '0.00'}
                 loading={headingReport?.isLoading}
                 icon={<FiServer size={'1.5em'} />}
                 iconBg='green.400'
+                link={{
+                  title: 'View paid sales',
+                  url: '/home/sales?status=paid'
+                }}
               />
               <StatsCard
                 title={'INVOICE DUE'}
-                stat={headingReport?.data?.sale?.totalDue?.toFixed(2)}
+                stat={headingReport?.data?.sale?.totalDue?.toFixed(2) || '0.00'}
                 loading={headingReport?.isLoading}
                 icon={<GoLocation size={'1.5em'} />}
                 iconBg='orange.400'
+                link={{
+                  title: 'View due sales',
+                  url: '/home/sales?status=due'
+                }}
               />
               <StatsCard
                 title={'TOTAL ITEMS SOLD'}
-                stat={headingReport?.data?.sale?.salesCount}
+                stat={headingReport?.data?.sale?.salesCount || '0'}
                 loading={headingReport?.isLoading}
                 icon={<AiFillMinusCircle size={'1.5em'} />}
                 iconBg='red.500'

@@ -5,7 +5,8 @@ import { DateRangePicker } from '@mantine/dates'
 import { useDebouncedState } from '@mantine/hooks'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
-import React, { useContext } from 'react'
+import { useRouter } from 'next/router'
+import React, { useContext, useEffect, useState } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import { InvoiceContext } from '../../../Contexts/InvoiceContext'
@@ -16,16 +17,29 @@ import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
 
 export default function index() {
+  const router = useRouter()
+
 
   const { deleteAction } = useAppActions()
   const {setProducts} = useContext(LabelContext)
 
   const { date, handleDateChange } = DateRangeHook()
   const [query, setQuery] = useDebouncedState('', 500);
+  const [status, setStatus] = useState(null);
 
-  const { data, isLoading, error } = useQuery([date, query], async () => {
+
+  useEffect(() => {
+    
+    if(router?.query?.status){
+      setStatus(router.query.status)
+    }
+
+  }, [router])
+
+
+  const { data, isLoading, error } = useQuery([date, query, status], async () => {
     const res = await Axios.get('/purchase', {
-      params: {date,query}
+      params: {date,query, status}
     })
 
     console.log('products loaded', res.data)

@@ -6,6 +6,7 @@ import { useDebouncedState } from '@mantine/hooks'
 import { IconArrowsLeftRight, IconMessageCircle, IconPhoto, IconSearch, IconSettings, IconTrash } from '@tabler/icons'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
+import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
@@ -18,14 +19,26 @@ import Layout from '../../../Layouts/Home/Layout'
 
 export default function index() {
 
+  const router = useRouter()
+
   const { deleteAction } = useAppActions()
 
   const { date, handleDateChange } = DateRangeHook()
   const [query, setQuery] = useDebouncedState('', 500);
+  const [status, setStatus] = useState(null);
 
-  const { data, isLoading, error } = useQuery(['getSales', date,query], async () => {
+
+  useEffect(() => {
+    
+    if(router?.query?.status){
+      setStatus(router.query.status)
+    }
+
+  }, [router])
+
+  const { data, isLoading, error } = useQuery(['getSales', date, query, status], async () => {
     const res = await Axios.get(`/sale`, {
-      params: { date, query }
+      params: { date, query, status }
     })
 
     console.log('Salse loaded', res.data)

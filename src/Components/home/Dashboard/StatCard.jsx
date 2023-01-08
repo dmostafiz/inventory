@@ -7,15 +7,17 @@ import {
     Stat,
     StatLabel,
     StatNumber,
+    Text,
     useColorModeValue,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { FiServer } from 'react-icons/fi';
 import { GoLocation } from 'react-icons/go';
 
 
-export default function StatsCard({title, stat, icon, iconBg='#88A47C', loading}) {
+export default function StatsCard({title, stat, icon, iconBg='#88A47C', loading, link=null}) {
 
     return (
         <Stat
@@ -45,6 +47,9 @@ export default function StatsCard({title, stat, icon, iconBg='#88A47C', loading}
                     {!loading ? <StatNumber fontSize={{base: 'md', md:'lg'}} color='#00453D' fontWeight={'black'}>
                         {stat}
                     </StatNumber> : <Spinner />}
+                    {link && <Link href={link.url}>
+                     <Text fontSize={'12px'} color='blue.500'>{link.title}</Text>
+                </Link>}
                 </Box>
 
             </Flex>
