@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function ComponentLoader({size='xl'}) {
   return (
-    <Center>
+    <Center py={8}>
         <Spinner color='gray.500' size={size} />
     </Center>
   )

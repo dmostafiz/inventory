@@ -1,15 +1,8 @@
 import { Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from "@chakra-ui/react"
-import { PDFDownloadLink } from "@react-pdf/renderer"
-import { useQuery } from "@tanstack/react-query"
-import { useRouter } from "next/router"
 import { createContext, useEffect, useRef, useState } from "react"
 // import Barcode from "react-barcode"
 import Barcode from 'react-jsbarcode';
 import ReactToPrint from "react-to-print"
-import InvoiceData from "../Components/home/Dashboard/Invoice/InvoiceData"
-import ReactToSvg from "../Helper/ReactToSvg"
-import Axios from "../Helpers/Axios"
-import { getAccessToken, removeAccessToken } from "../Helpers/cookieHelper"
 // import useUser from "../Hooks/useUser"
 
 export const LabelContext = createContext()
@@ -32,6 +25,11 @@ const LabelContextProvider = ({ children }) => {
 
     }, [products])
 
+    const handleClose = () => {
+        setProducts(null)
+        onClose()
+    }
+
     return <LabelContext.Provider value={{
         setProducts
     }}>
@@ -47,7 +45,7 @@ const LabelContextProvider = ({ children }) => {
                         return totalQty + +c.qty
                     }, 0)}</Text>
                 </ModalHeader>
-                <ModalCloseButton />
+                {/* <ModalCloseButton /> */}
                 <ModalBody>
 
                     <Box w='full' maxH={'50vh'} overflowY={'auto'}>
@@ -76,10 +74,10 @@ const LabelContextProvider = ({ children }) => {
                                                             renderer="svg"
                                                         />
                                                     </VStack>
+                                                    <div className="page-break" />
                                                 </Box>
                                             })
                                         }
-                                        <div className="page-break" />
                                     </Box>
                                 })
                             }
@@ -90,7 +88,7 @@ const LabelContextProvider = ({ children }) => {
 
                 </ModalBody>
                 <ModalFooter borderTop={'1px'} borderColor='gray.300'>
-                    <Button mr={3} onClick={onClose}>
+                    <Button mr={3} onClick={handleClose}>
                         Cancel
                     </Button>
                     <ReactToPrint

@@ -23,7 +23,7 @@ export function setAccessToken(token) {
 
 export function getAccessToken() {
     console.log('get accessToken')
-    return Cookies.get('accessToken')
+    return Cookies.get('accessToken') || null
 }
 
 export function removeAccessToken() {

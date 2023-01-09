@@ -6,13 +6,13 @@ const Chart = dynamic(import("react-apexcharts"), {
   });
   
 
-export default function BarChart({title}) {
+export default function BarChart({title, keys, values}) {
 
     const chart = {
 
         series: [{
             name: title,
-            data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35]
+            data: values
         }],
 
         options: {
@@ -65,9 +65,7 @@ export default function BarChart({title}) {
                 labels: {
                     rotate: -45
                 },
-                categories: ['Apples', 'Oranges', 'Strawberries', 'Pineapples', 'Mangoes', 'Bananas',
-                    'Blackberries', 'Pears', 'Watermelons', 'Cherries', 'Pomegranates', 'Tangerines', 'Papayas'
-                ],
+                categories: keys,
                 tickPlacement: 'on'
             },
 
