@@ -38,7 +38,7 @@ export default function index() {
             <TableContainer>
               {isLoading && <ComponentLoader />}
 
-              {!isLoading && data?.products?.length > 0 && <Table size='sm' variant='striped'>
+              {!isLoading && data?.products?.length > 0 && <Table size='sm' variant='simple'>
                 <Thead>
                   <Tr>
                     <Th>Product Name</Th>
@@ -62,7 +62,7 @@ export default function index() {
                 </Thead>
                 <Tbody>
                   {data?.products?.map((product, index) => {
-                    return <Tr key={index}>
+                    return <Tr key={index} bg={product.stock <= product.alertQuantity && 'red.100'}>
                       <Td>{product.name}</Td>
                       <Td>{product.sku}</Td>
                       <Td>{product.stock}</Td>

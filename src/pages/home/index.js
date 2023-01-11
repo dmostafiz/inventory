@@ -16,6 +16,9 @@ import { DateRangePicker } from '@mantine/dates'
 import DateRangeHook from '../../Hooks/DateRangeHook'
 import SalesLastThirtyDays from '../../Components/home/Dashboard/Reports/SalesLastThirtyDays'
 import SalesThisYear from '../../Components/home/Dashboard/Reports/SalesThisYear'
+import SalesDue from '../../Components/home/Dashboard/Reports/SalesDue'
+import PurchaseDue from '../../Components/home/Dashboard/Reports/PurchaseDue'
+import StockAlerts from '../../Components/home/Dashboard/Reports/StockAlerts'
 
 const SalesChart = dynamic(import("../../Components/Charts/LineChart"), {
   ssr: false
@@ -166,169 +169,17 @@ export default function index() {
       <SalesThisYear />
 
       <Box mt={4}>
-        <Flex direction={{ base: 'column', lg: 'row' }} gap={4}>
-          <Card flex='1' shadow={'md'} bg='white'>
-            <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-              <Heading size='md'>Sales payment due</Heading>
-            </CardHeader>
-            <CardBody p={0} pt={0}>
-              <TableContainer>
-                <Table size='sm' variant='striped'>
-                  <Thead>
-                    <Tr>
-                      <Th>Customer</Th>
-                      <Th>Invoice No</Th>
-                      <Th isNumeric>Due Amount</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>inches</Td>
-                      <Td>45rfd45rg45</Td>
-                      <Td isNumeric>25.4</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>feet</Td>
-                      <Td>sfgsr4rtgr45</Td>
-                      <Td isNumeric>30.48</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>yards</Td>
-                      <Td>rtyhbf45rgf45</Td>
-                      <Td isNumeric>0.91444</Td>
-                    </Tr>
-                  </Tbody>
-                </Table>
-              </TableContainer>
-
-            </CardBody>
-          </Card>
-
-          <Card flex='1' shadow={'md'} bg='white'>
-            <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-              <Heading size='md'>Purchase payments due</Heading>
-            </CardHeader>
-            <CardBody p={0} pt={0}>
-              <TableContainer>
-                <Table size='sm' variant='striped'>
-                  <Thead>
-                    <Tr>
-                      <Th>Supplier</Th>
-                      <Th>Reference No</Th>
-                      <Th isNumeric>Due Amount</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>inches</Td>
-                      <Td>sdf43445wfg34</Td>
-                      <Td isNumeric>25.4</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>feet</Td>
-                      <Td>45tfw45fwe556</Td>
-                      <Td isNumeric>30.48</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>yards</Td>
-                      <Td>64g45g5657et45</Td>
-                      <Td isNumeric>0.91444</Td>
-                    </Tr>
-                  </Tbody>
-                </Table>
-              </TableContainer>
-
-
-            </CardBody>
-          </Card>
-
-        </Flex>
+        <SalesDue />
       </Box>
 
       <Box mt={4}>
-        <Card flex='1' shadow={'md'} bg='white'>
-          <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-            <Heading size='md'>Product stock alerts</Heading>
-          </CardHeader>
-          <CardBody p={0} pt={0}>
-            <TableContainer>
-              <Table size='sm' variant='striped'>
-                <Thead>
-                  <Tr>
-                    <Th>Product</Th>
-                    <Th>Category</Th>
-                    <Th isNumeric>Current stock</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  <Tr>
-                    <Td>Apple iPhone 8 - Internal Memory - 32 GB (AS0015-1)</Td>
-                    <Td>Apple</Td>
-                    <Td isNumeric>25.4</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Samsung Galaxy S8 - Internal Memory - 64 GB (AS0014-1)</Td>
-                    <Td>Android</Td>
-                    <Td isNumeric>30.48</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Acer Aspire E 15 - Color - White (AS0017-2)</Td>
-                    <Td>Laptop</Td>
-                    <Td isNumeric>0.91444</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Apple iPhone 8 - Internal Memory - 32 GB (AS0015-1)</Td>
-                    <Td>Apple</Td>
-                    <Td isNumeric>25.4</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Samsung Galaxy S8 - Internal Memory - 64 GB (AS0014-1)</Td>
-                    <Td>Android</Td>
-                    <Td isNumeric>30.48</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Acer Aspire E 15 - Color - White (AS0017-2)</Td>
-                    <Td>Laptop</Td>
-                    <Td isNumeric>0.91444</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Apple iPhone 8 - Internal Memory - 32 GB (AS0015-1)</Td>
-                    <Td>Apple</Td>
-                    <Td isNumeric>25.4</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Samsung Galaxy S8 - Internal Memory - 64 GB (AS0014-1)</Td>
-                    <Td>Android</Td>
-                    <Td isNumeric>30.48</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Acer Aspire E 15 - Color - White (AS0017-2)</Td>
-                    <Td>Laptop</Td>
-                    <Td isNumeric>0.91444</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Apple iPhone 8 - Internal Memory - 32 GB (AS0015-1)</Td>
-                    <Td>Apple</Td>
-                    <Td isNumeric>25.4</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Samsung Galaxy S8 - Internal Memory - 64 GB (AS0014-1)</Td>
-                    <Td>Android</Td>
-                    <Td isNumeric>30.48</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Acer Aspire E 15 - Color - White (AS0017-2)</Td>
-                    <Td>Laptop</Td>
-                    <Td isNumeric>0.91444</Td>
-                  </Tr>
-                </Tbody>
-              </Table>
-            </TableContainer>
-
-
-          </CardBody>
-        </Card>
+        <PurchaseDue />
       </Box>
+
+      <Box mt={4}>
+        <StockAlerts />
+      </Box>
+
     </Layout>
   )
 }

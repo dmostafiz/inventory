@@ -40,6 +40,8 @@ const InvoiceContextProvider = ({ children }) => {
                 trans_date: invoice?.invoiceData,
                 due_date: invoice?.invoiceData,
                 business: invoice?.business,
+                paid: invoice?.paid,
+                due: invoice?.due,
                 items: items?.map((item, i) => {
                     return {
                         sno: i + 1,

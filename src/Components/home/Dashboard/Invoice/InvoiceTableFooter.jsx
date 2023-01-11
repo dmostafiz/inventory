@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const InvoiceTableFooter = ({ items }) => {
+const InvoiceTableFooter = ({ items, invoice }) => {
     const total = items?.map(item => item.qty * item.rate)
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
     return (
@@ -39,14 +39,33 @@ const InvoiceTableFooter = ({ items }) => {
                 <Text style={styles.description}>TOTAL</Text>
                 <Text style={styles.total}>{Number.parseFloat(total).toFixed(2)}</Text>
             </View>
-            <View style={styles.row}>
+
+            {/* <View style={styles.row}>
                 <Text style={styles.description}>DISCOUNT (-)</Text>
                 <Text style={styles.total}>{0.00}</Text>
+            </View> */}
+
+            <View style={{
+                borderTop: '1px solid #e0e0e0',
+                borderBottom: '1px solid #e0e0e0',
+            }}>
+                <View style={styles.row}>
+                    <Text style={styles.description}>SUBTOTAL</Text>
+                    <Text style={styles.total}>{Number.parseFloat(total).toFixed(2)}</Text>
+                </View>
             </View>
-            <View style={styles.row}>
-                <Text style={styles.description}>SUBTOTAL</Text>
-                <Text style={styles.total}>{Number.parseFloat(total).toFixed(2)}</Text>
-            </View>
+
+                <View style={styles.row}>
+                    <Text style={styles.description}>PAID</Text>
+                    <Text style={styles.total}>{invoice.paid?.toFixed(2)}</Text>
+                </View>
+
+                <View style={styles.row}>
+                    <Text style={styles.description}>Due</Text>
+                    <Text style={styles.total}>{invoice.due?.toFixed(2)}</Text>
+                </View>
+                
+
         </>
     )
 };

@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
 
 export default function InvoiceData({invoice}) {
 
-
     return (
         <Document>
             <Page size="A4" style={styles.page} >

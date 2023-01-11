@@ -17,7 +17,7 @@ import { FiServer } from 'react-icons/fi';
 import { GoLocation } from 'react-icons/go';
 
 
-export default function StatsCard({title, stat, icon, iconBg='#88A47C', loading, link=null}) {
+export default function StatsCard({ title, stat, icon, iconBg = '#88A47C', loading, link = null }) {
 
     return (
         <Stat
@@ -27,8 +27,9 @@ export default function StatsCard({title, stat, icon, iconBg='#88A47C', loading,
             // border={'1px solid'}
             bg='white'
             borderColor={useColorModeValue('gray.800', 'gray.500')}
-            rounded={'lg'}>
-            <Flex gap={{base:3, md:5}} alignItems='center'>
+            // rounded={'lg'}
+        >
+            <Flex gap={{ base: 3, md: 5 }} alignItems='center'>
                 <Box
                     // my={'auto'}
                     color={'white'}
@@ -41,15 +42,15 @@ export default function StatsCard({title, stat, icon, iconBg='#88A47C', loading,
                 </Box>
 
                 <Box>
-                    <StatLabel fontSize={{base: 'xs', md:'sm'}} color='gray.400'>
+                    <StatLabel fontSize={{ base: 'xs', md: 'sm' }} color='gray.400'>
                         {title}
                     </StatLabel>
-                    {!loading ? <StatNumber fontSize={{base: 'md', md:'lg'}} color='#00453D' fontWeight={'black'}>
+                    {!loading ? <StatNumber fontSize={{ base: 'md', md: 'lg' }} color='#00453D' fontWeight={'black'}>
                         {stat}
                     </StatNumber> : <Spinner />}
                     {link && <Link href={link.url}>
-                     <Text fontSize={'12px'} color='blue.500'>{link.title}</Text>
-                </Link>}
+                        <Text fontSize={'12px'} color='blue.500'>{link.title}</Text>
+                    </Link>}
                 </Box>
 
             </Flex>

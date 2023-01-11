@@ -78,7 +78,7 @@ export default function index() {
               </Table>}
 
 
-              {!isLoading && !data?.invoices?.length && <DataNotFound />}
+              {!isLoading && !data?.expenses?.length && <DataNotFound />}
 
 
             </TableContainer>
