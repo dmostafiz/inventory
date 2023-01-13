@@ -12,8 +12,7 @@ export default function Logo({bg = 'none', rounded = 'xl'}) {
             // mt={'-5px'}
             // shadow='sm'
         >
-            <Image w={66} src={'/oak.png'} />
-            <Text fontSize={'24px'} fontWeight='black'>TECH <Text as='span' color='#01B4A1'>OAK</Text></Text>
+            <Image w={200} src={'/logo.png'} />
         </Flex>
     )
 }

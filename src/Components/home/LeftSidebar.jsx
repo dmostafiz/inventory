@@ -105,7 +105,7 @@ export default function LeftSidebar(props) {
           submenus={[
             { title: 'Purchases List', link: '/home/purchases' },
             { title: 'Add Purchase', link: '/home/purchases/add' },
-            { title: 'Return List', link: '/home/purchases/returns' },
+            // { title: 'Return List', link: '/home/purchases/returns' },
           ]}
         />
 
@@ -116,7 +116,7 @@ export default function LeftSidebar(props) {
             { title: 'All Sales', link: '/home/sales' },
             { title: 'Add Sale', link: '/home/sales/add' },
             { title: 'List POS', link: '/home/pos/list' },
-            { title: 'Sale Returns', link: '/home/sales/returns' },
+            // { title: 'Sale Returns', link: '/home/sales/returns' },
           ]}
         />
 
@@ -135,8 +135,8 @@ export default function LeftSidebar(props) {
           icon={BsGearFill}
           title='Settings'
           submenus={[
-            { title: 'General Settings', link: '#' },
-            { title: 'Profile Settings', link: '#' },
+            { title: 'General Settings', link: '/home/settings/general'},
+            { title: 'Profile Settings', link: '/home/settings/profile' },
             { title: 'Business Settings', link: '/home/settings/business' },
             { title: 'Tax Rates', link: '/home/settings/tax' }
           ]}

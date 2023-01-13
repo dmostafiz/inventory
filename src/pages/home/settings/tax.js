@@ -10,7 +10,7 @@ import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
 
 export default function tax() {
-    
+
     const { data, error, isLoading } = useQuery(['getTaxes'], async () => {
         const res = await Axios('/tax/get')
         console.log('Load taxes', res)
@@ -66,9 +66,7 @@ export default function tax() {
                                                 </Button>
                                             </Td>
                                         </Tr>
-
                                     })}
-
                                 </Tbody>
                             </Table>}
 

@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Avatar, Box, Button, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Show, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { FaBell, FaPowerOff, FaUser } from 'react-icons/fa'
 import { FiMenu, FiSearch } from 'react-icons/fi'
@@ -29,11 +29,11 @@ export default function TopBar({ layoutWidth, sidebar, showSidebar }) {
             shadow={'sm'}
         >
 
-            <Box
+            {showSidebar && <Box
                 display={{ base: "inline-flex", md: "none" }}
             >
                 <LogoMobile bg='white' />
-            </Box>
+            </Box>}
 
             {!showSidebar &&
                 <Box py={2}>
@@ -43,7 +43,7 @@ export default function TopBar({ layoutWidth, sidebar, showSidebar }) {
                 </Box>
             }
 
-            <InputGroup w="96" display={{ base: "none", md: "flex" }}>
+            {/* <InputGroup w="96" display={{ base: "none", md: "flex" }}>
                 <InputLeftElement color="gray.900">
                     <FiSearch />
                 </InputLeftElement>
@@ -63,30 +63,34 @@ export default function TopBar({ layoutWidth, sidebar, showSidebar }) {
                     placeholder="Search for products..."
                     rounded={'full'}
                 />
-            </InputGroup>
+            </InputGroup> */}
 
-            <Flex align="center" gap={5}>
-                <Link href={'/home/pos'}>
-                    <Button size={'sm'} rounded='full' bg={'blackAlpha.300'} _active color='whiteAlpha.900' _hover shadow='sm'>
-                        POINT OF SALES
-                    </Button>
-                </Link>
-
-                <Icon fontSize={'20px'} color="blackAlpha.800" as={FaBell} cursor="pointer" />
+            <Flex ml={3} align="center" w='full' justify={'space-between'} gap={5}>
+                <Flex align="center" gap={5}>
+                    {showSidebar &&
+                        <Link href={'/home/pos'}>
+                            <Button size={'sm'} rounded='full' bg={'blackAlpha.300'} _active color='whiteAlpha.900' _hover shadow='sm'>
+                                <Show above='sm'>POINT OF SALES</Show>
+                                <Show below='sm'>POS</Show>
+                            </Button>
+                        </Link>
+                    }
+                    <Icon fontSize={'20px'} color="blackAlpha.800" as={FaBell} cursor="pointer" />
+                </Flex>
 
                 <Menu>
-                    <MenuButton as={Button} bg='transparent' rightIcon={<ChevronDownIcon />}>
-                        <Avatar
-                            // ml="4"
-                            size="sm"
-                            name="anubra266"
-                            src="https://avatars.githubusercontent.com/u/30869823?v=4"
-                            cursor="pointer"
-                        />
+                    <MenuButton as={Button} bg='transparent' _hover='' _active='' rightIcon={<ChevronDownIcon />}>
+                        <Text color={'blackAlpha.900'}>{authUser?.firstName}</Text>
                     </MenuButton>
                     <MenuList>
-                        <MenuItem icon={<FaUser />}>Profile Settings</MenuItem>
-                        <MenuItem icon={<FaPowerOff />}>Business Settings</MenuItem>
+                        <Link href={'/home/settings/profile'}>
+                            <MenuItem icon={<FaUser />}>Profile Settings</MenuItem>
+                        </Link>
+
+                        <Link href={'/home/settings/business'}>
+                            <MenuItem icon={<FaPowerOff />}>Business Settings</MenuItem>
+                        </Link>
+
                         <MenuItem icon={<FaPowerOff />} onClick={() => logoutUser()}>
                             Logout
                         </MenuItem>
