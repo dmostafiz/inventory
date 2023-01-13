@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AiFillGift } from "react-icons/ai";
 import { BsCardChecklist, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
 import { FaMinusCircle } from "react-icons/fa";
-import { MdContacts, MdHome } from "react-icons/md";
+import { MdContacts, MdHome, MdSubscriptions } from "react-icons/md";
 import Axios from "../../Helpers/Axios";
 import Logo from "../Logo";
 import MenuItem from "../Sidebar/MenuItem";
@@ -130,17 +130,25 @@ export default function LeftSidebar(props) {
           ]}
         />
 
+        <MenuItem
+          icon={MdSubscriptions}
+          title='Subscription'
+          link='/home/subscription'
+        />
 
         <MenuItem
           icon={BsGearFill}
           title='Settings'
           submenus={[
-            { title: 'General Settings', link: '/home/settings/general'},
+            { title: 'General Settings', link: '/home/settings/general' },
             { title: 'Profile Settings', link: '/home/settings/profile' },
             { title: 'Business Settings', link: '/home/settings/business' },
             { title: 'Tax Rates', link: '/home/settings/tax' }
           ]}
         />
+
+
+
       </Flex>
 
 
