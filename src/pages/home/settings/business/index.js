@@ -19,6 +19,7 @@ export default function index() {
 
     return (
         <Layout
+            onlyAdmin={true}
             title='Business'
             breads={[
                 { title: 'Settings', link: '#' },
@@ -39,7 +40,7 @@ export default function index() {
                             </CardHeader>
                             <CardBody p={2} pt={0}>
                                 <Box p={3}>
-                                    <SimpleGrid columns={{base: 1, md: 1, lg:2}} spacing={5}>
+                                    <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={5}>
                                         {data?.businesses?.map((businiess, index) => <MyBusinesses key={index} item={businiess} />)}
                                     </SimpleGrid>
                                 </Box>

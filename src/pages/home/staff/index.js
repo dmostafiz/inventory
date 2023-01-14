@@ -15,12 +15,13 @@ export default function index() {
         const res = await Axios('/user/get')
         console.log('Load users', res)
         return res?.data
-      })
-    
-      const { deleteAction } = useAppActions()
+    })
+
+    const { deleteAction } = useAppActions()
 
     return (
         <Layout
+            onlyAdmin={true}
             title='Staff'
             breads={[
                 { title: 'Staff', link: '/home/staff' }

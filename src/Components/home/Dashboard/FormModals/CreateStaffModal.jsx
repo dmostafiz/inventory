@@ -44,7 +44,7 @@ export default function CreateStaffModal() {
 
     const submitData = async (value) => {
 
-        alert(JSON.stringify(value))
+        // alert(JSON.stringify(value))
 
         const res = await Axios.post('/user/create', { ...value })
 

@@ -6,6 +6,7 @@ import Layout from '../../../Layouts/Home/Layout'
 export default function index() {
     return (
         <Layout
+            onlyAdmin={true}
             title='Subscription'
             breads={[
                 { title: 'Subscription', link: '/home/subscription' },
@@ -18,76 +19,76 @@ export default function index() {
                 </CardHeader>
 
                 <CardBody p={5}> */}
-                    <Card
-                        direction={{ base: 'column', sm: 'row' }}
-                        overflow='hidden'
-                        variant='outline'
-                        mb={5}
-                        bg='white'
-                        shadow={'sm'}
-                    >
-                        <CardBody>
-                            <Text fontSize={'lg'}>You are currently browsing the free plan with basic features.</Text>
-                        </CardBody>
-                    </Card>
+            <Card
+                direction={{ base: 'column', sm: 'row' }}
+                overflow='hidden'
+                variant='outline'
+                mb={5}
+                bg='white'
+                shadow={'sm'}
+            >
+                <CardBody>
+                    <Text fontSize={'lg'}>You are currently browsing the free plan with basic features.</Text>
+                </CardBody>
+            </Card>
 
 
-                    <Card
-                        direction={{ base: 'column', sm: 'row' }}
-                        alignItems={['start','center']}
-                        overflow='hidden'
-                        variant='outline'
-                        bg='white'
-                        shadow={'sm'}
+            <Card
+                direction={{ base: 'column', sm: 'row' }}
+                alignItems={['start', 'center']}
+                overflow='hidden'
+                variant='outline'
+                bg='white'
+                shadow={'sm'}
 
-                    >
-                        <Image
-                            objectFit='contain'
-                            maxW={{ base: '100%', sm: '200px' }}
-                            src='https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-client-user-costs-employee-finance-money-person-blue-icon-png-image_1649029.jpg'
-                            alt='Caffe Latte'
-                        />
+            >
+                <Image
+                    objectFit='contain'
+                    maxW={{ base: '100%', sm: '200px' }}
+                    src='https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-client-user-costs-employee-finance-money-person-blue-icon-png-image_1649029.jpg'
+                    alt='Caffe Latte'
+                />
 
 
-                        <CardBody>
-                            <Heading size='md'>PREMIUM PLAN</Heading>
+                <CardBody>
+                    <Heading size='md'>PREMIUM PLAN</Heading>
 
-                            <Text mb={5} color='gray.500'>
-                                Subscribe our premium plan to unlock extensive features.
-                            </Text>
+                    <Text mb={5} color='gray.500'>
+                        Subscribe our premium plan to unlock extensive features.
+                    </Text>
 
-                            <List spacing={1}>
-                                <ListItem>
-                                    <ListIcon as={MdCheckCircle} color='green.500' />
-                                     Realtime reports
-                                </ListItem>
-                                <ListItem>
-                                    <ListIcon as={MdCheckCircle} color='green.500' />
-                                    Inventory level and stock management
-                                </ListItem>
-                                <ListItem>
-                                    <ListIcon as={MdCheckCircle} color='green.500' />
-                                    Other premium features
-                                </ListItem>
-                            </List>
-                        </CardBody>
+                    <List spacing={1}>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color='green.500' />
+                            Realtime reports
+                        </ListItem>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color='green.500' />
+                            Inventory level and stock management
+                        </ListItem>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color='green.500' />
+                            Other premium features
+                        </ListItem>
+                    </List>
+                </CardBody>
 
-                        <CardFooter>
-                            <Box>
-                                <Text mb={3}>
-                                    <Text as='span' fontWeight={'bold'} fontSize='xl'>$55</Text>
-                                    <Text as={'span'}> / </Text>
-                                    <Text as={'span'}>month</Text>
-                                </Text>
-                                <Button variant='solid' colorScheme='teal'>
-                                    Subscribe Now
-                                </Button>
-                            </Box>
-                        </CardFooter>
+                <CardFooter>
+                    <Box>
+                        <Text mb={3}>
+                            <Text as='span' fontWeight={'bold'} fontSize='xl'>$55</Text>
+                            <Text as={'span'}> / </Text>
+                            <Text as={'span'}>month</Text>
+                        </Text>
+                        <Button variant='solid' colorScheme='teal'>
+                            Subscribe Now
+                        </Button>
+                    </Box>
+                </CardFooter>
 
-                    </Card>
+            </Card>
 
-                {/* </CardBody>
+            {/* </CardBody>
 
             </Card > */}
 

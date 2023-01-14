@@ -21,6 +21,7 @@ export default function tax() {
 
     return (
         <Layout
+            onlyAdmin={true}
             title='Tax Rates'
             breads={[
                 { title: 'Settings', link: '#' },

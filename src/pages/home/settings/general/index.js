@@ -13,7 +13,7 @@ export default function index() {
 
     const handleChange = (value) => {
         const currency = currencies.find(c => c.value == value)
-        if(currency){
+        if (currency) {
             setSymbol(currency.symbol)
             setCode(currency.value)
         }
@@ -22,6 +22,7 @@ export default function index() {
 
     return (
         <Layout
+            onlyAdmin={true}
             title='General Settings'
             breads={[
                 { title: 'Settings', link: '#' },

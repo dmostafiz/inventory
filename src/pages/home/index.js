@@ -57,7 +57,7 @@ export default function index() {
       title={`Welcome ${authUser?.firstName}`}
       header={
         <>
-          {(authUser?.business_role == 'admin' && !authUser.businesses?.length)  && <Box mt={5} mb={5}>
+          {(authUser?.business_role == 'admin' && !authUser.businesses?.length) && <Box mt={5} mb={5}>
             <Alert status='info' variant='left-accent' shadow={'md'} bg='white'>
               <AlertIcon />
               <Box>We are very happy to get you here today. To run your operations, please setup your business infomation right now (
