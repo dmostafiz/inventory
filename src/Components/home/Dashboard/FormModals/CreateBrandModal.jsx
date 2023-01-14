@@ -63,7 +63,7 @@ export default function CreateBrandModal() {
 
     return (
         <>
-            <Button onClick={hasBusiness ? onOpen : businessNotFound} colorScheme={'teal'} variant='outline' size={'sm'}>Create Brand</Button>
+            <Button onClick={hasBusiness() ? onOpen : businessNotFound} colorScheme={'teal'} variant='outline' size={'sm'}>Create Brand</Button>
 
             <Modal closeOnOverlayClick={false} size={{ base: 'sm', sm: 'lg', md: '2xl' }} isOpen={isOpen} onClose={onClose}>
 

@@ -87,9 +87,9 @@ export default function TopBar({ layoutWidth, sidebar, showSidebar }) {
                             <MenuItem icon={<FaUser />}>Profile Settings</MenuItem>
                         </Link>
 
-                        <Link href={'/home/settings/business'}>
+                        {authUser?.business_role == 'admin' &&  <Link href={'/home/settings/business'}>
                             <MenuItem icon={<FaPowerOff />}>Business Settings</MenuItem>
-                        </Link>
+                        </Link>}
 
                         <MenuItem icon={<FaPowerOff />} onClick={() => logoutUser()}>
                             Logout

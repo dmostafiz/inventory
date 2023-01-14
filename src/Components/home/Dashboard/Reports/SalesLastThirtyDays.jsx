@@ -22,9 +22,9 @@ export default function SalesLastThirtyDays() {
                 <Heading size='md'>Sales last 30 days</Heading>
             </CardHeader>
             <CardBody p={0}>
-               {(isLoading && !data?.keys?.length) && <ComponentLoader />}
-               {(!isLoading && data?.keys?.length) &&  <BarChart keys={data.keys} values={data.values} title='Sales' />}
-               {!isLoading && !data?.keys?.length && <DataNotFound />}
+               {(isLoading && !data?.keys?.length > 0) && <ComponentLoader />}
+               {(!isLoading && data?.keys?.length > 0) &&  <BarChart keys={data.keys} values={data.values} title='Sales' />}
+               {(!isLoading && !data?.keys?.length > 0) && <DataNotFound />}
             </CardBody>
         </Card>
 

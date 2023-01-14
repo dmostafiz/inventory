@@ -22,9 +22,9 @@ export default function SalesThisYear() {
             </CardHeader>
  
             <CardBody p={0}>
-               {(isLoading && !data?.keys?.length) && <ComponentLoader />}
-               {(!isLoading && data?.keys?.length) &&  <AreaChart keys={data.keys} values={data.values} title='Sales' />}
-               {!isLoading && !data?.keys?.length && <DataNotFound />}
+               {(isLoading && !data?.keys?.length > 0) && <ComponentLoader />}
+               {(!isLoading && data?.keys?.length > 0) &&  <AreaChart keys={data.keys} values={data.values} title='Sales' />}
+               {(!isLoading && !data?.keys?.length > 0) && <DataNotFound />}
             </CardBody>
         </Card>
 

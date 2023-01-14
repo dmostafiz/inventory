@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import Axios from '../../../../Helpers/Axios';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 
 const schema = yup.object({
 
@@ -29,6 +30,8 @@ const schema = yup.object({
 }).required();
 
 export default function CreateBusiness() {
+
+    const router = useRouter()
 
     const queryClient = useQueryClient()
 
@@ -58,6 +61,9 @@ export default function CreateBusiness() {
                 duration: 9000,
                 isClosable: true,
             })
+
+            router.reload()
+
         } else {
             toast({
                 title: 'Ooppss!',

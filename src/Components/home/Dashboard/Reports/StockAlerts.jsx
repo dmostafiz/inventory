@@ -19,9 +19,9 @@ export default function StockAlerts() {
                 <Heading size='md'>Product stock alerts</Heading>
             </CardHeader>
             <CardBody p={0} pt={0}>
-                {(isLoading && !data?.products?.length) && <ComponentLoader />}
-                {(!isLoading && !data?.products?.length) && <DataNotFound />}
-                {(!isLoading && data?.products?.length) && <TableContainer>
+                {(isLoading && !data?.products?.length > 0) && <ComponentLoader />}
+                {(!isLoading && !data?.products?.length > 0) && <DataNotFound />}
+                {(!isLoading && data?.products?.length > 0) && <TableContainer>
                     <Table size='sm' variant='simple'>
                         <Thead>
                             <Tr>

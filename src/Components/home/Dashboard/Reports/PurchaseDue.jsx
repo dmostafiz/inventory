@@ -24,9 +24,9 @@ export default function PurchaseDue() {
                 <Heading size='md'>Purchase payments due</Heading>
             </CardHeader>
             <CardBody p={0} pt={0}>
-                {(isLoading && !data?.purchases?.length) && <ComponentLoader />}
-                {(!isLoading && !data?.purchases?.length) && <DataNotFound />}
-                {(!isLoading && data?.purchases?.length) && <TableContainer maxH={'400px'} overflowY='auto'>
+                {(isLoading && !data?.purchases?.length > 0) && <ComponentLoader />}
+                {(!isLoading && !data?.purchases?.length > 0) && <DataNotFound />}
+                {(!isLoading && data?.purchases?.length > 0) && <TableContainer maxH={'400px'} overflowY='auto'>
                     <Table size='sm' variant='striped'>
                         <Thead>
                             <Tr>

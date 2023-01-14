@@ -15,14 +15,14 @@ const NavItem = (props) => {
             pl="3"
             py="2"
             cursor="pointer"
-            color={(routes.includes(router.pathname) || (route == router.pathname))  ? 'black' : 'blackAlpha.700'}
+            color={(routes.includes(router.pathname) || (route == router.pathname))  ? 'teal' : 'blackAlpha.700'}
             borderBottom={submenu ? '0px' : '2px'}
             borderBottomColor='blackAlpha.50'
             borderLeft={'4px'}
             borderLeftColor={routes.includes(router.pathname) ? 'turquoise' : 'white'}
             _hover={{
                 bgGradient: submenu ? 'none' : 'linear(to-tr, whiteAlpha.500, whiteAlpha.200)',
-                color: "blackAlpha.900",
+                color: "teal",
                 // borderLeftColor: 'turquoise'
             }}
             role="group"
@@ -37,7 +37,7 @@ const NavItem = (props) => {
                     mx="2"
                     boxSize="4"
                     _groupHover={{
-                        color: "blackAlpha.900",
+                        color: "teal",
                     }}
                     as={icon}
                 />
@@ -48,7 +48,7 @@ const NavItem = (props) => {
                     mx="1"
                     boxSize="4"
                     _groupHover={{
-                        color: "blackAlpha.900",
+                        color: "teal",
                     }}
                     as={BsArrowRight}
                 />

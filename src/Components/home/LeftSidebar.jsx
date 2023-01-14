@@ -2,11 +2,14 @@ import { Box, Center, Flex } from "@chakra-ui/react";
 import { IconAlertTriangle } from "@tabler/icons";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRef } from "react";
 import { AiFillGift } from "react-icons/ai";
 import { BsCardChecklist, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
-import { FaMinusCircle } from "react-icons/fa";
+import { FaMinusCircle, FaUserFriends } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
 import { MdContacts, MdHome, MdSubscriptions } from "react-icons/md";
 import Axios from "../../Helpers/Axios";
+import useUser from "../../Hooks/useUser";
 import Logo from "../Logo";
 import MenuItem from "../Sidebar/MenuItem";
 import NavItem from "../Sidebar/NavItem";
@@ -14,6 +17,8 @@ import Submenu from "../Sidebar/Submenu";
 import StatsCard from "./Dashboard/StatCard";
 
 export default function LeftSidebar(props) {
+
+  const { isError, error, authUser, logoutUser } = useUser()
 
   const { data, isLoading } = useQuery(['stockAlerts'], async () => {
     const res = await Axios.get('/report/get_stock_alerts')
@@ -72,7 +77,7 @@ export default function LeftSidebar(props) {
       >
         <MenuItem
           icon={MdHome}
-          title='Home'
+          title='Dashboard'
           link='/home'
         />
 
@@ -80,8 +85,8 @@ export default function LeftSidebar(props) {
           icon={MdContacts}
           title='Contacts'
           submenus={[
-            { title: 'Suppliers', link: '/home/contacts/suppliers' },
-            { title: 'Customers', link: '/home/contacts/customers' },
+            { title: 'Suppliers', link: '/home/contacts/suppliers', show: true },
+            { title: 'Customers', link: '/home/contacts/customers', show: true },
           ]}
         />
 
@@ -89,13 +94,13 @@ export default function LeftSidebar(props) {
           icon={AiFillGift}
           title='Products'
           submenus={[
-            { title: 'Print Labels', link: '/home/products/labels' },
-            { title: 'Product List', link: '/home/products' },
-            { title: 'Add Products', link: '/home/products/add' },
-            // { title: 'Variations', link: '/home/products/variations' },
-            { title: 'Product Units', link: '/home/products/units' },
-            { title: 'Categories', link: '/home/products/categories' },
-            { title: 'Brands / Company', link: '/home/products/brands' },
+            { title: 'Print Labels', link: '/home/products/labels', show: true },
+            { title: 'Product List', link: '/home/products', show: true },
+            { title: 'Add Products', link: '/home/products/add', show: true },
+            // { title: 'Variations', link: '/home/products/variations', show: true },
+            { title: 'Product Units', link: '/home/products/units', show: true },
+            { title: 'Categories', link: '/home/products/categories', show: true },
+            { title: 'Brands / Company', link: '/home/products/brands', show: true },
           ]}
         />
 
@@ -103,20 +108,20 @@ export default function LeftSidebar(props) {
           icon={BsFillArrowDownCircleFill}
           title='Purchases'
           submenus={[
-            { title: 'Purchases List', link: '/home/purchases' },
-            { title: 'Add Purchase', link: '/home/purchases/add' },
-            // { title: 'Return List', link: '/home/purchases/returns' },
+            { title: 'Purchases List', link: '/home/purchases', show: true },
+            { title: 'Add Purchase', link: '/home/purchases/add', show: true },
+            // { title: 'Return List', link: '/home/purchases/returns', show: true },
           ]}
         />
 
         <MenuItem
           icon={BsFillArrowUpCircleFill}
-          title='Sales'
+          title='Manage Sales'
           submenus={[
-            { title: 'All Sales', link: '/home/sales' },
-            { title: 'Add Sale', link: '/home/sales/add' },
-            { title: 'List POS', link: '/home/pos/list' },
-            // { title: 'Sale Returns', link: '/home/sales/returns' },
+            { title: 'All Sales', link: '/home/sales', show: true },
+            { title: 'Add Sale', link: '/home/sales/add', show: true },
+            { title: 'List POS', link: '/home/pos/list', show: true },
+            // { title: 'Sale Returns', link: '/home/sales/returns', show: true },
           ]}
         />
 
@@ -125,25 +130,34 @@ export default function LeftSidebar(props) {
           icon={FaMinusCircle}
           title='Expenses'
           submenus={[
-            { title: 'Expenses List', link: '/home/expenses' },
-            { title: 'Add Expenses', link: '/home/expenses/add' }
+            { title: 'Expenses List', link: '/home/expenses', show: true },
+            { title: 'Add Expenses', link: '/home/expenses/add', show: true  }
           ]}
         />
+        
 
-        <MenuItem
+        {authUser?.business_role == 'admin' &&  <MenuItem
+          icon={FaUserFriends}
+          title='Manage staff'
+          link='/home/staff'
+        />}
+
+
+       {authUser?.business_role == 'admin' && <MenuItem
           icon={MdSubscriptions}
           title='Subscription'
           link='/home/subscription'
-        />
+        />}
+
 
         <MenuItem
           icon={BsGearFill}
           title='Settings'
           submenus={[
-            { title: 'General Settings', link: '/home/settings/general' },
-            { title: 'Profile Settings', link: '/home/settings/profile' },
-            { title: 'Business Settings', link: '/home/settings/business' },
-            { title: 'Tax Rates', link: '/home/settings/tax' }
+            { title: 'General Settings', link: '/home/settings/general', show: authUser?.business_role == 'admin' ? true : false },
+            { title: 'Profile Settings', link: '/home/settings/profile', show: true },
+            { title: 'Business Settings', link: '/home/settings/business', show: authUser?.business_role == 'admin' ? true : false },
+            { title: 'Tax Rates', link: '/home/settings/tax', show: authUser?.business_role == 'admin' ? true : false }
           ]}
         />
 
@@ -183,4 +197,4 @@ export default function LeftSidebar(props) {
 
     </Flex>
   </Box>
-}
+} FiUsers

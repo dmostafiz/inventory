@@ -3,7 +3,7 @@ import React from 'react'
 import NavItem from './NavItem'
 import Submenu from './Submenu'
 
-export default function MenuItem({icon, title, link = '#', submenus = [] }) {
+export default function MenuItem({ icon, title, link = '#', submenus = [] }) {
 
     const submenuLinks = submenus?.map(mnu => mnu?.link)
 
@@ -18,11 +18,15 @@ export default function MenuItem({icon, title, link = '#', submenus = [] }) {
                         title={title}
                         routes={submenuLinks}
                     >
-                        {submenus?.map((menu, index) => <Link key={index} href={menu?.link}>
-                            <NavItem route={menu?.link} pl="6" py="1" submenu={true}>
-                                {menu?.title}
-                            </NavItem>
-                        </Link>)}
+                        {submenus?.map((menu, index) => {
+                            if (menu.show) {
+                              return  <Link key={index} href={menu?.link}>
+                                    <NavItem route={menu?.link} pl="6" py="1" submenu={true}>
+                                        {menu?.title}
+                                    </NavItem>
+                                </Link>
+                            }
+                        })}
 
                     </Submenu>
                 </>

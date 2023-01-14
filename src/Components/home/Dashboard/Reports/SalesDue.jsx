@@ -23,9 +23,9 @@ export default function SalesDue() {
                 <Heading size='md'>Sales payment due</Heading>
             </CardHeader>
             <CardBody p={0} pt={0}>
-                {(isLoading && !data?.sales?.length) && <ComponentLoader />}
-                {(!isLoading && !data?.sales?.length) && <DataNotFound />}
-                {(!isLoading && data?.sales?.length) && <TableContainer maxH={'400px'} overflowY='auto'>
+                {(isLoading && !data?.sales?.length > 0) && <ComponentLoader />}
+                {(!isLoading && !data?.sales?.length > 0) && <DataNotFound />}
+                {(!isLoading && data?.sales?.length > 0) && <TableContainer maxH={'400px'} overflowY='auto'>
                     <Table size='sm' variant='striped'>
                         <Thead>
                             <Tr>

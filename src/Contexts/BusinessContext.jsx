@@ -16,7 +16,7 @@ const BusinessContextProvider = ({ children }) => {
     const { authUser } = useContext(AuthContext)
 
     const hasBusiness = () => {
-        if (authUser?.businesses?.length) {
+        if ((authUser?.business_role == 'admin' && authUser?.businesses?.length) || authUser?.business_role != 'admin') {
             return true
         }
 
