@@ -126,7 +126,7 @@ export default function useRegistration() {
 
             toast({
                 title: 'Congratulations!',
-                description: "Your registration has done successfully.",
+                description: "You have created your account. Now please provide your business information to unlock other features and operate your business with Tech Oak.",
                 status: 'success',
                 position: 'top-right',
                 duration: 9000,
@@ -135,7 +135,7 @@ export default function useRegistration() {
 
             setFlashMessage('success', "Congratulations!", "Your registration has done successfull.",)
 
-            window.location.href = '/home'
+            window.location.href = '/home/settings/business'
 
             return
 

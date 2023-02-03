@@ -97,6 +97,11 @@ export default function Login() {
                 </Link>
               </Stack>
             </Stack>
+            <Stack pt={6}>
+              <Text align={'center'}>
+                Don't have any account? <Link href='/auth/register' color={'blue.400'}>Create Now</Link>
+              </Text>
+            </Stack>
           </Box>
         </Stack>
       </Flex>

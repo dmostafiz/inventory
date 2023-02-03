@@ -2,12 +2,13 @@ import { Box, Center, Flex } from "@chakra-ui/react";
 import { IconAlertTriangle } from "@tabler/icons";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { AiFillGift } from "react-icons/ai";
 import { BsCardChecklist, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
 import { FaMinusCircle, FaUserFriends } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
 import { MdContacts, MdHome, MdSubscriptions } from "react-icons/md";
+import { BusinessContext } from "../../Contexts/BusinessContext";
 import Axios from "../../Helpers/Axios";
 import useUser from "../../Hooks/useUser";
 import Logo from "../Logo";
@@ -19,8 +20,9 @@ import StatsCard from "./Dashboard/StatCard";
 export default function LeftSidebar(props) {
 
   const { isError, error, authUser, logoutUser } = useUser()
+  const { business, hasBusiness } = useContext(BusinessContext)
 
-  const { data, isLoading } = useQuery(['stockAlerts'], async () => {
+  const { data, isLoading } = useQuery(['stockAlertssw'], async () => {
     const res = await Axios.get('/report/get_stock_alerts')
     // console.log('Product stock alerts', res.data)
     return res?.data
@@ -75,22 +77,23 @@ export default function LeftSidebar(props) {
         color="gray.600"
         aria-label="Main Navigation"
       >
-        <MenuItem
+
+        {hasBusiness() && <MenuItem
           icon={MdHome}
           title='Dashboard'
           link='/home'
-        />
+        />}
 
-        <MenuItem
+        {hasBusiness() && <MenuItem
           icon={MdContacts}
           title='Contacts'
           submenus={[
             { title: 'Suppliers', link: '/home/contacts/suppliers', show: true },
-            { title: 'Customers', link: '/home/contacts/customers', show: true },
+            { title: business() && business()?.businessType == 'cantine' ? 'Students' : 'Customers', link: '/home/contacts/customers', show: true },
           ]}
-        />
+        />}
 
-        <MenuItem
+        {hasBusiness() && <MenuItem
           icon={AiFillGift}
           title='Products'
           submenus={[
@@ -102,9 +105,9 @@ export default function LeftSidebar(props) {
             { title: 'Categories', link: '/home/products/categories', show: true },
             { title: 'Brands / Company', link: '/home/products/brands', show: true },
           ]}
-        />
+        />}
 
-        <MenuItem
+        {hasBusiness() && <MenuItem
           icon={BsFillArrowDownCircleFill}
           title='Purchases'
           submenus={[
@@ -112,9 +115,9 @@ export default function LeftSidebar(props) {
             { title: 'Add Purchase', link: '/home/purchases/add', show: true },
             // { title: 'Return List', link: '/home/purchases/returns', show: true },
           ]}
-        />
+        />}
 
-        <MenuItem
+        {hasBusiness() && <MenuItem
           icon={BsFillArrowUpCircleFill}
           title='Manage Sales'
           submenus={[
@@ -123,27 +126,27 @@ export default function LeftSidebar(props) {
             { title: 'List POS', link: '/home/pos/list', show: true },
             // { title: 'Sale Returns', link: '/home/sales/returns', show: true },
           ]}
-        />
+        />}
 
 
-        <MenuItem
+        {hasBusiness() && <MenuItem
           icon={FaMinusCircle}
           title='Expenses'
           submenus={[
             { title: 'Expenses List', link: '/home/expenses', show: true },
-            { title: 'Add Expenses', link: '/home/expenses/add', show: true  }
+            { title: 'Add Expenses', link: '/home/expenses/add', show: true }
           ]}
-        />
-        
+        />}
 
-        {authUser?.business_role == 'admin' &&  <MenuItem
+
+        {hasBusiness() && authUser?.business_role == 'admin' && <MenuItem
           icon={FaUserFriends}
           title='Manage staff'
           link='/home/staff'
         />}
 
 
-       {authUser?.business_role == 'admin' && <MenuItem
+        {authUser?.business_role == 'admin' && <MenuItem
           icon={MdSubscriptions}
           title='Subscription'
           link='/home/subscription'
@@ -154,10 +157,10 @@ export default function LeftSidebar(props) {
           icon={BsGearFill}
           title='Settings'
           submenus={[
-            { title: 'General Settings', link: '/home/settings/general', show: authUser?.business_role == 'admin' ? true : false },
+            { title: 'General Settings', link: '/home/settings/general', show: (authUser?.business_role == 'admin' && hasBusiness()) ? true : false },
             { title: 'Profile Settings', link: '/home/settings/profile', show: true },
             { title: 'Business Settings', link: '/home/settings/business', show: authUser?.business_role == 'admin' ? true : false },
-            { title: 'Tax Rates', link: '/home/settings/tax', show: authUser?.business_role == 'admin' ? true : false }
+            { title: 'Tax Rates', link: '/home/settings/tax', show: (authUser?.business_role == 'admin' && hasBusiness()) ? true : false }
           ]}
         />
 
@@ -197,4 +200,4 @@ export default function LeftSidebar(props) {
 
     </Flex>
   </Box>
-} FiUsers
+}

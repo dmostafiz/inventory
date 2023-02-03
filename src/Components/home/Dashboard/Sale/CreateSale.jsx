@@ -25,7 +25,7 @@ const schema = yup.object({
 
 export default function CreateSale() {
 
-    const { businessNotFound, hasBusiness } = useContext(BusinessContext)
+    const { businessNotFound, hasBusiness, business } = useContext(BusinessContext)
 
 
     const queryClient = useQueryClient()
@@ -305,9 +305,9 @@ export default function CreateSale() {
             <SimpleGrid py={8} columns={{ base: 1, sm: 1, md: 2, lg: 4 }} spacingX={8} spacingY={4}>
 
                 <FormControl isRequired isInvalid={errors.name}>
-                    <FormLabel>Customer</FormLabel>
+                    <FormLabel>{business()?.businessType == 'cantine' ? 'Student' :'Customer'}</FormLabel>
                     <Select
-                        placeholder="Pick a supplier here"
+                        placeholder={`Pick a ${business()?.businessType == 'cantine' ? 'student' :'customer'} here`}
                         searchable
                         nothingFound="No customers found"
                         data={customers}
@@ -316,7 +316,7 @@ export default function CreateSale() {
                     />
 
                     <Box mt={2}>
-                        <CreateCustomer setCustomerId={setCustomerId} />
+                        <CreateCustomer setCustomerId={setCustomerId} button={business()?.businessType == 'cantine' ? 'Create Student' :'Create Customer'} />
                     </Box>
                     {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
                     <FormErrorMessage>

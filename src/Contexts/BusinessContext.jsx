@@ -27,7 +27,6 @@ const BusinessContextProvider = ({ children }) => {
     }
 
     const businessNotFound = () => {
-
         onOpen()
     }
 
@@ -36,9 +35,16 @@ const BusinessContextProvider = ({ children }) => {
         onClose()
     }
 
+    const business = () => {
+
+        console.log('My New Business', authUser?.businesses?.[0])
+        return authUser?.businesses?.[0] || null
+    }
+
     return <BusinessContext.Provider value={{
         hasBusiness,
-        businessNotFound
+        businessNotFound,
+        business
     }}>
 
         {children}

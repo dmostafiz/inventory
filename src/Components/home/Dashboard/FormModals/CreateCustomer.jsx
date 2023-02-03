@@ -60,7 +60,7 @@ const schema = yup.object({
 
 export default function CreateCustomer({ setCustomerId = null, button='Create Customer'}) {
 
-    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
+    const {businessNotFound, hasBusiness, business} = useContext(BusinessContext)
 
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -114,7 +114,7 @@ export default function CreateCustomer({ setCustomerId = null, button='Create Cu
 
                 <ModalContent>
 
-                    <ModalHeader borderBottom='2px' borderColor='gray.100' py={2}>Create Customer</ModalHeader>
+                    <ModalHeader borderBottom='2px' borderColor='gray.100' py={2}>Create {business()?.businessType == 'cantine' ? 'Student' :'Customer'}</ModalHeader>
 
                     <ModalCloseButton />
 
@@ -384,7 +384,7 @@ export default function CreateCustomer({ setCustomerId = null, button='Create Cu
                             isLoading={isSubmitting}
                             loadingText='Creating...'
                         >
-                            Create Customer
+                            Create {business()?.businessType == 'cantine' ? 'Student' :'Customer'}
                         </Button>
 
                     </ModalFooter>

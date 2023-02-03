@@ -1,11 +1,13 @@
 import { Box, Button, Card, CardBody, CardHeader, Heading, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ComponentLoader from '../../../Components/ComponentLoader'
 import DataNotFound from '../../../Components/DataNotFound'
 import CreateCustomer from '../../../Components/home/Dashboard/FormModals/CreateCustomer'
+import GetPayment from '../../../Components/home/Dashboard/Sale/GetPayment'
 import SimpleTable from '../../../Components/SimpleTable'
+import { BusinessContext } from '../../../Contexts/BusinessContext'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
@@ -15,6 +17,8 @@ export default function customers() {
   const { deleteAction } = useAppActions()
 
   // const [customerId, setCustomerId] = useState(null)
+  const { business, hasBusiness } = useContext(BusinessContext)
+
 
   const { data, isLoading, error } = useQuery(['getCustomers'], async () => {
     const res = await Axios.get('/customer')
@@ -27,17 +31,17 @@ export default function customers() {
 
   return (
     <Layout
-      title={'Customers'}
-      titleRight={<CreateCustomer />}
+      title={business()?.businessType == 'cantine' ? 'Students' : 'Customers'}
+      titleRight={<CreateCustomer button={business()?.businessType == 'cantine' ? 'Create Student' : 'Create Customer'} />}
       breads={[
         { title: 'Contacts', link: '#' },
-        { title: 'Customers', link: '/home/contacts/customers' }
+        { title: business()?.businessType == 'cantine' ? 'Students' : 'Customers', link: '/home/contacts/customers' }
       ]}
     >
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
           <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-            <Heading size='md'>Customer list</Heading>
+            <Heading size='md'>{business()?.businessType == 'cantine' ? 'Student' : 'Customer'} list</Heading>
           </CardHeader>
           <CardBody p={2} pt={0}>
             <TableContainer>
@@ -51,7 +55,7 @@ export default function customers() {
                     <Th>Purchased</Th>
                     <Th>Description</Th>
                     <Th>Created</Th>
-                    <Th isNumeric></Th>
+                    {/* <Th isNumeric></Th> */}
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -75,18 +79,24 @@ export default function customers() {
                       <Td>
 
                         <SimpleTable data={[
-                          { title: 'Total', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.totalAmount}, 0).toFixed(2) },
-                          { title: 'Paid', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.paid}, 0).toFixed(2) },
-                          { title: 'Due', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.due}, 0).toFixed(2) },
+                          { title: 'Total', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.totalAmount }, 0).toFixed(2) },
+                          { title: 'Paid', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.paid }, 0).toFixed(2) },
+                          { title: 'Due', value: customer?.invoices?.reduce((acc, curr) => { return acc + curr.due }, 0).toFixed(2) },
                         ]} />
-                        
+
+                        {customer?.invoices?.reduce((acc, curr) => { return acc + curr.due }, 0).toFixed(2) > 0 &&
+                          <Box pt={3}>
+                           <GetPayment customer={customer} total={customer?.invoices?.reduce((acc, curr) => { return acc + curr.due }, 0).toFixed(2)}></GetPayment>
+                          </Box> 
+                        }
+
                       </Td>
 
 
 
                       <Td>{customer.description}</Td>
                       <Td>{moment(customer.createdAt).format('LL')}</Td>
-                      <Td isNumeric>
+                      {/* <Td isNumeric>
                         <Button size={'sm'} colorScheme='teal'>Edit</Button>
                         <Button
                           onClick={() => deleteAction({
@@ -99,7 +109,7 @@ export default function customers() {
                           ml={2}>
                           Delete
                         </Button>
-                      </Td>
+                      </Td> */}
                     </Tr>
 
                   })}

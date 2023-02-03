@@ -1,9 +1,15 @@
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Heading, Image, List, ListIcon, ListItem, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { MdCheckCircle } from 'react-icons/md'
+import CancelSubscription from '../../../Components/home/Dashboard/Subscription/CancelSubscription'
+import CreateSubscription from '../../../Components/home/Dashboard/Subscription/CreateSubscription'
+import useUser from '../../../Hooks/useUser'
 import Layout from '../../../Layouts/Home/Layout'
 
 export default function index() {
+
+    const { isError, error, authUser, logoutUser } = useUser()
+
     return (
         <Layout
             onlyAdmin={true}
@@ -28,7 +34,12 @@ export default function index() {
                 shadow={'sm'}
             >
                 <CardBody>
-                    <Text fontSize={'lg'}>You are currently browsing the free plan with basic features.</Text>
+                    {authUser?.isPremium == false ? <Text fontSize={'lg'}>
+                        You are currently browsing the free plan with basic features.
+                    </Text>
+                        : <Text fontSize={'lg'}>
+                            Awesome! you are currently on the premium plan and our extended features are available for you.
+                        </Text>}
                 </CardBody>
             </Card>
 
@@ -80,9 +91,10 @@ export default function index() {
                             <Text as={'span'}> / </Text>
                             <Text as={'span'}>month</Text>
                         </Text>
-                        <Button variant='solid' colorScheme='teal'>
-                            Subscribe Now
-                        </Button>
+                        {authUser?.isPremium == false
+                            ? <CreateSubscription />
+                            : <CancelSubscription />
+                        }
                     </Box>
                 </CardFooter>
 

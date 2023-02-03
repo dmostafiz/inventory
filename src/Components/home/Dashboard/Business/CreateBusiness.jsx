@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, SimpleGrid, useToast } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Select, SimpleGrid, useToast } from '@chakra-ui/react'
 import React from 'react'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
@@ -26,6 +26,10 @@ const schema = yup.object({
 
     zip: yup.string()
         .required('Zip code field is required'),
+
+
+    businessType: yup.string()
+        .required('This field is required'),
 
 }).required();
 
@@ -85,7 +89,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        focusBorderColor='#00B29E' 
+                        focusBorderColor='#00B29E'
                         placeholder='Enter business name'
                         {...register('name')}
                     />
@@ -100,7 +104,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        focusBorderColor='#00B29E' 
+                        focusBorderColor='#00B29E'
                         placeholder='Enter contact number'
                         {...register('contact')}
                     />
@@ -116,7 +120,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        focusBorderColor='#00B29E' 
+                        focusBorderColor='#00B29E'
                         placeholder='Enter business address location'
                         {...register('location')}
 
@@ -133,7 +137,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        focusBorderColor='#00B29E' 
+                        focusBorderColor='#00B29E'
                         placeholder='Enter business city'
                         {...register('city')}
                     />
@@ -148,7 +152,7 @@ export default function CreateBusiness() {
                     <Input
                         size={'sm'}
                         type='text'
-                        focusBorderColor='#00B29E' 
+                        focusBorderColor='#00B29E'
                         placeholder='Enter business state'
                         {...register('state')}
                     />
@@ -165,7 +169,7 @@ export default function CreateBusiness() {
                         size={'sm'}
                         type='text'
                         placeholder='Enter business zip code'
-                        focusBorderColor='#00B29E' 
+                        focusBorderColor='#00B29E'
                         {...register('zip')}
                     />
                     {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
@@ -174,19 +178,29 @@ export default function CreateBusiness() {
                     </FormErrorMessage>
                 </FormControl>
 
-                <Box pt={4}>
-                    <Button
-                        colorScheme={'teal'}
-                        isLoading={isSubmitting}
-                        loadingText={'Creating....'}
-                        onClick={handleSubmit(submitNow)}
-                    >
-                        Create Business
-                    </Button>
-                </Box>
-
-
+                <FormControl isInvalid={errors.businessType}>
+                    <FormLabel>Business Type</FormLabel>
+                    <Select placeholder='Select your business type' {...register('businessType')}>
+                        <option value='cantine'>School Cantine</option>
+                        <option value='store'>Store / Shop</option>
+                    </Select>
+                    {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                    <FormErrorMessage>
+                        {errors.businessType && errors.businessType.message}
+                    </FormErrorMessage>
+                </FormControl>
             </SimpleGrid>
+
+            <Box pt={8}>
+                <Button
+                    colorScheme={'teal'}
+                    isLoading={isSubmitting}
+                    loadingText={'Creating....'}
+                    onClick={handleSubmit(submitNow)}
+                >
+                    Create Business
+                </Button>
+            </Box>
         </Box>
     )
 }
