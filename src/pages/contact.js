@@ -1,37 +1,41 @@
 import {
-    Container,
-    Flex,
-    Box,
-    Heading,
-    Text,
-    IconButton,
-    Button,
-    VStack,
-    HStack,
-    Wrap,
-    WrapItem,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    Textarea,
-  } from '@chakra-ui/react';
-  import {
-    MdPhone,
-    MdEmail,
-    MdLocationOn,
-    MdFacebook,
-    MdOutlineEmail,
-  } from 'react-icons/md';
-  import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
-  
-  export default function contact() {
-    return (
+  Container,
+  Flex,
+  Box,
+  Heading,
+  Text,
+  IconButton,
+  Button,
+  VStack,
+  HStack,
+  Wrap,
+  WrapItem,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
+} from '@chakra-ui/react';
+import {
+  MdPhone,
+  MdEmail,
+  MdLocationOn,
+  MdFacebook,
+  MdOutlineEmail,
+} from 'react-icons/md';
+import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
+import Navbar from '../Components/LandingPage/Navbar';
+import Footer from '../Components/LandingPage/Footer';
+
+export default function contact() {
+  return (
+    <>
+      <Navbar />
       <Container h='100vh' maxW="full" mt={0} centerContent overflow="hidden">
         <Flex>
           <Box
-            bg="#02054B"
+            bg="teal"
             color="white"
             borderRadius="lg"
             m={{ sm: 4, md: 16, lg: 10 }}
@@ -52,8 +56,8 @@ import {
                           width="200px"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: '2px solid #1C6FEB' }}
-                          leftIcon={<MdPhone color="#1970F1" size="20px" />}>
+                          _hover={{ border: '2px solid #DCE2FF' }}
+                          leftIcon={<MdPhone color="#DCE2FF" size="20px" />}>
                           +91-988888888
                         </Button>
                         <Button
@@ -62,8 +66,8 @@ import {
                           width="200px"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: '2px solid #1C6FEB' }}
-                          leftIcon={<MdEmail color="#1970F1" size="20px" />}>
+                          _hover={{ border: '2px solid #DCE2FF' }}
+                          leftIcon={<MdEmail color="#DCE2FF" size="20px" />}>
                           hello@abc.com
                         </Button>
                         <Button
@@ -72,8 +76,8 @@ import {
                           width="200px"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: '2px solid #1C6FEB' }}
-                          leftIcon={<MdLocationOn color="#1970F1" size="20px" />}>
+                          _hover={{ border: '2px solid #DCE2FF' }}
+                          leftIcon={<MdLocationOn color="#DCE2FF" size="20px" />}>
                           Karnavati, India
                         </Button>
                       </VStack>
@@ -88,7 +92,7 @@ import {
                         variant="ghost"
                         size="lg"
                         isRound={true}
-                        _hover={{ bg: '#0D74FF' }}
+                        _hover={{ bg: 'white' }}
                         icon={<MdFacebook size="28px" />}
                       />
                       <IconButton
@@ -162,5 +166,7 @@ import {
           </Box>
         </Flex>
       </Container>
-    );
-  }
+      <Footer />
+    </>
+  );
+}

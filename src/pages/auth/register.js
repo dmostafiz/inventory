@@ -21,6 +21,7 @@ import Link from 'next/link';
 import useRegistration from '../../Hooks/useRegistration';
 import useUser from '../../Hooks/useUser';
 import IfAuthenticatedWrapper from '../../wrappers/IfAuthenticatedWrapper';
+import Navbar from '../../Components/LandingPage/Navbar';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,19 +31,21 @@ export default function Register() {
   const { isLoading, authUser } = useUser()
 
   return (
-    <IfAuthenticatedWrapper>
+    <>
+      <Navbar />
+
       <Flex
-        minH={'100vh'}
+        // minH={'100vh'}
         align={'center'}
         justify={'center'}
         bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={20} px={6}>
           <Stack align={'center'}>
-            <Box pb={{ base: 5, md: 5 }}>
+            {/* <Box pb={{ base: 5, md: 5 }}>
               <Link href='/'>
                 <Logo />
               </Link>
-            </Box>
+            </Box> */}
             <Heading fontSize={'4xl'} textAlign={'center'}>
               Sign up
             </Heading>
@@ -166,6 +169,6 @@ export default function Register() {
           </Box>
         </Stack>
       </Flex>
-    </IfAuthenticatedWrapper>
+    </>
   );
 }

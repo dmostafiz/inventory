@@ -13,6 +13,7 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import Navbar from '../../Components/LandingPage/Navbar';
 import Logo from '../../Components/Logo';
 import useLogin from '../../Hooks/useLogin';
 import IfAuthenticatedWrapper from '../../wrappers/IfAuthenticatedWrapper';
@@ -20,22 +21,23 @@ import IfAuthenticatedWrapper from '../../wrappers/IfAuthenticatedWrapper';
 export default function Login() {
   const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading } = useLogin('/home')
   return (
-    <IfAuthenticatedWrapper>
+    <>
+      <Navbar />
       <Flex
-        minH={'100vh'}
+        // minH={'100vh'}
         align={'center'}
         justify={'center'}
       // bg={useColorModeValue('gray.50', 'gray.800')}
       >
 
-        <Stack w={{ base: 'full', md: 'lg' }} spacing={8} py={5} px={{ base: 2, md: 6 }}>
+        <Stack w={{ base: 'full', md: 'lg' }} spacing={8} py={20} px={{ base: 2, md: 6 }}>
 
           <Stack align={'center'}>
-            <Box pb={{ base: 5, md: 10 }}>
+            {/* <Box pb={{ base: 5, md: 10 }}>
               <Link href='/'>
                 <Logo />
               </Link>
-            </Box>
+            </Box> */}
 
             <Heading fontSize={{ base: 'xl', md: '3xl' }}>Sign in</Heading>
             <Text fontSize={'lg'} color={'gray.600'}>
@@ -105,6 +107,6 @@ export default function Login() {
           </Box>
         </Stack>
       </Flex>
-    </IfAuthenticatedWrapper>
+    </>
   );
 }

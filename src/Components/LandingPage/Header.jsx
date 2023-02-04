@@ -1,7 +1,8 @@
-import { Box, Container, Flex, Image, Text } from '@chakra-ui/react';
-import { Title, Button, createStyles } from '@mantine/core';
+import { Box, Button, Container, Flex, Image, Text } from '@chakra-ui/react';
+import { Title, createStyles } from '@mantine/core';
 import Link from 'next/link';
 import Logo from '../Logo';
+import Navbar from './Navbar';
 
 const useStyles = createStyles((theme) => ({
 
@@ -97,26 +98,7 @@ export default function Header() {
         bgGradient='linear(to-r, blackAlpha.700, blackAlpha.400)'
       >
 
-        <Container
-          py={3}
-          maxW='6xl'
-        >
-
-          <Flex alignItems='center' justify='space-between'>
-           
-           <Logo bg='white' />
-
-            <Flex alignItems='center' gap={2}>
-              <Link href='/auth/login'>
-                <Button className={classes.control}>Store login</Button>
-              </Link>
-              <Link href='/auth/register'>
-                <Button className={cx(classes.control, classes.secondaryControl)}>Create account</Button>
-              </Link>
-            </Flex>
-
-          </Flex>
-        </Container>
+        <Navbar bg='white' />
 
         <Box
           paddingTop={150}
@@ -135,11 +117,11 @@ export default function Header() {
             </Container>
 
             <Flex gap={2} className={classes.controls}>
-              <Button className={classes.control} variant="white" size="lg">
+              <Button colorScheme={'whiteAlpha'} size="lg">
                 Get started
               </Button>
               <Link href={'/contact'}>
-                <Button className={cx(classes.control, classes.secondaryControl)} size="lg">
+                <Button colorScheme={'teal'} size="lg">
                   Request a demo
                 </Button>
               </Link>
