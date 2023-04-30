@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Box w='full'>
       <Header />
-      <SectionTwo />
+      {/* <SectionTwo /> */}
       <SectionOne />
       <Testimonial />
       <Footer/>

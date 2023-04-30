@@ -88,7 +88,7 @@ export default function Header() {
     <Box
       position='relative'
 
-      bgImage='https://images.unsplash.com/photo-1573164713988-8665fc963095?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80'
+      bgImage='https://uploads-ssl.webflow.com/60edc0a8835d5b38bf11f03f/61cf04ea45898934315251e5_Inventory-management-system-objectives.png'
       bgSize='cover'
       bgPosition='center'
     >
@@ -107,12 +107,12 @@ export default function Header() {
           <Box alignItems={'center'} textAlign='center'>
 
             <Container maxW={'2xl'}>
-              <Text fontSize={56} casing='uppercase' fontWeight='bold' color={'white'} lineHeight='59px' zIndex={9999} mb={5}>
-                Automated AI code reviews for
+              <Text fontSize={44} casing='uppercase' fontWeight='bold' color={'white'} lineHeight='59px' zIndex={9999} mb={5}>
+                Inventory Solution with NFC facility
               </Text>
               <Text lineHeight={'30px'} fontSize="2xl" className={classes.description}>
-                Build more reliable software with AI companion. AI is also trained to detect lazy
-                developers who do nothing and just complain on Twitter.
+                Are you ready to take your business to the next level by using our amazing, user-friendly inventory
+                management and business solutions?
               </Text>
             </Container>
 
