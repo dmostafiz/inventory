@@ -47,6 +47,8 @@ export default function CreateProduct() {
 
     const {businessNotFound, hasBusiness, business} = useContext(BusinessContext)
 
+    console.log('business info', business)
+
     const queryClient = useQueryClient()
 
     const toast = useToast()
