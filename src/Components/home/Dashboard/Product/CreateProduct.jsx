@@ -45,7 +45,7 @@ const schema = yup.object({
 
 export default function CreateProduct() {
 
-    const {businessNotFound, hasBusiness} = useContext(BusinessContext)
+    const {businessNotFound, hasBusiness, business} = useContext(BusinessContext)
 
     const queryClient = useQueryClient()
 
@@ -118,7 +118,7 @@ export default function CreateProduct() {
     })
 
     const submitNow = async (value) => {
-        const res = await Axios.post('/product/create', { ...value, image, taxId: tax, taxRate, profitMargin, purchasePrice, sellingPriceExcludingTax, sellingPriceIncludingTax })
+        const res = await Axios.post('/product/create', { ...value, image, taxId: tax, taxRate, profitMargin, purchasePrice, sellingPriceExcludingTax, sellingPriceIncludingTax, business })
 
         console.log('Post create response: ', res)
 
