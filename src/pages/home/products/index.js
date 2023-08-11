@@ -80,7 +80,7 @@ export default function index() {
                       <Td>{product.sellingPriceIncTax}</Td>
                       <Td>{moment(product.createdAt).format('LL')}</Td>
                       <Td isNumeric>
-                        <Button size={'sm'} colorScheme='teal'>Edit</Button>
+                        {/* <Button size={'sm'} colorScheme='teal'>Edit</Button> */}
                         <Button
                           onClick={() => deleteAction({
                             id: product.id,

@@ -47,7 +47,7 @@ export default function CreateProduct() {
 
     const {businessNotFound, hasBusiness, business} = useContext(BusinessContext)
 
-    console.log('business info', business)
+    console.log('business info', business())
 
     const queryClient = useQueryClient()
 
@@ -120,7 +120,11 @@ export default function CreateProduct() {
     })
 
     const submitNow = async (value) => {
-        const res = await Axios.post('/product/create', { ...value, image, taxId: tax, taxRate, profitMargin, purchasePrice, sellingPriceExcludingTax, sellingPriceIncludingTax, business })
+        const productData = { ...value, image, taxId: tax, taxRate, profitMargin, purchasePrice, sellingPriceExcludingTax, sellingPriceIncludingTax, business: business()?.id }
+
+        console.log('productData ', productData)
+        
+        const res = await Axios.post('/product/create', productData)
 
         console.log('Post create response: ', res)
 
@@ -158,7 +162,7 @@ export default function CreateProduct() {
         } else {
             toast({
                 title: 'Ooppss!',
-                description: 'Something went wrong! please try again later.',
+                description: res?.data?.msg,
                 status: 'error',
                 position: 'top-right',
                 duration: 9000,
