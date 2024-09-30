@@ -88,17 +88,17 @@ export default function suplliers() {
                       <Td>{moment(supplier.createdAt).format('LL')}</Td>
                       <Td isNumeric>
                         <Button size={'sm'} colorScheme='teal'>Edit</Button>
-                        <Button
-                          onClick={() => deleteAction({
-                            id: supplier.id,
-                            url: '/supplier/delete',
-                            refetchKies: ['getSuppliers']
-                          })}
-                          size={'sm'}
-                          colorScheme='red'
-                          ml={2}>
-                          Delete
-                        </Button>
+                        {/*<Button*/}
+                        {/*  onClick={() => deleteAction({*/}
+                        {/*    id: supplier.id,*/}
+                        {/*    url: '/supplier/delete',*/}
+                        {/*    refetchKies: ['getSuppliers']*/}
+                        {/*  })}*/}
+                        {/*  size={'sm'}*/}
+                        {/*  colorScheme='red'*/}
+                        {/*  ml={2}>*/}
+                        {/*  Delete*/}
+                        {/*</Button>*/}
                       </Td>
                     </Tr>
 

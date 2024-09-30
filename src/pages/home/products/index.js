@@ -7,6 +7,7 @@ import DataNotFound from '../../../Components/DataNotFound'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
+import NextLink from "next/link";
 
 export default function index() {
 
@@ -81,17 +82,14 @@ export default function index() {
                       <Td>{moment(product.createdAt).format('LL')}</Td>
                       <Td isNumeric>
                         {/* <Button size={'sm'} colorScheme='teal'>Edit</Button> */}
-                        <Button
-                          onClick={() => deleteAction({
-                            id: product.id,
-                            url: '/product/delete',
-                            refetchKies: ['getproducts']
-                          })}
-                          size={'sm'}
-                          colorScheme='red'
-                          ml={2}>
-                          Delete
-                        </Button>
+                        <NextLink href={`/home/products/add?productId=${product.id}`}>
+                          <Button
+                              size={'sm'}
+                              colorScheme='teal'
+                              ml={2}>
+                            Update
+                          </Button>
+                        </NextLink>
                       </Td>
                     </Tr>
 

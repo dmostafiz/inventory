@@ -155,8 +155,8 @@ export default function index() {
 
     const total = saleProducts.reduce((acc, curr) => {
 
-      const total = curr.qty * curr.purchasePrice
-      return acc + (((total * curr.taxRate) / 100) + total)
+      const total = curr.qty * curr.sellingPriceIncTax
+      return acc + total
 
     }, 0)
 

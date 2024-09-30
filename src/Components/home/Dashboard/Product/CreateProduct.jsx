@@ -43,7 +43,7 @@ const schema = yup.object({
 
 }).required();
 
-export default function CreateProduct() {
+export default function CreateProduct({product = null}) {
 
     const {businessNotFound, hasBusiness, business} = useContext(BusinessContext)
 
