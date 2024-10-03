@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useContext, useRef } from "react";
 import { AiFillGift } from "react-icons/ai";
-import { BsCardChecklist, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
+import { BsCardChecklist, BsCart, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
 import { FaMinusCircle, FaUserFriends } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
-import { MdArrowCircleDown, MdBarChart, MdContacts, MdHome, MdMoney, MdOutlineArrowDownward, MdPerson, MdReport, MdSubscriptions } from "react-icons/md";
+import { MdArrowCircleDown, MdBarChart, MdContacts, MdHome, MdMoney, MdOutlineArrowDownward, MdPerson, MdReport, MdStore, MdSubscriptions } from "react-icons/md";
 import { BusinessContext } from "../../Contexts/BusinessContext";
 import Axios from "../../Helpers/Axios";
 import useUser from "../../Hooks/useUser";
@@ -112,7 +112,7 @@ export default function LeftSidebar(props) {
         />}
 
         {hasBusiness() && <MenuItem
-          icon={BsFillArrowDownCircleFill}
+          icon={BsCart}
           title='Purchases'
           submenus={[
             { title: 'Purchases List', link: '/home/purchases', show: true },
@@ -122,7 +122,7 @@ export default function LeftSidebar(props) {
         />}
 
         {hasBusiness() && <MenuItem
-          icon={BsFillArrowUpCircleFill}
+          icon={MdStore}
           title='Manage Sales'
           submenus={[
             { title: 'Add Sale', link: '/home/sales/add', show: true },
