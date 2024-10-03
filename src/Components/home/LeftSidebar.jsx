@@ -7,7 +7,7 @@ import { AiFillGift } from "react-icons/ai";
 import { BsCardChecklist, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
 import { FaMinusCircle, FaUserFriends } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
-import { MdContacts, MdHome, MdPerson, MdSubscriptions } from "react-icons/md";
+import { MdArrowCircleDown, MdBarChart, MdContacts, MdHome, MdMoney, MdOutlineArrowDownward, MdPerson, MdReport, MdSubscriptions } from "react-icons/md";
 import { BusinessContext } from "../../Contexts/BusinessContext";
 import Axios from "../../Helpers/Axios";
 import useUser from "../../Hooks/useUser";
@@ -125,12 +125,29 @@ export default function LeftSidebar(props) {
           icon={BsFillArrowUpCircleFill}
           title='Manage Sales'
           submenus={[
-            { title: 'Sales Report', link: '/home/sales', show: true },
             { title: 'Add Sale', link: '/home/sales/add', show: true },
             { title: 'List POS', link: '/home/pos/list', show: true },
-            { title: 'Profits', link: '/home/sales/profits', show: true },
-            { title: 'Sale Returns', link: '/home/sales/returns', show: true },
+            // { title: 'Sale Returns', link: '/home/sales/returns', show: true },
           ]}
+        />}
+
+        {hasBusiness() && <MenuItem
+          icon={MdBarChart}
+          title='Sales Report'
+          link='/home/sales'
+        />}
+
+
+        {hasBusiness() && <MenuItem
+          icon={MdMoney}
+          title='Profits'
+          link='/home/sales/profits'
+        />}
+
+        {hasBusiness() && <MenuItem
+          icon={MdOutlineArrowDownward}
+          title='Sales Returns'
+          link='/home/sales/returns'
         />}
 
 
