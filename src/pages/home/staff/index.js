@@ -8,6 +8,7 @@ import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
 import moment from 'moment'
+import Link from 'next/link'
 
 export default function index() {
 
@@ -44,6 +45,7 @@ export default function index() {
                                         <Th>Last Name</Th>
                                         <Th>Email</Th>
                                         {/* <Th>Role</Th> */}
+                                        <Th>Sales</Th>
                                         <Th>Added Date</Th>
                                         <Th isNumeric></Th>
                                     </Tr>
@@ -54,11 +56,15 @@ export default function index() {
                                             <Td>{user.firstName}</Td>
                                             <Td>{user.lastName}</Td>
                                             <Td>{user.email}</Td>
-                                            {/* <Td>{'Sales'}</Td> */}
+                                            <Td>
+                                                <Link href={`/home/sales?cashier=${user.id}`}>
+                                                    {user?.invoices?.length} {' '} Sales
+                                                </Link>
+                                            </Td>
                                             <Td>{moment(user.createdAt).format('lll')}</Td>
                                             <Td isNumeric>
-                                                <Button size={'sm'} colorScheme='teal'>Edit</Button>
-                                                <Button
+                                                {/* <Button size={'sm'} colorScheme='teal'>Edit</Button> */}
+                                                {/* <Button
                                                     onClick={() => deleteAction({
                                                         id: user.id,
                                                         url: '/user/delete',
@@ -68,7 +74,7 @@ export default function index() {
                                                     colorScheme='red'
                                                     ml={2}>
                                                     Delete
-                                                </Button>
+                                                </Button> */}
                                             </Td>
                                         </Tr>
 

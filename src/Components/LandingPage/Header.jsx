@@ -95,24 +95,23 @@ export default function Header() {
       <Box
         h={'full'}
         w={'full'}
-        bgGradient='linear(to-r, blackAlpha.700, blackAlpha.400)'
+        bgGradient='linear(to-b, blackAlpha.900, blackAlpha.500)'
       >
 
         <Navbar bg='white' />
 
         <Box
-          paddingTop={150}
-          paddingBottom={120}
+          paddingTop={200}
+          paddingBottom={200}
         >
           <Box alignItems={'center'} textAlign='center'>
 
             <Container maxW={'2xl'}>
-              <Text fontSize={44} casing='uppercase' fontWeight='bold' color={'white'} lineHeight='59px' zIndex={9999} mb={5}>
-                Inventory Solution with NFC facility
+              <Text fontSize={32} casing='uppercase' fontWeight='bold' color={'white'} lineHeight='40px' zIndex={9999} mb={5}>
+                The platform that your business needs to thrive.
               </Text>
               <Text lineHeight={'30px'} fontSize="2xl" className={classes.description}>
-                Are you ready to take your business to the next level by using our amazing, user-friendly inventory
-                management and business solutions?
+              Are you tired of juggling suppliers, struggling with inventory chaos, and losing precious customer loyalty? Tech-oak is here to revolutionise the way you manage your business!
               </Text>
             </Container>
 

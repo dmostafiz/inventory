@@ -11,15 +11,37 @@ import {
   Text,
   useColorModeValue,
   FormErrorMessage,
+  useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import Navbar from '../../Components/LandingPage/Navbar';
 import Logo from '../../Components/Logo';
 import useLogin from '../../Hooks/useLogin';
 import IfAuthenticatedWrapper from '../../wrappers/IfAuthenticatedWrapper';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Login() {
-  const { responseFacebook, responseGoogle, onSubmit, handleSubmit, register, errors, isSubmitting, googleLoading, fbLoading } = useLogin('/home')
+
+  const router = useRouter()
+  const toast = useToast()
+  
+  const handleSubmit = async () => {
+
+    setTimeout(() => {
+      toast({
+        title: 'Check Email!',
+        description: "You should receive a new password in your mail box.",
+        status: 'success',
+        position: 'top-right',
+        duration: 9000,
+        isClosable: true,
+    })
+      router.push('/auth/login')
+    }, 5000)
+
+  }
+
   return (
     <>
       <Navbar />
@@ -39,9 +61,9 @@ export default function Login() {
               </Link>
             </Box> */}
 
-            <Heading fontSize={{ base: 'xl', md: '3xl' }}>Sign in</Heading>
+            <Heading fontSize={{ base: 'xl', md: '3xl' }}>Recover forgotten password</Heading>
             <Text fontSize={'lg'} color={'gray.600'}>
-              to enjoy all of our cool <Link href={'#'}>features</Link> ✌️
+             Enter your email to get a new password
             </Text>
           </Stack>
 
@@ -52,37 +74,20 @@ export default function Login() {
             p={5}
           >
             <Stack spacing={4}>
-              <FormControl id="email" isInvalid={errors.email}>
+              <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
                 <Input
                   type="email"
                   placeholder='Enter your login email'
-                  {...register('email')}
+                  // {...register('email')}
                 />
 
-                <FormErrorMessage>
+                {/* <FormErrorMessage>
                   {errors.email && errors.email.message}
-                </FormErrorMessage>
+                </FormErrorMessage> */}
               </FormControl>
-              <FormControl id="password" isInvalid={errors.password}>
-                <FormLabel>Password</FormLabel>
-                <Input
-                  type="password"
-                  placeholder='Enter your password'
-                  {...register('password')}
-                />
-                <FormErrorMessage>
-                  {errors.password && errors.password.message}
-                </FormErrorMessage>
-              </FormControl>
+
               <Stack spacing={10}>
-                <Stack
-                  direction={{ base: 'column', sm: 'row' }}
-                  align={'start'}
-                  justify={'space-between'}>
-                  <Checkbox>Remember me</Checkbox>
-                  <Link href={'/auth/forgot_password'}>Forgot password?</Link>
-                </Stack>
                 <Link href='/home'>
                   <Button
                     bg={'turquoise'}
@@ -91,18 +96,13 @@ export default function Login() {
                       bg: 'turquoise',
                     }}
                     loadingText="Loging in..."
-                    isLoading={isSubmitting}
-                    onClick={handleSubmit(onSubmit)}
+                    // isLoading={isSubmitting}
+                    onClick={handleSubmit}
                   >
-                    Sign in
+                    Send new password
                   </Button>
                 </Link>
               </Stack>
-            </Stack>
-            <Stack pt={6}>
-              <Text align={'center'}>
-                Don't have any account? <Link href='/auth/register' color={'blue.400'}>Create Now</Link>
-              </Text>
             </Stack>
           </Box>
         </Stack>

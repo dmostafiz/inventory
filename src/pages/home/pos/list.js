@@ -84,6 +84,7 @@ export default function list() {
                                         <Th isNumeric></Th>
                                         <Th>Sale Date</Th>
                                         <Th>Invoice</Th>
+                                        <Th>Cashier</Th>
                                         <Th>Customer</Th>
                                         <Th>Payment Method</Th>
                                         <Th>Total Amount</Th>
@@ -108,6 +109,7 @@ export default function list() {
                                             </Td>
                                             <Td>{moment(invoice.purchaseDate).format('LL')}</Td>
                                             <Td>#{invoice.refNo}</Td>
+                                            <Td>{invoice?.user?.firstName} {invoice?.user?.lastName}</Td>
                                             <Td>{invoice?.customer?.prefix} {invoice?.customer?.firstName} {invoice?.customer?.lastName}</Td>
                                             <Td>{invoice.paymentMethod}</Td>
                                             <Td>{invoice.totalAmount}</Td>

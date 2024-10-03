@@ -35,7 +35,7 @@ const Feature = ({ text, icon, iconBg }) => {
   );
 };
 
-export default function SectionTwo() {
+export default function SectionFours() {
   return (
     <Box bg={'gray.50'}>
       <Container maxW={'6xl'} py={24}>
@@ -46,7 +46,7 @@ export default function SectionTwo() {
               rounded={'3xl'}
               alt={'feature image'}
               src={
-                'https://www.omegacube.com/wp-content/uploads/2018/11/Image-for-Blogs_ivnentory-1024x621.jpg'
+                'https://images.ctfassets.net/3q1a0w8cwuwf/1bt7YMbM9mLvxCmfVcZzYq/e41d1f8a8a942a822c353254fe30ae4e/7_Tested_Ways_to_Build_Customer_Loyalty.jpg'
               }
               objectFit={'cover'}
             />
@@ -64,9 +64,9 @@ export default function SectionTwo() {
             rounded={'md'}>
             Our services
           </Text> */}
-            <Heading> Streamline Supplier Relations</Heading>
+            <Heading>Boost Customer Loyalty</Heading>
             <Text color={'gray.500'} fontSize={'xl'}>
-            Effortlessly manage your suppliers, communicate seamlessly, and ensure a dependable supply chain.
+              Keep customers coming back for more with tailor-made loyalty programs, enticing offers, and exceptional service.
             </Text>
             <Stack
               spacing={4}

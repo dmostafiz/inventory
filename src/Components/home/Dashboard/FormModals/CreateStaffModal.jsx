@@ -21,6 +21,8 @@ const schema = yup.object({
         .email("Invalid Email!")
         .required('This field is required!'),
 
+    password: yup.string()
+        .required('This password field is required!'),
 }).required();
 
 export default function CreateStaffModal() {
@@ -59,13 +61,13 @@ export default function CreateStaffModal() {
             await queryClient.refetchQueries({ queryKey: ['getUsers'] })
 
             onClose()
-        }else{
+        } else {
             toast({
                 title: 'Opps!',
                 description: res?.data?.msg,
                 status: 'success'
             })
- 
+
         }
 
     }
@@ -131,6 +133,21 @@ export default function CreateStaffModal() {
                                 {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
                                 <FormErrorMessage>
                                     {errors.email && errors.email.message}
+                                </FormErrorMessage>
+                            </FormControl>
+
+                            <FormControl isInvalid={errors.lastName}>
+                                <FormLabel>Password</FormLabel>
+                                <Input
+                                    size={'sm'}
+                                    type='text'
+                                    focusBorderColor='#00B29E'
+                                    placeholder='Enter Password'
+                                    {...register('password')}
+                                />
+                                {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                                <FormErrorMessage>
+                                    {errors.password && errors.password.message}
                                 </FormErrorMessage>
                             </FormControl>
 

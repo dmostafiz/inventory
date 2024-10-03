@@ -29,6 +29,7 @@ export default function SalesDue() {
                     <Table size='sm' variant='striped'>
                         <Thead>
                             <Tr>
+                                <Th>Cashier</Th>
                                 <Th>Customer</Th>
                                 <Th>Invoice No</Th>
                                 <Th isNumeric>Total</Th>
@@ -40,6 +41,7 @@ export default function SalesDue() {
                         <Tbody>
                             {data.sales?.map((item, i) => {
                                 return <Tr key={i}>
+                                    <Td>{item?.user?.firstName} {item?.user?.lastName}</Td>
                                     <Td>{item.customer.prefix} {item.customer.firstName}</Td>
                                     <Td><Button onClick={() => setInvoice(item)} size='xs' colorScheme='teal'>
                                         #{item.refNo}

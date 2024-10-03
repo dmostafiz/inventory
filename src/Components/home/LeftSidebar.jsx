@@ -112,7 +112,7 @@ export default function LeftSidebar(props) {
           title='Purchases'
           submenus={[
             { title: 'Purchases List', link: '/home/purchases', show: true },
-            { title: 'Add Purchase', link: '/home/purchases/add', show: true },
+            { title: 'Add Purchase', link: '/home/purchases/add', show: authUser?.business_role == 'admin' ? true : false },
             // { title: 'Return List', link: '/home/purchases/returns', show: true },
           ]}
         />}
@@ -121,10 +121,11 @@ export default function LeftSidebar(props) {
           icon={BsFillArrowUpCircleFill}
           title='Manage Sales'
           submenus={[
-            { title: 'All Sales', link: '/home/sales', show: true },
+            { title: 'Sales Report', link: '/home/sales', show: true },
             { title: 'Add Sale', link: '/home/sales/add', show: true },
             { title: 'List POS', link: '/home/pos/list', show: true },
-            // { title: 'Sale Returns', link: '/home/sales/returns', show: true },
+            { title: 'Profits', link: '/home/sales/profits', show: true },
+            { title: 'Sale Returns', link: '/home/sales/returns', show: true },
           ]}
         />}
 

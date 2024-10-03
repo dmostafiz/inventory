@@ -1,10 +1,12 @@
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, InputGroup, InputRightElement, SimpleGrid, Stack } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, InputGroup, InputRightElement, SimpleGrid, Stack, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import Axios from '../../../../Helpers/Axios';
+import { useRouter } from 'next/router';
+import useUser from '../../../../Hooks/useUser';
 
 const schema = yup.object({
     email: yup.string()
@@ -32,21 +34,18 @@ const schema = yup.object({
     lastName: yup.string()
         .required('Last Name field is required!'),
 
-    password: yup.string()
-        .required('Password field is required!')
-        .min(6, 'Minimum 6 character is allowed'),
 
-    confirmPassword: yup.string()
-        .oneOf([yup.ref('password')], 'Confirm password should be match with new password')
-        .required('Confirm password field is required!')
 
 }).required();
 
 
 export default function ProfileUpdate() {
 
-    const [showPassword, setShowPassword] = useState(false);
+    const { isError, error, authUser, isLoading, logoutUser } = useUser()
 
+
+    const router = useRouter()
+    const toast = useToast()
 
     const {
         handleSubmit,
@@ -54,13 +53,31 @@ export default function ProfileUpdate() {
         formState: { errors, isSubmitting },
     } = useForm({
         mode: 'onChange',
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema),
+        defaultValues:{
+            firstName: authUser?.firstName,
+            lastName: authUser?.lastName,
+            email: authUser?.email
+        }
     })
 
 
-    async function onSubmit(values) {
-        console.log('Form Value', values)
+    async function onSubmit(value) {
+        console.log('Form Value', value)
         // await submitRegistrationData('/auth/signUp', values)
+        const res = await Axios.post('/profile/update', { ...value })
+        // await submitRegistrationData('/auth/signUp', values)
+
+        toast({
+            title: 'Done!',
+            description: 'You have just updated your profile info.',
+            status: 'success',
+            position: 'top-right',
+            duration: 9000,
+            isClosable: true,
+        })
+
+        router.reload()
     }
 
     return (
@@ -107,7 +124,7 @@ export default function ProfileUpdate() {
                 </Box>
             </SimpleGrid>
 
-     
+
             <Box spacing={10} pt={5}>
                 <Button
                     loadingText="Submitting"

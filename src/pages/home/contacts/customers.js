@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, CardHeader, Heading, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Input, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
 import moment from 'moment'
 import React, { useContext, useState } from 'react'
@@ -11,17 +11,22 @@ import { BusinessContext } from '../../../Contexts/BusinessContext'
 import Axios from '../../../Helpers/Axios'
 import useAppActions from '../../../Hooks/useAppActions'
 import Layout from '../../../Layouts/Home/Layout'
+import { Search2Icon } from '@chakra-ui/icons'
+import { useDebouncedState } from '@mantine/hooks'
 
 export default function customers() {
 
   const { deleteAction } = useAppActions()
+  const [query, setQuery] = useDebouncedState('', 500);
 
   // const [customerId, setCustomerId] = useState(null)
   const { business, hasBusiness } = useContext(BusinessContext)
 
 
-  const { data, isLoading, error } = useQuery(['getCustomers'], async () => {
-    const res = await Axios.get('/customer')
+  const { data, isLoading, error } = useQuery(['getCustomers', query], async () => {
+    const res = await Axios.get('/customer', {
+      params: { query }
+    })
 
     console.log('customers loaded', res.data)
 
@@ -41,7 +46,18 @@ export default function customers() {
       <Box>
         <Card flex='1' shadow={'md'} bg='white'>
           <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-            <Heading size='md'>{business()?.businessType == 'cantine' ? 'Student' : 'Customer'} list</Heading>
+            <Flex alignItems={'center'} gap={5} justify='space-between'>
+              <Heading size='md'>{business()?.businessType == 'cantine' ? 'Student' : 'Customer'} list</Heading>
+              <Box flex={'1'}>
+                <Input
+                  bg={'white'}
+                  w={'full'}
+                  icon={<Search2Icon />}
+                  placeholder="Search by customer's first name / last name / email / phone."
+                  onChange={e => setQuery(e.target.value)}
+                />
+              </Box>
+            </Flex>
           </CardHeader>
           <CardBody p={2} pt={0}>
             <TableContainer>
@@ -86,8 +102,8 @@ export default function customers() {
 
                         {customer?.invoices?.reduce((acc, curr) => { return acc + curr.due }, 0).toFixed(2) > 0 &&
                           <Box pt={3}>
-                           <GetPayment customer={customer} total={customer?.invoices?.reduce((acc, curr) => { return acc + curr.due }, 0).toFixed(2)}></GetPayment>
-                          </Box> 
+                            <GetPayment customer={customer} total={customer?.invoices?.reduce((acc, curr) => { return acc + curr.due }, 0).toFixed(2)}></GetPayment>
+                          </Box>
                         }
 
                       </Td>

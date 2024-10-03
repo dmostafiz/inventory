@@ -57,7 +57,7 @@ export default function index() {
                       <Td>{expense.amount}</Td>
                       <Td>{moment(expense.expenseDate).format('LL')}</Td>
                       <Td isNumeric>
-                        <Button size={'sm'} colorScheme='teal'>Edit</Button>
+                        {/* <Button size={'sm'} colorScheme='teal'>Edit</Button>
                         <Button
                           onClick={() => deleteAction({
                             id: expense.id,
@@ -68,7 +68,7 @@ export default function index() {
                           colorScheme='red'
                           ml={2}>
                           Delete
-                        </Button>
+                        </Button> */}
                       </Td>
                     </Tr>
 

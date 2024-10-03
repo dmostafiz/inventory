@@ -1,9 +1,11 @@
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, InputGroup, InputRightElement, SimpleGrid, Stack } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, InputGroup, InputRightElement, SimpleGrid, Stack, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
+import Axios from '../../../../Helpers/Axios';
+import { useRouter } from 'next/router';
 
 
 const schema = yup.object({
@@ -25,6 +27,9 @@ const schema = yup.object({
 
 export default function ChangePassword() {
 
+    const toast = useToast()
+    const router = useRouter()
+
     const [showPassword, setShowPassword] = useState(false);
 
     const {
@@ -37,9 +42,21 @@ export default function ChangePassword() {
     })
 
 
-    async function onSubmit(values) {
-        console.log('Form Value', values)
+    async function onSubmit(value) {
+        console.log('Form Value', value)
+        const res = await Axios.post('/profile/password', { ...value })
         // await submitRegistrationData('/auth/signUp', values)
+
+        toast({
+            title: 'Done!',
+            description: 'You have just updated your password.',
+            status: 'success',
+            position: 'top-right',
+            duration: 9000,
+            isClosable: true,
+        })
+
+        router.reload()
     }
 
 

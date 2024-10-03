@@ -22,13 +22,13 @@ import LineChart from '../../../Components/Charts/LineChart'
 import PieChart from '../../../Components/Charts/PieChart'
 
 
-export default function index() {
+export default function profits() {
 
   const router = useRouter()
 
   const { deleteAction } = useAppActions()
 
-  const { date, handleDateChange } = DateRangeHook()
+  const {date, handleDateChange } = DateRangeHook()
   const [query, setQuery] = useDebouncedState('', 500);
   const [status, setStatus] = useState(null);
   const [cashier, setCashier] = useState(null);
@@ -51,8 +51,8 @@ export default function index() {
   }, [router])
 
   const { data, isLoading, error } = useQuery(['getSales', date, query, status, cashier], async () => {
-    const res = await Axios.get(`/sale`, {
-      params: { date, query, status, cashier }
+    const res = await Axios.get(`/report/profites`, {
+      params: { date, query, cashier }
     })
 
     console.log('Salse loaded', res.data)
@@ -68,34 +68,37 @@ export default function index() {
   const { setInvoice } = useContext(InvoiceContext)
 
   const [totalSales, setTotalSales] = useState(0)
-  const [totalPaid, setTotalPaid] = useState(0)
-  const [totalDue, setTotalDue] = useState(0)
+  const [totalCost, setCost] = useState(0)
+  const [saleProfit, setSaleProfit] = useState(0)
+  const [nitProfit, setNitSaleProfit] = useState(0)
 
   const [cashierName, setCashierName] = useState(null)
 
   useEffect(() => {
 
-    if (data?.invoices?.length) {
+    if (data?.sales?.length) {
 
-      const invoices = data.invoices
+      const sales = data.sales
 
       if (cashier) {
-        setCashierName(invoices?.[0]?.user?.firstName + ' ' + invoices?.[0]?.user?.lastName)
+        setCashierName(sales?.[0]?.user?.firstName + ' ' + sales?.[0]?.user?.lastName)
       }else{
         setCashierName('')
       }
 
-      setTotalSales(invoices.reduce((total, current) => {
-        return total + current.totalAmount
-      }, 0))
+      const salesCount = sales.reduce((total, current) => {
+        return total + (current.product.sellingPriceIncTax * current.quantity)
+      }, 0)
+      setTotalSales(salesCount)
 
-      setTotalPaid(invoices.reduce((total, current) => {
-        return total + current.paid
-      }, 0))
 
-      setTotalDue(invoices.reduce((total, current) => {
-        return total + current.due
-      }, 0))
+      const costCount = sales.reduce((total, current) => {
+        return total + (current.product.purchasePrice * current.quantity)
+      }, 0)
+      setCost(costCount)
+
+      setSaleProfit(salesCount - costCount)
+
     }
 
   }, [data, cashier])
@@ -104,9 +107,9 @@ export default function index() {
 
   return (
     <Layout
-      title='Sales Report'
+      title='Profits'
       breads={[
-        { title: 'Sales Report', link: '/home/sales' }
+        { title: 'Profits', link: '/home/profits' }
       ]}
     >
       <Box>
@@ -116,13 +119,13 @@ export default function index() {
 
             <Flex direction={{ base: 'column', lg: 'row' }} gap={5} justify='space-between'>
 
-              <Heading size='md'>Sales Report</Heading>
+              <Heading size='md'>Profits Report</Heading>
 
               <Box flex={'1'}>
                 <Input
                   w={'full'}
                   icon={<Search2Icon />}
-                  placeholder="Search by invoice number / customer first name, last name, email."
+                  placeholder="Search by product name / invoice number / customer first name, last name, email."
                   onChange={e => setQuery(e.target.value)}
                 />
               </Box>
@@ -146,7 +149,7 @@ export default function index() {
 
               <Box flex={1} w={{ base: 'full', lg: 'auto' }}>
 
-                <PieChart keys={['Total Sales', 'Total Paid', 'Total Due']} values={[totalSales, totalPaid, totalDue]} title='Sales Report' />
+                <PieChart name={'pie'} keys={['Total Sales', 'Total cost on products', 'Total Profits']} values={[totalSales, totalCost, saleProfit]} title='Sales Report' />
 
               </Box>
 
@@ -170,13 +173,14 @@ export default function index() {
                         <Td>{totalSales}</Td>
                       </Tr>
                       <Tr>
-                        <Td>Total Paid</Td>
-                        <Td>{totalPaid}</Td>
+                        <Td>Total product costs</Td>
+                        <Td>{totalCost}</Td>
                       </Tr>
                       <Tr>
-                        <Td>Total Due</Td>
-                        <Td>{totalDue}</Td>
+                        <Td>Total Profits</Td>
+                        <Td>{saleProfit}</Td>
                       </Tr>
+                 
                     </Tbody>
 
                   </Table>
@@ -191,29 +195,29 @@ export default function index() {
 
         <Card flex='1' shadow={'md'} bg='white'>
           <CardHeader bg='#1CE7CF' py={3} borderBottom={'2px'} borderColor='gray.100' mb={2}>
-            <Heading size='md'>Sales list</Heading>
+            <Heading size='md'>Sale Items list</Heading>
           </CardHeader>
           <CardBody p={2} pt={0}>
             <TableContainer>
               {isLoading && <ComponentLoader />}
 
-              {!isLoading && data?.invoices?.length > 0 && <Table size='sm' variant='striped'>
+              {!isLoading && data?.sales?.length > 0 && <Table size='sm' variant='striped'>
                 <Thead>
                   <Tr>
                     <Th isNumeric></Th>
                     <Th>Sale Date</Th>
                     <Th>Invoice</Th>
+                    <Th>Product</Th>
                     <Th>Cashier</Th>
                     <Th>Customer</Th>
+                    <Th>Unit Price</Th>
                     <Th>Total Amount</Th>
-                    <Th>Paid</Th>
-                    <Th>Due</Th>
-                    <Th>Note</Th>
+                    <Th>Stock</Th>
                     <Th>Created</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.invoices?.map((invoice, index) => {
+                  {data?.sales?.map((sale, index) => {
                     return <Tr key={index}>
                       <Td isNumeric>
                         <Menu>
@@ -221,19 +225,19 @@ export default function index() {
                             Actions
                           </MenuButton>
                           <MenuList color={'black'} shadow='md'>
-                            <MenuItem onClick={() => setInvoice(invoice)}>Invoice</MenuItem>
+                            <MenuItem onClick={() => setInvoice(sale?.invoice)}>Invoice</MenuItem>
                           </MenuList>
                         </Menu>
                       </Td>
-                      <Td>{moment(invoice.purchaseDate).format('LL')}</Td>
-                      <Td>#{invoice.refNo}</Td>
-                      <Td>{invoice?.user?.firstName} {invoice?.user?.lastName}</Td>
-                      <Td>{invoice?.customer?.prefix} {invoice?.customer?.firstName} {invoice?.customer?.lastName}</Td>
-                      <Td>{invoice.totalAmount}</Td>
-                      <Td>{invoice.paid}</Td>
-                      <Td>{invoice.due}</Td>
-                      <Td>{invoice.note}</Td>
-                      <Td>{moment(invoice.createdAt).format('LL')}</Td>
+                      <Td>{moment(sale?.createdAt).format('LL')}</Td>
+                      <Td>#{sale?.invoice?.refNo}</Td>
+                      <Td>{sale?.product?.name}</Td>
+                      <Td>{sale?.user?.firstName} {sale?.user?.lastName}</Td>
+                      <Td>{sale?.customer?.prefix} {sale?.customer?.firstName} {sale?.customer?.lastName}</Td>
+                      <Td>{sale.unitPrice}</Td>
+                      <Td>{sale.total}</Td>
+                      <Td>{sale.quantity}</Td>
+                      <Td>{moment(sale?.createdAt).format('LL')}</Td>
 
                     </Tr>
 
@@ -242,7 +246,7 @@ export default function index() {
                 </Tbody>
               </Table>}
 
-              {!isLoading && !data?.invoices?.length && <DataNotFound />}
+              {!isLoading && !data?.sales?.length && <DataNotFound />}
 
             </TableContainer>
 

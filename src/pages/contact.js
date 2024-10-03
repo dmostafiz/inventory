@@ -46,72 +46,32 @@ export default function contact() {
                   <Box>
                     <Heading>Contact</Heading>
                     <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.50">
-                      Fill up the form below to contact
+                      Ready to take the leap? Connect with us to explore <br /> the possibilities that Tech-oak can bring to 
+                      your <br /> retail business
                     </Text>
                     <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
-                      <VStack pl={0} spacing={3} alignItems="flex-start">
+                      <Flex direction={'column'} alignItems={'flex-start'} justify={'flex-start'} pl={0} spacing={3} >
                         <Button
                           size="md"
                           height="48px"
-                          width="200px"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: '2px solid #DCE2FF' }}
+                          _hover={{ border: '0px solid #DCE2FF' }}
                           leftIcon={<MdPhone color="#DCE2FF" size="20px" />}>
-                          +254 799 947 883
+                          +254799947883
                         </Button>
                         <Button
                           size="md"
                           height="48px"
-                          width="200px"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: '2px solid #DCE2FF' }}
+                          _hover={{ border: '0px solid #DCE2FF' }}
                           leftIcon={<MdEmail color="#DCE2FF" size="20px" />}>
-                          hello@abc.com
+                        techoak.info@gmail.com
                         </Button>
-                        <Button
-                          size="md"
-                          height="48px"
-                          width="200px"
-                          variant="ghost"
-                          color="#DCE2FF"
-                          _hover={{ border: '2px solid #DCE2FF' }}
-                          leftIcon={<MdLocationOn color="#DCE2FF" size="20px" />}>
-                          Karnavati, India
-                        </Button>
-                      </VStack>
+         
+                      </Flex>
                     </Box>
-                    <HStack
-                      mt={{ lg: 10, md: 10 }}
-                      spacing={5}
-                      px={5}
-                      alignItems="flex-start">
-                      <IconButton
-                        aria-label="facebook"
-                        variant="ghost"
-                        size="lg"
-                        isRound={true}
-                        _hover={{ bg: 'white' }}
-                        icon={<MdFacebook size="28px" />}
-                      />
-                      <IconButton
-                        aria-label="github"
-                        variant="ghost"
-                        size="lg"
-                        isRound={true}
-                        _hover={{ bg: '#0D74FF' }}
-                        icon={<BsGithub size="28px" />}
-                      />
-                      <IconButton
-                        aria-label="discord"
-                        variant="ghost"
-                        size="lg"
-                        isRound={true}
-                        _hover={{ bg: '#0D74FF' }}
-                        icon={<BsDiscord size="28px" />}
-                      />
-                    </HStack>
                   </Box>
                 </WrapItem>
                 <WrapItem>

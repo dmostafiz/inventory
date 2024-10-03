@@ -16,29 +16,40 @@ export default function subscription() {
                         </Box>
 
                         <Box flex={1}>
+                            <Text mb={5}>
+                                First of all one gets a 2 week free trial to try out all the features including premium ones
+                            </Text>
+                            <Text mb={5}>
+                                Ones the 14 day trial ends
+                            </Text>
                             <Box mb={8}>
                                 <Text fontWeight={'bold'} mb={2} fontSize={'17px'}>
-                                    Basic subscription
+                                    Premium Plan
                                 </Text>
 
 
                                 <OrderedList>
-                                    <ListItem>Feature 1</ListItem>
-                                    <ListItem>Feature 2</ListItem>
+                                    <ListItem>Point of sale</ListItem>
+                                    <ListItem>Data analytics (all data showing
+                                        sales,purchase, inventory within a certain period etc (anything on the dashboard)</ListItem>
+                                    <ListItem>Customer data which helps in customer loyalt</ListItem>
+                                    <ListItem>Staff analytics</ListItem>
                                 </OrderedList>
                             </Box>
 
-                            <Box>
+                            <Box mb={8}>
                                 <Text fontWeight={'bold'} mb={2} fontSize={'17px'}>
-                                    Premium subscription
+                                    Free Plan
                                 </Text>
 
 
                                 <OrderedList>
-                                    <ListItem>Feature 1</ListItem>
-                                    <ListItem>Feature 2</ListItem>
+                                    <ListItem>Supplier entry</ListItem>
+                                    <ListItem>Adding new products</ListItem>
                                 </OrderedList>
                             </Box>
+
+
                         </Box>
                     </Flex>
                 </Container>
