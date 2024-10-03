@@ -7,7 +7,7 @@ import { AiFillGift } from "react-icons/ai";
 import { BsCardChecklist, BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsGearFill } from "react-icons/bs";
 import { FaMinusCircle, FaUserFriends } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
-import { MdContacts, MdHome, MdSubscriptions } from "react-icons/md";
+import { MdContacts, MdHome, MdPerson, MdSubscriptions } from "react-icons/md";
 import { BusinessContext } from "../../Contexts/BusinessContext";
 import Axios from "../../Helpers/Axios";
 import useUser from "../../Hooks/useUser";
@@ -86,12 +86,16 @@ export default function LeftSidebar(props) {
 
         {hasBusiness() && <MenuItem
           icon={MdContacts}
-          title='Contacts'
-          submenus={[
-            { title: 'Suppliers', link: '/home/contacts/suppliers', show: true },
-            { title: business() && business()?.businessType == 'cantine' ? 'Students' : 'Customers', link: '/home/contacts/customers', show: true },
-          ]}
+          title='Suppliers'
+          link='/home/contacts/suppliers'
         />}
+
+        {hasBusiness() && <MenuItem
+          icon={MdPerson}
+          title={business() && business()?.businessType == 'cantine' ? 'Students' : 'Customers'}
+          link='/home/contacts/customers'
+        />}
+
 
         {hasBusiness() && <MenuItem
           icon={AiFillGift}
